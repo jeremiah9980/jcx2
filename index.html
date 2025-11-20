@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JC² • Twin Flame Tribute</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="A tribute to Jeremiah & Jesica • JC² • Twin Flames, 10/10 forever."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --accent: #f97316;
+      --accent-soft: rgba(249,115,22,0.12);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --card: #020617;
+      --border: rgba(148,163,184,0.3);
+      --pill-bg: rgba(15,23,42,0.85);
+      --shadow-soft: 0 22px 45px rgba(15,23,42,0.9);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --blur-strong: blur(26px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, #1e293b 0, transparent 40%),
+        radial-gradient(circle at bottom right, #020617 0, transparent 55%),
+        #020617;
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+
+    @media (min-width: 768px) {
+      main {
+        padding: 32px 24px 80px;
+      }
+    }
+
+    /* Hero */
+
+    .hero {
+      position: relative;
+      padding: 28px 20px 28px;
+      border-radius: 32px;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #1f2937, #020617 55%);
+      border: 1px solid rgba(148,163,184,0.4);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 32px;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(40px);
+      opacity: 0.7;
+      mix-blend-mode: screen;
+    }
+
+    .hero::before {
+      width: 260px;
+      height: 260px;
+      top: -120px;
+      right: -40px;
+      background: radial-gradient(circle, rgba(249,115,22,0.8), transparent 70%);
+    }
+
+    .hero::after {
+      width: 300px;
+      height: 300px;
+      bottom: -120px;
+      left: -80px;
+      background: radial-gradient(circle, rgba(56,189,248,0.7), transparent 70%);
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      gap: 24px;
+      z-index: 1;
+    }
+
+    @media (min-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1.3fr 1fr;
+        align-items: center;
+        gap: 32px;
+      }
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(15,23,42,0.85);
+      border: 1px solid rgba(148,163,184,0.4);
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(249,115,22,0.9);
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      font-size: 32px;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 40px;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      margin-bottom: 16px;
+    }
+
+    .hero-quote {
+      font-style: italic;
+      font-size: 14px;
+      color: #e5e7eb;
+      border-left: 2px solid rgba(249,115,22,0.8);
+      padding-left: 12px;
+      margin-bottom: 20px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(148,163,184,0.3);
+      color: var(--muted);
+      backdrop-filter: blur(12px);
+    }
+
+    .meta-pill span {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      font-size: 13px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f97316, #fb923c);
+      color: #0b1120;
+      font-weight: 600;
+      box-shadow: 0 18px 35px rgba(248,113,22,0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 45px rgba(248,113,22,0.7);
+    }
+
+    .btn-ghost {
+      background: rgba(15,23,42,0.9);
+      color: var(--text);
+      border-color: rgba(148,163,184,0.4);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15,23,42,0.95);
+    }
+
+    .btn-icon {
+      font-size: 16px;
+    }
+
+    .hero-media-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148,163,184,0.45);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.98), #020617);
+      padding: 18px 18px 16px;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-media-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .hero-media-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-media-count {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .hero-media-badge {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.5);
+      color: #bbf7d0;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .hero-media-frame {
+      border-radius: 18px;
+      border: 1px dashed rgba(148,163,184,0.7);
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(15,23,42,0.96),
+        rgba(15,23,42,0.96) 12px,
+        rgba(30,64,175,0.25) 12px,
+        rgba(30,64,175,0.25) 24px
+      );
+      padding: 18px;
+      flex: 1;
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .hero-media-placeholder {
+      max-width: 260px;
+    }
+
+    .hero-media-placeholder h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .hero-media-placeholder p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .mini-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+    }
+
+    .mini-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.9);
+      color: #e5e7eb;
+    }
+
+    .hero-media-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .hero-media-footer small {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .hero-media-footer a {
+      font-size: 11px;
+      color: #93c5fd;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Sections */
+
+    section {
+      margin-bottom: 32px;
+    }
+
+    .section-header {
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .card {
+      background: linear-gradient(145deg, rgba(15,23,42,0.96), rgba(15,23,42,0.9));
+      border-radius: var(--radius-lg);
+      padding: 16px 16px 18px;
+      border: 1px solid rgba(148,163,184,0.35);
+      box-shadow: 0 16px 40px rgba(15,23,42,0.9);
+    }
+
+    .card + .card {
+      margin-top: 12px;
+    }
+
+    /* Our Story */
+
+    .story-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    @media (min-width: 900px) {
+      .story-grid {
+        grid-template-columns: 1.3fr 1fr;
+      }
+    }
+
+    .story-text p {
+      font-size: 14px;
+      color: #e5e7eb;
+      margin-bottom: 10px;
+    }
+
+    .story-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-timeline {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148,163,184,0.4);
+      padding: 12px 14px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.9), #020617);
+      font-size: 12px;
+    }
+
+    .story-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 10px;
+      row-gap: 6px;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+
+    .story-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      margin-top: 5px;
+    }
+
+    .story-date {
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 0;
+    }
+
+    .story-desc {
+      color: var(--muted);
+    }
+
+    /* Gallery */
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .media-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .media-tile {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #1f2937, #020617);
+      border: 1px solid rgba(148,163,184,0.45);
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 10px;
+    }
+
+    /* Replace this background with real images using inline style or <img> tags later */
+    .media-tile-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(15,23,42,0.9),
+        rgba(30,64,175,0.45),
+        rgba(15,23,42,0.96)
+      );
+      opacity: 0.85;
+    }
+
+    .media-tile-label {
+      position: relative;
+      font-size: 11px;
+      color: #e5e7eb;
+      z-index: 1;
+      text-shadow: 0 1px 2px rgba(15,23,42,0.8);
+    }
+
+    .media-tile-tag {
+      position: relative;
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 1px;
+      z-index: 1;
+    }
+
+    /* Videos */
+
+    .video-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .video-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .video-card {
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.4);
+      padding: 10px 12px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.98), #020617);
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .video-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      border: 1px dashed rgba(148,163,184,0.7);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      color: rgba(249,250,251,0.9);
+      background: radial-gradient(circle at top, rgba(30,64,175,0.7), rgba(15,23,42,0.95));
+    }
+
+    .video-meta-title {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .video-meta-caption {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    /* Notes */
+
+    .notes-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .notes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .note-card {
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.35);
+      padding: 12px 12px 14px;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.96), #020617);
+      font-size: 13px;
+    }
+
+    .note-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .note-body {
+      color: #e5e7eb;
+      white-space: pre-line;
+    }
+
+    /* Instagram */
+
+    .ig-card {
+      display: grid;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .ig-card {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+      }
+    }
+
+    .ig-info p {
+      font-size: 13px;
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
+
+    .ig-info p span {
+      color: #93c5fd;
+    }
+
+    .ig-link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      padding: 8px 12px;
+      font-size: 12px;
+      background: rgba(15,23,42,0.9);
+      color: #e5e7eb;
+      margin-top: 4px;
+    }
+
+    .ig-link-pill .handle {
+      font-weight: 600;
+      color: #f97316;
+    }
+
+    .ig-embed-placeholder {
+      border-radius: 18px;
+      border: 1px dashed rgba(148,163,184,0.6);
+      padding: 14px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(15,23,42,0.9);
+      text-align: center;
+    }
+
+    /* Footer */
+
+    footer {
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(55,65,81,0.7);
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    footer strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+  </style>
+</head>
+<body>
+  <main>
+    <!-- HERO -->
+    <header class="hero">
+      <!-- OPTIONAL: you can set a background image for you two on the hero by adding:
+           style="background-image:url('path-to-photo.jpg'); background-size:cover; background-position:center;"
+           to the .hero element. -->
+      <div class="hero-inner">
+        <div>
+          <div class="hero-tag">
+            <span class="hero-tag-dot"></span>
+            <span>JC² • Twin Flame • 10/10</span>
+          </div>
+
+          <h1 class="hero-title">Jeremiah &amp; Jesica</h1>
+          <p class="hero-subtitle">TWIN FLAME • ONE STORY • ONE LOVE</p>
+
+          <p class="hero-quote">
+            “I have found the one whom my soul loves.” — Song of Solomon 3:4
+          </p>
+
+          <div class="hero-meta">
+            <div class="meta-pill">
+              <span>💍</span>
+              <span>10 / 10</span>
+              <span style="color:var(--muted);">is a 10/10 day</span>
+            </div>
+            <div class="meta-pill">
+              🔥 Twin Flame • <span>JC²</span>
+            </div>
+            <div class="meta-pill">
+              💙 <span>Faith • Family • Forever</span>
+            </div>
+          </div>
+
+          <div class="hero-cta-row">
+            <a href="#gallery" class="btn-primary">
+              <span class="btn-icon">📸</span>
+              <span>View Our Memories</span>
+            </a>
+            <a href="#videos" class="btn-ghost">
+              <span class="btn-icon">🎥</span>
+              <span>Watch Our Story</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-media-card" aria-label="Upload area">
+          <div class="hero-media-header">
+            <div>
+              <div class="hero-media-title">JC² Media Vault</div>
+              <div class="hero-media-count">Add your own photos &amp; videos here</div>
+            </div>
+            <div class="hero-media-badge">Upload Hub</div>
+          </div>
+
+          <div class="hero-media-frame">
+            <div class="hero-media-placeholder">
+              <h3>Drop Your Favorite Moments</h3>
+              <p>
+                When you host this site, replace this area with a live gallery,
+                carousel, or embed (Google Photos, YouTube, Vimeo, etc.).
+              </p>
+              <div class="mini-tag-row">
+                <div class="mini-tag">First selfies</div>
+                <div class="mini-tag">Wedding clips</div>
+                <div class="mini-tag">Date nights</div>
+                <div class="mini-tag">Inside jokes</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-media-footer">
+            <small>
+              Tip: organize media in folders by year (2024, 2025, …) before uploading.
+            </small>
+            <a href="#gallery">Jump to gallery ↓</a>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <!-- OUR STORY -->
+    <section id="story">
+      <div class="section-header">
+        <h2 class="section-title">Our Story</h2>
+        <p class="section-subtitle">Write this in your own words when you’re ready.</p>
+      </div>
+
+      <div class="card story-grid">
+        <div class="story-text">
+          <!-- EDIT THIS TEXT WITH YOUR OWN STORY -->
+          <p>
+            This is the space for <strong>Jeremiah &amp; Jesica’s story</strong> —
+            how we met, how God lined up our steps, and how 10/10 became our
+            “for-always” day.
+          </p>
+          <p>
+            Replace this with your own words: the late-night talks, the shared
+            prayers, the laughs, the move, and all the little moments that confirmed
+            we are each other’s person.
+          </p>
+          <p>
+            Add as much as you want here — paragraphs, quotes, or even your vows.
+          </p>
+        </div>
+
+        <div class="story-timeline">
+          <!-- UPDATE THESE MILESTONES WITH REAL DATES / MOMENTS -->
+          <div class="story-row">
+            <div class="story-dot"></div>
+            <div>
+              <p class="story-date">First Connection</p>
+              <p class="story-desc">Where it started: the messages, the energy, the “I see you.”</p>
+            </div>
+          </div>
+          <div class="story-row">
+            <div class="story-dot"></div>
+            <div>
+              <p class="story-date">Twin Flame Realization</p>
+              <p class="story-desc">That moment we both knew this wasn’t random — this was God-timed.</p>
+            </div>
+          </div>
+          <div class="story-row">
+            <div class="story-dot"></div>
+            <div>
+              <p class="story-date">10 / 10 • Wedding Day</p>
+              <p class="story-desc">Our “10/10” day — the covenant, the rings, the beginning of JC² forever.</p>
+            </div>
+          </div>
+          <div class="story-row">
+            <div class="story-dot"></div>
+            <div>
+              <p class="story-date">New Home &amp; New Chapter</p>
+              <p class="story-desc">The apartment, the glam room, hardwood floors &amp; building our life together.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <div class="section-header">
+        <h2 class="section-title">Photo Gallery</h2>
+        <p class="section-subtitle">Replace each tile with real photos of you two.</p>
+      </div>
+
+      <div class="card">
+        <div class="media-grid">
+          <!-- Each tile: swap the placeholder with a real image or background -->
+          <!-- Example: add style="background-image:url('images/wedding.jpg'); background-size:cover; background-position:center;" to .media-tile -->
+          <article class="media-tile">
+            <div class="media-tile-placeholder"></div>
+            <div class="media-tile-label">Wedding Day</div>
+            <div class="media-tile-tag">10/10 moments</div>
+          </article>
+
+          <article class="media-tile">
+            <div class="media-tile-placeholder"></div>
+            <div class="media-tile-label">First Date</div>
+            <div class="media-tile-tag">Nerves &amp; butterflies</div>
+          </article>
+
+          <article class="media-tile">
+            <div class="media-tile-placeholder"></div>
+            <div class="media-tile-label">Everyday Life</div>
+            <div class="media-tile-tag">Kitchen laughs &amp; cozy nights</div>
+          </article>
+
+          <article class="media-tile">
+            <div class="media-tile-placeholder"></div>
+            <div class="media-tile-label">Family Moments</div>
+            <div class="media-tile-tag">Blending love &amp; kids</div>
+          </article>
+
+          <article class="media-tile">
+            <div class="media-tile-placeholder"></div>
+            <div class="media-tile-label">Trips &amp; Getaways</div>
+            <div class="media-tile-tag">Escape &amp; reset together</div>
+          </article>
+
+          <article class="media-tile">
+            <div class="media-tile-placeholder"></div>
+            <div class="media-tile-label">Future Memories</div>
+            <div class="media-tile-tag">More to come…</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEOS -->
+    <section id="videos">
+      <div class="section-header">
+        <h2 class="section-title">Video Moments</h2>
+        <p class="section-subtitle">Use this space for reels, vows, and clips.</p>
+      </div>
+
+      <div class="card">
+        <!-- Replace each video-card with a real <iframe> or <video> embed when ready. -->
+        <div class="video-list">
+          <div class="video-card">
+            <div class="video-thumb">▶</div>
+            <div>
+              <div class="video-meta-title">Wedding Highlight Reel</div>
+              <div class="video-meta-caption">
+                Embed your favorite 60–90 second edit here (YouTube, Vimeo, or direct video).
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card">
+            <div class="video-thumb">▶</div>
+            <div>
+              <div class="video-meta-title">Everyday JC² Moments</div>
+              <div class="video-meta-caption">
+                Short clips from the apartment, car rides, gym sessions, Target runs, etc.
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card">
+            <div class="video-thumb">▶</div>
+            <div>
+              <div class="video-meta-title">Jesica’s Favorite Video</div>
+              <div class="video-meta-caption">
+                A space just for her pick — let her choose what goes here.
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card">
+            <div class="video-thumb">▶</div>
+            <div>
+              <div class="video-meta-title">Jeremiah’s Favorite Video</div>
+              <div class="video-meta-caption">
+                Your personal favorite clip that shows who she is to you.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTES TO EACH OTHER -->
+    <section id="notes">
+      <div class="section-header">
+        <h2 class="section-title">Notes To Each Other</h2>
+        <p class="section-subtitle">Private-ish notes you’re okay putting in public.</p>
+      </div>
+
+      <div class="card notes-grid">
+        <!-- Replace with your real words -->
+        <article class="note-card">
+          <div class="note-label">From Jeremiah to Jesica</div>
+          <div class="note-body">
+Dear Jesica,
+
+This is where I tell you (in my own words) how I know God sent you, how
+you steady me, and how every version of my future has you in it.
+
+I can update this whenever I want — more memories, more appreciation,
+more promises. This page is proof that you’re my answered prayer.
+          </div>
+        </article>
+
+        <article class="note-card">
+          <div class="note-label">From Jesica to Jeremiah</div>
+          <div class="note-body">
+Dear Jeremiah,
+
+This is my space to write back — to talk about how you protect, provide,
+and show up, and how our story makes sense of things that never used to.
+
+When I’m ready, I’ll fill this in with my voice, my words, my love.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM / LINKING -->
+    <section id="instagram">
+      <div class="section-header">
+        <h2 class="section-title">Instagram &amp; Sharing</h2>
+        <p class="section-subtitle">Connect this page to your JC² profile.</p>
+      </div>
+
+      <div class="card ig-card">
+        <div class="ig-info">
+          <p>
+            Main profile:
+            <span>@jc2.twinflame.fit</span>
+          </p>
+          <p>
+            Once this tribute page is live, copy its URL and paste it into your
+            Instagram profile under <strong>Edit Profile → Links</strong> or the
+            website field.
+          </p>
+          <div class="ig-link-pill">
+            <span>🔗</span>
+            <span class="handle">@jc2.twinflame.fit</span>
+            <span>• tap here from IG bio</span>
+          </div>
+          <p style="margin-top:8px;">
+            You can also screenshot this page or specific sections to use as story
+            backgrounds and reels.
+          </p>
+        </div>
+
+        <div class="ig-embed-placeholder">
+          When you’re ready, you can embed a favorite Instagram post or reel here
+          using Instagram’s embed code.<br /><br />
+          <strong>How:</strong> On Instagram (web), open a post → click the ⋯ →
+          “Embed” → copy the code and paste it in this box.
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>
+        Made with ❤️ for <strong>Jeremiah &amp; Jesica</strong> • JC² Twin Flame
+      </div>
+      <div>
+        “I have found the one whom my soul loves.” — Song of Solomon 3:4
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
