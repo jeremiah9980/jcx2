@@ -485,7 +485,6 @@
       padding: 10px;
     }
 
-    /* Replace this background with real images using inline style or <img> tags later */
     .media-tile-placeholder {
       position: absolute;
       inset: 0;
@@ -667,15 +666,146 @@
       font-weight: 600;
     }
 
+    /* === MEDIA CAROUSEL === */
+
+    .carousel-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .carousel-window {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.45s ease;
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      position: relative;
+      height: 260px;
+      background: radial-gradient(circle at top, #1f2937, #020617);
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      color: #f9fafb;
+    }
+
+    @media (min-width: 768px) {
+      .carousel-slide {
+        height: 340px;
+      }
+    }
+
+    .carousel-media-wrapper {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: 24px;
+    }
+
+    .carousel-slide img,
+    .carousel-slide iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: none;
+    }
+
+    .carousel-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(15,23,42,0.82) 0,
+        rgba(15,23,42,0.4) 40%,
+        rgba(15,23,42,0.0) 70%
+      );
+    }
+
+    .carousel-caption {
+      position: relative;
+      z-index: 2;
+      padding: 16px 18px;
+      font-size: 13px;
+    }
+
+    .carousel-caption-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .carousel-caption-tag {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      background: rgba(15,23,42,0.82);
+      color: #e5e7eb;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+    }
+
+    .carousel-btn-prev {
+      left: 10px;
+    }
+
+    .carousel-btn-next {
+      right: 10px;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(15,23,42,0.95);
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+    }
+
+    .carousel-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(148,163,184,0.6);
+      cursor: pointer;
+    }
+
+    .carousel-dot.active {
+      width: 16px;
+      background: var(--accent);
+    }
+
   </style>
 </head>
 <body>
   <main>
     <!-- HERO -->
     <header class="hero">
-      <!-- OPTIONAL: you can set a background image for you two on the hero by adding:
-           style="background-image:url('path-to-photo.jpg'); background-size:cover; background-position:center;"
-           to the .hero element. -->
+      <!-- OPTIONAL: set a background image:
+           style="background-image:url('https://drive.google.com/uc?export=view&id=REPLACE_WITH_FILE_ID');
+                  background-size:cover;background-position:center;" -->
       <div class="hero-inner">
         <div>
           <div class="hero-tag">
@@ -745,7 +875,7 @@
             <small>
               Tip: organize media in folders by year (2024, 2025, …) before uploading.
             </small>
-            <a href="#gallery">Jump to gallery ↓</a>
+            <a href="#carousel">Jump to carousel ↓</a>
           </div>
         </aside>
       </div>
@@ -760,7 +890,6 @@
 
       <div class="card story-grid">
         <div class="story-text">
-          <!-- EDIT THIS TEXT WITH YOUR OWN STORY -->
           <p>
             This is the space for <strong>Jeremiah &amp; Jesica’s story</strong> —
             how we met, how God lined up our steps, and how 10/10 became our
@@ -777,7 +906,6 @@
         </div>
 
         <div class="story-timeline">
-          <!-- UPDATE THESE MILESTONES WITH REAL DATES / MOMENTS -->
           <div class="story-row">
             <div class="story-dot"></div>
             <div>
@@ -819,8 +947,10 @@
 
       <div class="card">
         <div class="media-grid">
-          <!-- Each tile: swap the placeholder with a real image or background -->
-          <!-- Example: add style="background-image:url('images/wedding.jpg'); background-size:cover; background-position:center;" to .media-tile -->
+          <!-- For each tile, you can add a background-image with a Drive direct link -->
+          <!-- Example:
+               style="background-image:url('https://drive.google.com/uc?export=view&id=FILE_ID');
+                      background-size:cover;background-position:center;" -->
           <article class="media-tile">
             <div class="media-tile-placeholder"></div>
             <div class="media-tile-label">Wedding Day</div>
@@ -860,6 +990,35 @@
       </div>
     </section>
 
+    <!-- MEDIA CAROUSEL -->
+    <section id="carousel">
+      <div class="section-header">
+        <h2 class="section-title">JC² Media Carousel</h2>
+        <p class="section-subtitle">
+          Swipe through our favorite photos &amp; videos from the JC² twin flame journey.
+        </p>
+      </div>
+
+      <div class="card carousel-card">
+        <div class="carousel-window">
+          <div class="carousel-track" id="jc2CarouselTrack">
+            <!-- Slides injected by JavaScript -->
+          </div>
+
+          <button class="carousel-btn carousel-btn-prev" id="jc2CarouselPrev" aria-label="Previous">
+            ‹
+          </button>
+          <button class="carousel-btn carousel-btn-next" id="jc2CarouselNext" aria-label="Next">
+            ›
+          </button>
+
+          <div class="carousel-dots" id="jc2CarouselDots">
+            <!-- Dots injected by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- VIDEOS -->
     <section id="videos">
       <div class="section-header">
@@ -868,14 +1027,14 @@
       </div>
 
       <div class="card">
-        <!-- Replace each video-card with a real <iframe> or <video> embed when ready. -->
+        <!-- Replace these with iframes / embeds when ready -->
         <div class="video-list">
           <div class="video-card">
             <div class="video-thumb">▶</div>
             <div>
               <div class="video-meta-title">Wedding Highlight Reel</div>
               <div class="video-meta-caption">
-                Embed your favorite 60–90 second edit here (YouTube, Vimeo, or direct video).
+                Embed your favorite 60–90 second edit here (YouTube, Vimeo, or Drive video).
               </div>
             </div>
           </div>
@@ -921,7 +1080,6 @@
       </div>
 
       <div class="card notes-grid">
-        <!-- Replace with your real words -->
         <article class="note-card">
           <div class="note-label">From Jeremiah to Jesica</div>
           <div class="note-body">
@@ -997,5 +1155,195 @@ When I’m ready, I’ll fill this in with my voice, my words, my love.
       </div>
     </footer>
   </main>
+
+  <!-- MEDIA CAROUSEL SCRIPT -->
+  <script>
+    // 1) LIST YOUR REAL MEDIA HERE
+    // -----------------------------
+    // Get each file's ID from a link like:
+    // https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+    //
+    // Images:
+    //   src: 'https://drive.google.com/uc?export=view&id=FILE_ID'
+    //
+    // Videos:
+    //   src: 'https://drive.google.com/file/d/FILE_ID/preview'
+
+    const mediaItems = [
+      {
+        type: 'image',
+        src: 'https://drive.google.com/uc?export=view&id=REPLACE_FILE_ID_1',
+        label: 'Wedding Day • 10/10',
+        tag: 'Our 10/10 forever moment'
+      },
+      {
+        type: 'image',
+        src: 'https://drive.google.com/uc?export=view&id=REPLACE_FILE_ID_2',
+        label: 'First Date',
+        tag: 'Where it all started'
+      },
+      {
+        type: 'image',
+        src: 'https://drive.google.com/uc?export=view&id=REPLACE_FILE_ID_3',
+        label: 'Everyday JC² Life',
+        tag: 'Laughing in the kitchen, late night talks'
+      },
+      {
+        type: 'image',
+        src: 'https://drive.google.com/uc?export=view&id=REPLACE_FILE_ID_4',
+        label: 'Family Moments',
+        tag: 'Blending love & kids'
+      },
+      {
+        type: 'video',
+        src: 'https://drive.google.com/file/d/REPLACE_VIDEO_FILE_ID_1/preview',
+        label: 'Wedding Highlight Reel',
+        tag: '60 seconds of JC² magic'
+      },
+      {
+        type: 'image',
+        src: 'https://drive.google.com/uc?export=view&id=REPLACE_FILE_ID_5',
+        label: 'Date Night in Austin',
+        tag: 'Music up, windows down'
+      }
+    ];
+
+    // 2) CAROUSEL LOGIC
+    // -----------------
+    (function initJc2Carousel() {
+      const track = document.getElementById('jc2CarouselTrack');
+      const dotsContainer = document.getElementById('jc2CarouselDots');
+      const prevBtn = document.getElementById('jc2CarouselPrev');
+      const nextBtn = document.getElementById('jc2CarouselNext');
+
+      if (!track || !dotsContainer || !prevBtn || !nextBtn || !mediaItems.length) {
+        return;
+      }
+
+      // Build slides + dots
+      mediaItems.forEach((item, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'carousel-media-wrapper';
+
+        if (item.type === 'video') {
+          const iframe = document.createElement('iframe');
+          iframe.src = item.src;
+          iframe.allow = 'autoplay';
+          wrapper.appendChild(iframe);
+        } else {
+          const img = document.createElement('img');
+          img.src = item.src;
+          img.alt = item.label || 'JC² memory';
+          wrapper.appendChild(img);
+        }
+
+        const gradient = document.createElement('div');
+        gradient.className = 'carousel-gradient';
+
+        const caption = document.createElement('div');
+        caption.className = 'carousel-caption';
+
+        const title = document.createElement('div');
+        title.className = 'carousel-caption-title';
+        title.textContent = item.label || 'JC² Moment';
+
+        const tag = document.createElement('div');
+        tag.className = 'carousel-caption-tag';
+        tag.textContent = item.tag || '';
+
+        caption.appendChild(title);
+        caption.appendChild(tag);
+
+        slide.appendChild(wrapper);
+        slide.appendChild(gradient);
+        slide.appendChild(caption);
+
+        track.appendChild(slide);
+
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
+        dot.dataset.index = index;
+        dotsContainer.appendChild(dot);
+      });
+
+      const slides = Array.from(track.children);
+      const dots = Array.from(dotsContainer.children);
+
+      let currentIndex = 0;
+      let autoTimer = null;
+
+      function updateCarousel(index) {
+        if (!slides.length) return;
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        currentIndex = index;
+
+        const offset = -index * 100;
+        track.style.transform = 'translateX(' + offset + '%)';
+
+        dots.forEach((d, i) => {
+          d.classList.toggle('active', i === index);
+        });
+
+        resetAutoPlay();
+      }
+
+      function next() {
+        updateCarousel(currentIndex + 1);
+      }
+
+      function prev() {
+        updateCarousel(currentIndex - 1);
+      }
+
+      function resetAutoPlay() {
+        if (autoTimer) clearInterval(autoTimer);
+        autoTimer = setInterval(() => {
+          updateCarousel(currentIndex + 1);
+        }, 7000);
+      }
+
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.dataset.index, 10);
+          updateCarousel(idx);
+        });
+      });
+
+      // Basic touch swipe
+      let startX = 0;
+      let isDragging = false;
+
+      track.addEventListener('touchstart', (e) => {
+        if (!e.touches || !e.touches.length) return;
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      }, { passive: true });
+
+      track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        const endX = (e.changedTouches && e.changedTouches[0].clientX) || startX;
+        const deltaX = endX - startX;
+        const threshold = 40;
+
+        if (deltaX > threshold) {
+          prev();
+        } else if (deltaX < -threshold) {
+          next();
+        }
+
+        isDragging = false;
+      });
+
+      updateCarousel(0);
+    })();
+  </script>
 </body>
 </html>
+
