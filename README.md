@@ -1,16 +1,17 @@
-# GitHub Pages Timeline Site
+# Secondary AI Review Package
 
-Files included:
-- index.html
-- styles.css
-- README.md
+This package is organized for:
+- secondary AI review
+- attorney review
+- mediation prep
+- chronology verification
 
-## Publish
-1. Create a GitHub repository.
-2. Upload these files.
-3. Go to Settings > Pages.
-4. Choose Deploy from a branch.
-5. Select main branch and root folder.
-6. Save.
+## Recommended workflow
+1. Review `analysis/package_manifest.md`
+2. Load `datasets/appclose_structured_message_dataset.csv`
+3. Load the timeline CSVs in `timelines/`
+4. Review `analysis/communication_behavior_classification.md`
+5. Use the site in `site/` for human-readable navigation
 
-Review privacy before publishing publicly.
+## Important note
+Per-message structured datasets for Jesica↔Sharon and Jesica↔Stephanie are not fully extracted here. Templates are included in `templates/` for consistent manual completion or future OCR reconstruction.
