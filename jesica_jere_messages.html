@@ -1,210 +1,35 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jesica & Jere Messages</title>
-
 <style>
-
-body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica;
-background:#0d0d0d;
-color:#e6e6e6;
-}
-
-/* TOP SIMPLE VIEWER */
-
-.simpleViewer{
-max-width:900px;
-margin:auto;
-padding:40px;
-}
-
-.simpleViewer h1{
-text-align:center;
-margin-bottom:30px;
-}
-
-.timestamp{
-text-align:center;
-color:#888;
-font-size:13px;
-margin-bottom:20px;
-}
-
-.imageBlock{
-text-align:center;
-margin-bottom:30px;
-}
-
-.imageBlock img{
-max-width:420px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,.6);
-}
-
-.message{
-display:flex;
-margin-bottom:18px;
-}
-
-.bubble{
-padding:14px 18px;
-border-radius:18px;
-max-width:70%;
-line-height:1.5;
-}
-
-.jesica .bubble{
-background:#2b2b2e;
-}
-
-.jere{
-justify-content:flex-end;
-}
-
-.jere .bubble{
-background:#007aff;
-color:white;
-}
-
-.divider{
-margin:60px auto;
-width:80%;
-border-top:1px solid #333;
-}
-
-/* FULL THREAD VIEWER */
-
-.viewer{
-max-width:1100px;
-margin:auto;
-padding:20px 40px 60px 40px;
-}
-
-.chat{
-margin-top:30px;
-}
-
-.msg-row{
-display:flex;
-margin-bottom:14px;
-}
-
-.msg-row.me{
-justify-content:flex-end;
-}
-
-.msg{
-max-width:70%;
-padding:12px 16px;
-border-radius:18px;
-line-height:1.45;
-}
-
-.me .msg{
-background:#007aff;
-}
-
-.them .msg{
-background:#2b2b2e;
-}
-
-.meta{
-font-size:11px;
-color:#999;
-margin-bottom:4px;
-}
-
-.preview{
-margin-top:6px;
-padding:10px;
-border-radius:10px;
-background:#111;
-border:1px solid #333;
-}
-
-.preview a{
-color:#8ab4ff;
-text-decoration:none;
-}
-
-.preview a:hover{
-text-decoration:underline;
-}
-
-.day{
-text-align:center;
-margin:40px 0 20px;
-color:#aaa;
-font-size:12px;
-}
-
+body{background:#0d0d0d;color:#e6e6e6;font-family:-apple-system,Segoe UI,Roboto;margin:0}
+.container{max-width:1000px;margin:auto;padding:40px}
+.msg{padding:12px 16px;border-radius:16px;margin-bottom:12px;max-width:70%}
+.me{background:#007aff;margin-left:auto}
+.them{background:#2b2b2e}
+.day{text-align:center;margin:30px 0;color:#aaa;font-size:12px}
 </style>
 </head>
-
 <body>
 
-<div class="simpleViewer">
+<div class="container">
 
-<h1>Conversation Start</h1>
+<h2>Jesica & Jere Conversation</h2>
 
-<div class="timestamp">Aug 29, 2025 • Messenger</div>
-
-<div class="imageBlock">
-<img src="messenger_start.jpeg">
+<div style="text-align:center;margin:20px 0">
+<img src="messenger_start.jpeg" style="max-width:420px;border-radius:16px">
 </div>
 
-<div class="message jesica">
-<div class="bubble">
-Can we just talk about how Rando it is for me to send this message 👀 to you of all peeps....
-</div>
-</div>
-
-<div class="message jesica">
-<div class="bubble">
-OK now that's over.... I wanted to ask you a question BUT I refuse to slide into anyone’s DM’s soooo you’re gonna have to call or text me, sorry bro!
-</div>
-</div>
-
-<div class="message jesica">
-<div class="bubble">
-409-457-4112
-</div>
-</div>
+<div id="chat"></div>
 
 </div>
 
-<div class="divider"></div>
-
-<div class="viewer">
-
-<h2>Jesica & Jere Messages</h2>
-
-<div id="chat" class="chat"></div>
-
-</div>
+<script src="messages_to_10_10_dataset.js"></script>
 
 <script>
-
-const messages=[
-{sender:"Jere",is_me:true,text:"Yo yo.",day:"Aug 29 2025",time:"10:27 AM"},
-{sender:"Jere",is_me:true,text:"This is Jere",day:"Aug 29 2025",time:"10:28 AM"},
-{sender:"Jesica",is_me:false,text:"Damn, that was easy…. And just like that here we are.",day:"Aug 29 2025",time:"10:31 AM"},
-{sender:"Jesica",is_me:false,text:"How are you?",day:"Aug 29 2025",time:"10:31 AM"},
-{sender:"Jesica",is_me:false,text:"What’s all the normal stuff you’re supposed to ask each other let’s get that out-of-the-way",day:"Aug 29 2025",time:"10:31 AM"},
-{sender:"Jere",is_me:true,text:"Good how are you?",day:"Aug 29 2025",time:"10:32 AM"},
-{sender:"Jesica",is_me:false,text:"I had a dream about you last night, sir…. Which is the reason why you’re talking to me right now",day:"Aug 29 2025",time:"10:33 AM"},
-{sender:"Jesica",is_me:false,text:"So are you busy at 6 PM on Sunday?",day:"Aug 29 2025",time:"10:35 AM"},
-{sender:"Jere",is_me:true,text:"Yes I do. And yes I love comedy.",day:"Aug 29 2025",time:"10:36 AM"},
-{sender:"Jesica",is_me:false,text:"LFG!",day:"Aug 29 2025",time:"10:37 AM"},
-{sender:"Jere",is_me:true,text:"Free Sunday",day:"Aug 29 2025",time:"10:37 AM"},
-{sender:"Jere",is_me:true,text:"https://www.instagram.com/reel/DNyFVyNwKyL/?igsh=MWk4aWZpdGNrb2x1ag==",day:"Aug 29 2025",time:"7:35 PM"},
-{sender:"Jere",is_me:true,text:"https://www.instagram.com/reel/DLAqbUJA99P/?igsh=MXBxeXo2b3M3aGNxbw==",day:"Aug 29 2025",time:"7:35 PM"}
-];
-
 const chat=document.getElementById("chat");
 
 let lastDay=null;
@@ -213,51 +38,24 @@ messages.forEach(m=>{
 
 if(m.day!==lastDay){
 
-const day=document.createElement("div");
-day.className="day";
-day.innerText=m.day;
+const d=document.createElement("div");
+d.className="day";
+d.innerText=m.day;
 
-chat.appendChild(day);
-
+chat.appendChild(d);
 lastDay=m.day;
 
 }
 
-const row=document.createElement("div");
-row.className="msg-row "+(m.is_me?"me":"them");
+const msg=document.createElement("div");
+msg.className="msg "+(m.is_me?"me":"them");
 
-const bubble=document.createElement("div");
-bubble.className="msg";
+msg.innerHTML="<b>"+m.sender+"</b><br>"+m.text+"<div style='font-size:11px;color:#aaa'>"+m.time+"</div>";
 
-const meta=document.createElement("div");
-meta.className="meta";
-meta.innerText=m.sender+" • "+m.time;
-
-bubble.appendChild(meta);
-
-const text=document.createElement("div");
-text.innerText=m.text;
-
-bubble.appendChild(text);
-
-if(m.text.includes("instagram.com")){
-
-const preview=document.createElement("div");
-preview.className="preview";
-
-preview.innerHTML=`Instagram link<br><a href="${m.text}" target="_blank">${m.text}</a>`;
-
-bubble.appendChild(preview);
-
-}
-
-row.appendChild(bubble);
-chat.appendChild(row);
+chat.appendChild(msg);
 
 });
-
 </script>
 
 </body>
 </html>
-
