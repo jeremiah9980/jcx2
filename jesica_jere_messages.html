@@ -8,165 +8,144 @@
 <style>
 
 body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica;
-    background:#0d0d0d;
-    color:#e6e6e6;
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica;
+background:#0d0d0d;
+color:#e6e6e6;
 }
 
-/* ---------- TOP SIMPLE VIEWER ---------- */
+/* TOP SIMPLE VIEWER */
 
 .simpleViewer{
-    max-width:900px;
-    margin:auto;
-    padding:40px;
+max-width:900px;
+margin:auto;
+padding:40px;
 }
 
 .simpleViewer h1{
-    text-align:center;
-    margin-bottom:30px;
+text-align:center;
+margin-bottom:30px;
 }
 
 .timestamp{
-    text-align:center;
-    color:#888;
-    font-size:13px;
-    margin-bottom:20px;
+text-align:center;
+color:#888;
+font-size:13px;
+margin-bottom:20px;
 }
 
 .imageBlock{
-    text-align:center;
-    margin-bottom:30px;
+text-align:center;
+margin-bottom:30px;
 }
 
 .imageBlock img{
-    max-width:420px;
-    border-radius:16px;
-    box-shadow:0 10px 30px rgba(0,0,0,.6);
+max-width:420px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,.6);
 }
 
 .message{
-    display:flex;
-    margin-bottom:18px;
+display:flex;
+margin-bottom:18px;
 }
 
 .bubble{
-    padding:14px 18px;
-    border-radius:18px;
-    max-width:70%;
-    line-height:1.5;
+padding:14px 18px;
+border-radius:18px;
+max-width:70%;
+line-height:1.5;
 }
 
 .jesica .bubble{
-    background:#2b2b2e;
+background:#2b2b2e;
 }
 
 .jere{
-    justify-content:flex-end;
+justify-content:flex-end;
 }
 
 .jere .bubble{
-    background:#007aff;
-    color:white;
+background:#007aff;
+color:white;
 }
 
 .divider{
-    margin:60px auto;
-    width:80%;
-    border-top:1px solid #333;
+margin:60px auto;
+width:80%;
+border-top:1px solid #333;
 }
 
-/* ---------- FULL THREAD VIEWER ---------- */
+/* FULL THREAD VIEWER */
 
 .viewer{
-    max-width:1100px;
-    margin:auto;
-    padding:20px 40px 60px 40px;
-}
-
-.header{
-    position:sticky;
-    top:0;
-    background:#0d0d0d;
-    padding:20px 0;
-    z-index:5;
-}
-
-.search{
-    width:100%;
-    padding:12px 14px;
-    border-radius:10px;
-    border:1px solid #333;
-    background:#1a1a1a;
-    color:white;
+max-width:1100px;
+margin:auto;
+padding:20px 40px 60px 40px;
 }
 
 .chat{
-    margin-top:30px;
+margin-top:30px;
 }
 
 .msg-row{
-    display:flex;
-    margin-bottom:14px;
+display:flex;
+margin-bottom:14px;
 }
 
 .msg-row.me{
-    justify-content:flex-end;
+justify-content:flex-end;
 }
 
 .msg{
-    max-width:70%;
-    padding:12px 16px;
-    border-radius:18px;
-    line-height:1.45;
+max-width:70%;
+padding:12px 16px;
+border-radius:18px;
+line-height:1.45;
 }
 
 .me .msg{
-    background:#007aff;
+background:#007aff;
 }
 
 .them .msg{
-    background:#2b2b2e;
+background:#2b2b2e;
 }
 
 .meta{
-    font-size:11px;
-    color:#999;
-    margin-bottom:4px;
+font-size:11px;
+color:#999;
+margin-bottom:4px;
 }
 
-/* Instagram preview */
-
 .preview{
-    margin-top:6px;
-    padding:10px;
-    border-radius:10px;
-    background:#111;
-    border:1px solid #333;
+margin-top:6px;
+padding:10px;
+border-radius:10px;
+background:#111;
+border:1px solid #333;
 }
 
 .preview a{
-    color:#8ab4ff;
-    text-decoration:none;
+color:#8ab4ff;
+text-decoration:none;
 }
 
 .preview a:hover{
-    text-decoration:underline;
+text-decoration:underline;
 }
 
 .day{
-    text-align:center;
-    margin:40px 0 20px;
-    color:#aaa;
-    font-size:12px;
+text-align:center;
+margin:40px 0 20px;
+color:#aaa;
+font-size:12px;
 }
 
 </style>
 </head>
 
 <body>
-
-<!-- SIMPLE DARK VIEWER -->
 
 <div class="simpleViewer">
 
@@ -200,17 +179,9 @@ OK now that's over.... I wanted to ask you a question BUT I refuse to slide into
 
 <div class="divider"></div>
 
-<!-- FULL THREAD VIEWER -->
-
 <div class="viewer">
 
-<div class="header">
-
 <h2>Jesica & Jere Messages</h2>
-
-<input id="search" class="search" placeholder="Search messages">
-
-</div>
 
 <div id="chat" class="chat"></div>
 
@@ -218,7 +189,7 @@ OK now that's over.... I wanted to ask you a question BUT I refuse to slide into
 
 <script>
 
-const messages = [
+const messages=[
 {sender:"Jere",is_me:true,text:"Yo yo.",day:"Aug 29 2025",time:"10:27 AM"},
 {sender:"Jere",is_me:true,text:"This is Jere",day:"Aug 29 2025",time:"10:28 AM"},
 {sender:"Jesica",is_me:false,text:"Damn, that was easy…. And just like that here we are.",day:"Aug 29 2025",time:"10:31 AM"},
@@ -236,12 +207,9 @@ const messages = [
 
 const chat=document.getElementById("chat");
 
-function render(list){
-
-chat.innerHTML="";
 let lastDay=null;
 
-list.forEach(m=>{
+messages.forEach(m=>{
 
 if(m.day!==lastDay){
 
@@ -250,6 +218,7 @@ day.className="day";
 day.innerText=m.day;
 
 chat.appendChild(day);
+
 lastDay=m.day;
 
 }
@@ -268,9 +237,8 @@ bubble.appendChild(meta);
 
 const text=document.createElement("div");
 text.innerText=m.text;
-bubble.appendChild(text);
 
-/* instagram preview */
+bubble.appendChild(text);
 
 if(m.text.includes("instagram.com")){
 
@@ -288,23 +256,8 @@ chat.appendChild(row);
 
 });
 
-}
-
-render(messages);
-
-/* search */
-
-document.getElementById("search").addEventListener("input",e=>{
-
-const q=e.target.value.toLowerCase();
-
-const filtered=messages.filter(m=>m.text.toLowerCase().includes(q));
-
-render(filtered);
-
-});
-
 </script>
 
 </body>
 </html>
+
