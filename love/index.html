@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JC² | Jesica + Jere</title>
+  <meta name="description" content="A love story site for Jesica and Jere — wedding memories, photos, videos, favorite moments, and a growing digital scrapbook." />
+  <meta name="theme-color" content="#8d3049" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top">JC<span>²</span></a>
+      <nav class="site-nav">
+        <a href="#story">Our Story</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#gallery">Photos</a>
+        <a href="#videos">Videos</a>
+        <a href="#instagram">Instagram</a>
+        <a href="#letter">Love Note</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">A digital home for Jesica + Jere</p>
+          <h1>JC² — a love story told through memories, milestones, and all the little moments in between.</h1>
+          <p class="lead">
+            This site is built as your private-feeling public scrapbook: wedding photos, favorite videos,
+            your love story, future dreams, and a place to keep adding the beautiful pieces of your life together.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#gallery">Open Photo Gallery</a>
+            <a class="btn btn-secondary" href="#instagram">Instagram Feed</a>
+          </div>
+
+          <div class="hero-badges">
+            <span>Wedding memories</span>
+            <span>Love story timeline</span>
+            <span>Instagram-ready</span>
+            <span>Video-friendly</span>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <p class="mini-label">Built for your story</p>
+          <h2>What this site is for</h2>
+          <ul>
+            <li>Showcase wedding photos beautifully</li>
+            <li>Embed your Instagram feed or favorite posts</li>
+            <li>Feature personal videos and reels</li>
+            <li>Tell your story in a warm, timeless way</li>
+            <li>Keep growing the site as your memories grow</li>
+          </ul>
+          <div class="date-pill">Forever started on <strong>10/10/2025</strong></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="story">
+      <div class="container split-grid">
+        <div>
+          <p class="section-label">Our story</p>
+          <h2>More than a wedding day. More than a highlight reel.</h2>
+          <div id="story-paragraphs" class="story-stack"></div>
+        </div>
+        <div class="panel soft-panel">
+          <p class="section-label">The heart of JC²</p>
+          <h3>A love worth documenting well</h3>
+          <p>
+            The best love stories are not only the grand milestones. They are the quiet check-ins, the support,
+            the laughter, the grace, the healing, the choosing each other again and again.
+          </p>
+          <p>
+            This site gives those moments a place to live.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="timeline">
+      <div class="container">
+        <p class="section-label center">Timeline</p>
+        <h2 class="center">A few of the moments that define your story</h2>
+        <div id="timeline-list" class="timeline-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-label">Wedding + favorite moments</p>
+            <h2>Photo gallery</h2>
+          </div>
+          <p class="section-note">
+            The cards below are ready for your real images. Add photo files to <code>love/assets/media/</code> and
+            update <code>assets/js/content.js</code> to swap placeholders for your own memories.
+          </p>
+        </div>
+        <div id="gallery-grid" class="media-grid photo-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="videos">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-label">Reels, clips, and keepsakes</p>
+            <h2>Video gallery</h2>
+          </div>
+          <p class="section-note">
+            Perfect for ceremony highlights, reception clips, travel videos, anniversary montages, or private moments
+            you want to preserve beautifully.
+          </p>
+        </div>
+        <div id="video-grid" class="media-grid video-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="instagram">
+      <div class="container split-grid">
+        <div>
+          <p class="section-label">Instagram integration</p>
+          <h2>Embed your feed or favorite posts here</h2>
+          <p>
+            This section is already styled for an Instagram wall. You can paste your embed snippet, a feed widget,
+            or a favorite post/reel embed inside the placeholder area below.
+          </p>
+          <div class="embed-card">
+            <div class="embed-header">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <strong>@your-instagram-here</strong>
+            </div>
+            <div class="embed-body">
+              <p><strong>Instagram feed placeholder</strong></p>
+              <p>
+                Replace this block with your feed embed code, a widget snippet, or individual post embeds.
+              </p>
+              <pre class="code-block">&lt;!-- Paste Instagram or feed widget embed code here --&gt;</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p class="section-label">Ideas for this section</p>
+          <div class="pill-grid">
+            <span>Wedding recap reel</span>
+            <span>Proposal post</span>
+            <span>Anniversary carousel</span>
+            <span>Date-night highlights</span>
+            <span>Travel memories</span>
+            <span>Favorite selfies together</span>
+          </div>
+          <p class="small-note">
+            If you want, you can later swap this placeholder for a full embedded feed or a grid of your favorite posts.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="letter">
+      <div class="container">
+        <div class="letter-panel">
+          <p class="section-label center">A note from the heart</p>
+          <h2 class="center">To Jesica</h2>
+          <p class="letter-copy">
+            Loving you feels like peace, loyalty, beauty, laughter, strength, and home all at once.
+            This space is here so our story is not scattered across phones, posts, and passing moments.
+            It deserves a place that feels intentional — something as meaningful as the life we are building together.
+          </p>
+          <p class="letter-copy">
+            Every photo, every clip, every memory here is another reminder that what we have is worth celebrating,
+            protecting, and keeping close. This is our little digital love letter.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container footer-callout">
+        <h2>Next additions you can drop in fast</h2>
+        <div class="pill-grid centered">
+          <span>Wedding album pages</span>
+          <span>Engagement story</span>
+          <span>Favorite songs playlist</span>
+          <span>Anniversary countdown</span>
+          <span>Travel map</span>
+          <span>Private vows page</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <div>
+        <strong>JC²</strong>
+        <p>Jesica + Jere — captured with love.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#story">Story</a>
+        <a href="#gallery">Photos</a>
+        <a href="#videos">Videos</a>
+        <a href="#instagram">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./assets/js/content.js"></script>
+</body>
+</html>
