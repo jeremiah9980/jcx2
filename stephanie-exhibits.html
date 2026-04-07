@@ -8,24 +8,86 @@
   <title>Stephanie Exhibits</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    .print-wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
-    .print-header { margin-bottom: 24px; }
-    .tag-row { display:flex; flex-wrap:wrap; gap:10px; margin: 12px 0 20px; }
-    .tag { display:inline-block; padding:8px 12px; border-radius:999px; font-weight:700; font-size:14px; }
+    .print-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .print-header {
+      margin-bottom: 24px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0 20px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
     .tag-conflict { background:#b42318; color:#fff; }
     .tag-influence { background:#f5c542; color:#1f2937; }
     .tag-logistics { background:#1d4ed8; color:#fff; }
     .tag-emotional { background:#15803d; color:#fff; }
-    .exhibit-block { background:#fff; border:1px solid #d0d7de; border-radius:16px; padding:20px; margin: 0 0 24px; box-shadow:0 8px 30px rgba(0,0,0,.06); page-break-inside: avoid; }
-    .exhibit-block img { width:100%; border-radius:12px; margin-top:14px; }
-    .page-label { font-size: 13px; color:#6b7280; margin-top: 8px; }
-    .cross-links { margin: 12px 0 20px; }
+
+    .exhibit-block {
+      background: #fff;
+      border: 1px solid #d0d7de;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 0 0 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+      page-break-inside: avoid;
+    }
+
+    .exhibit-block img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 14px;
+    }
+
+    .page-label {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 8px;
+    }
+
+    .cross-links {
+      margin: 12px 0 20px;
+    }
+
     @media print {
-      body { background:#fff; }
-      .hero, .nav { display:none !important; }
-      .print-wrap { max-width:none; padding:0; }
-      .exhibit-block { box-shadow:none; border:1px solid #999; break-inside: avoid; }
-      a { color:#000; text-decoration:none; }
+      body {
+        background: #fff;
+      }
+
+      .hero, .nav {
+        display: none !important;
+      }
+
+      .print-wrap {
+        max-width: none;
+        padding: 0;
+      }
+
+      .exhibit-block {
+        box-shadow: none;
+        border: 1px solid #999;
+        break-inside: avoid;
+      }
+
+      a {
+        color: #000;
+        text-decoration: none;
+      }
     }
   </style>
 </head>
@@ -35,27 +97,32 @@
       <p class="eyebrow">Court-Ready Exhibit Packet</p>
       <h1>Stephanie Exhibits A–C</h1>
       <p class="lead">Single-reference page for print, PDF export, and structured review.</p>
+
       <div class="tag-row">
         <span class="tag tag-conflict">🔴 Conflict</span>
         <span class="tag tag-influence">🟡 Influence</span>
         <span class="tag tag-logistics">🔵 Logistics</span>
         <span class="tag tag-emotional">🟢 Emotional reinforcement</span>
       </div>
+
       <div class="cross-links">
         <a href="stephanie-profile.html#exhibit-a">Go to Exhibit A in profile</a> ·
         <a href="stephanie-profile.html#exhibit-b">Go to Exhibit B in profile</a> ·
         <a href="stephanie-profile.html#exhibit-c">Go to Exhibit C in profile</a> ·
-        <a href="advanced-analysis.html#conflict-map">Triangulation diagram</a>
+        <a href="advanced-analysis.html#conflict-map">Triangulation diagram</a> ·
+        <a href="advanced-analysis.html#child-impact">Child impact analysis</a>
       </div>
     </div>
 
     <section class="exhibit-block" id="print-exhibit-a">
       <h2>Exhibit A — False Accusations</h2>
       <p>Screenshots showing repeated allegations involving third-party Stephanie and claims made without supporting evidence.</p>
+
       <div class="tag-row">
         <span class="tag tag-conflict">🔴 Conflict</span>
         <span class="tag tag-influence">🟡 Influence</span>
       </div>
+
       <img src="assets/img/stephanie-exhibit-a.png" alt="Exhibit A showing repeated allegations involving Stephanie and unsupported claims">
       <div class="page-label">Page 1</div>
     </section>
@@ -63,10 +130,12 @@
     <section class="exhibit-block" id="print-exhibit-b">
       <h2>Exhibit B — Adult Conflict Disclosure to Child</h2>
       <p>Screenshots demonstrating legal conflict and custody-related messaging communicated directly to the child.</p>
+
       <div class="tag-row">
         <span class="tag tag-conflict">🔴 Conflict</span>
         <span class="tag tag-emotional">🟢 Emotional reinforcement</span>
       </div>
+
       <img src="assets/img/stephanie-exhibit-b.png" alt="Exhibit B showing adult conflict and custody related messaging communicated to a child">
       <div class="page-label">Page 2</div>
     </section>
@@ -74,11 +143,13 @@
     <section class="exhibit-block" id="print-exhibit-c">
       <h2>Exhibit C — Third Party Involvement &amp; Triangulation</h2>
       <p>Screenshots illustrating repeated references to Stephanie and triangulation patterns involving the child.</p>
+
       <div class="tag-row">
         <span class="tag tag-influence">🟡 Influence</span>
         <span class="tag tag-logistics">🔵 Logistics</span>
         <span class="tag tag-emotional">🟢 Emotional reinforcement</span>
       </div>
+
       <img src="assets/img/stephanie-exhibit-c.png" alt="Exhibit C showing repeated references to Stephanie and triangulation patterns involving the child">
       <div class="page-label">Page 3</div>
     </section>
