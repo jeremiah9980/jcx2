@@ -7,6 +7,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stephanie Profile</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .tag-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .tag-conflict { background:#b42318; color:white; }
+    .tag-influence { background:#f5c542; color:#1f2937; }
+    .tag-logistics { background:#1d4ed8; color:white; }
+    .tag-emotional { background:#15803d; color:white; }
+
+    .exhibit-link-row {
+      margin-top: 12px;
+    }
+
+    .exhibit-link-row a {
+      text-decoration: none;
+    }
+
+    .exhibit-link-row .card-button {
+      display: inline-block;
+      margin-top: 6px;
+    }
+  </style>
 </head>
 <body>
   <header class="hero">
@@ -15,12 +49,11 @@
       <h1>Stephanie Profile</h1>
       <p class="lead">Context page summarizing Stephanie’s role as a recurring third-party figure within prior family and communication-related narratives.</p>
       <nav class="nav">
-        <nav class="nav">
-  <a href="index.html">Overview</a>
-  <a href="children-profiles.html">Children Profiles</a>
-  <a href="behavior-analysis.html">Behavior Analysis</a>
-  <a href="#communication-exhibits">Exhibits</a>
-  <a href="advanced-analysis.html">Advanced Analysis</a>
+        <a href="index.html">Overview</a>
+        <a href="children-profiles.html">Children Profiles</a>
+        <a href="behavior-analysis.html">Behavior Analysis</a>
+        <a href="#communication-exhibits">Exhibits</a>
+        <a href="advanced-analysis.html">Advanced Analysis</a>
       </nav>
     </div>
   </header>
@@ -60,6 +93,109 @@
         <li>Functioned in the broader narrative as a symbol of outside influence entering family space at moments of instability.</li>
         <li>Was associated with concerns about overreach, triangulation, and competing authority.</li>
       </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Tagging System</h2>
+      <div class="legend">
+        <span class="badge" style="background:#b42318;color:white;">🔴 Conflict</span>
+        <span class="badge" style="background:#f5c542;color:#1f2937;">🟡 Influence</span>
+        <span class="badge" style="background:#1d4ed8;color:white;">🔵 Logistics</span>
+        <span class="badge" style="background:#15803d;color:white;">🟢 Emotional reinforcement</span>
+      </div>
+    </section>
+
+    <section class="panel" id="communication-exhibits">
+      <h2>Communication Exhibits</h2>
+
+      <div class="mini-card">
+        <p><strong>Purpose:</strong> These exhibits preserve example screenshots reflecting recurring references to Stephanie in conflict-related communication, including allegations, third-party involvement, and messaging that may place children near or inside adult disputes.</p>
+        <p><strong>Use of exhibits:</strong> These should be read as pattern exhibits rather than isolated findings. The goal is to preserve language, context markers, and recurring references for structured review.</p>
+      </div>
+
+      <div class="analysis-card" id="exhibit-a" style="margin-bottom:24px;">
+        <div class="icon">A</div>
+        <h3>Exhibit A — False Accusations</h3>
+        <p>Screenshots showing repeated allegations involving third-party Stephanie and claims made without supporting evidence.</p>
+
+        <div class="tag-row">
+          <span class="tag tag-conflict">🔴 Conflict</span>
+          <span class="tag tag-influence">🟡 Influence</span>
+        </div>
+
+        <img src="assets/img/stephanie-exhibit-a.png" alt="Exhibit A showing repeated allegations involving Stephanie and unsupported claims" style="width:100%; border-radius:14px; margin-top:12px;">
+
+        <div class="exhibit-link-row">
+          <a href="stephanie-exhibits.html#print-exhibit-a">
+            <span class="card-button">Open Court-Ready Exhibit A →</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="analysis-card" id="exhibit-b" style="margin-bottom:24px;">
+        <div class="icon">B</div>
+        <h3>Exhibit B — Adult Conflict Disclosure to Child</h3>
+        <p>Screenshots demonstrating legal conflict and custody-related messaging communicated directly to the child.</p>
+
+        <div class="tag-row">
+          <span class="tag tag-conflict">🔴 Conflict</span>
+          <span class="tag tag-emotional">🟢 Emotional</span>
+        </div>
+
+        <img src="assets/img/stephanie-exhibit-b.png" alt="Exhibit B showing adult conflict and custody related messaging communicated to a child" style="width:100%; border-radius:14px; margin-top:12px;">
+
+        <div class="exhibit-link-row">
+          <a href="advanced-analysis.html#child-impact">
+            <span class="card-button">View Child Impact Analysis →</span>
+          </a>
+          <br>
+          <a href="stephanie-exhibits.html#print-exhibit-b">
+            <span class="card-button">Open Court-Ready Exhibit B →</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="analysis-card" id="exhibit-c" style="margin-bottom:24px;">
+        <div class="icon">C</div>
+        <h3>Exhibit C — Third Party Involvement &amp; Triangulation</h3>
+        <p>Screenshots illustrating repeated references to Stephanie and triangulation patterns involving the child.</p>
+
+        <div class="tag-row">
+          <span class="tag tag-influence">🟡 Influence</span>
+          <span class="tag tag-logistics">🔵 Logistics</span>
+          <span class="tag tag-emotional">🟢 Emotional</span>
+        </div>
+
+        <img src="assets/img/stephanie-exhibit-c.png" alt="Exhibit C showing repeated references to Stephanie and triangulation patterns involving the child" style="width:100%; border-radius:14px; margin-top:12px;">
+
+        <div class="exhibit-link-row">
+          <a href="advanced-analysis.html#conflict-map">
+            <span class="card-button">View Triangulation Diagram →</span>
+          </a>
+          <br>
+          <a href="stephanie-exhibits.html#print-exhibit-c">
+            <span class="card-button">Open Court-Ready Exhibit C →</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="analysis-card" id="exhibit-overview">
+        <div class="icon">&#128248;</div>
+        <h3>Composite Exhibit Overview</h3>
+        <p>Composite image showing highlighted messages across multiple exchanges to illustrate repeated communication patterns and child-facing engagement themes.</p>
+
+        <div class="tag-row">
+          <span class="tag tag-influence">🟡 Influence</span>
+          <span class="tag tag-logistics">🔵 Logistics</span>
+          <span class="tag tag-emotional">🟢 Emotional</span>
+        </div>
+
+        <img src="assets/img/stephanie-exhibit-overview.png" alt="Composite exhibit showing Stephanie communication patterns with highlighted messages" style="width:100%; border-radius:14px; margin-top:12px;">
+      </div>
+
+      <div class="mini-card" style="margin-top:24px;">
+        <p><strong>Documentation note:</strong> These exhibits are best used as pattern-reference materials. Any final conclusion should be based on full chronology and surrounding context, but the repeated themes visible here are significant enough to preserve separately for review.</p>
+      </div>
     </section>
 
     <section class="panel">
