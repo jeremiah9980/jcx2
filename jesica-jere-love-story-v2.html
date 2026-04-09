@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="/jcx2/assets/js/analytics.js"></script>
+  <script src="/assets/js/analytics.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jesica + Jere | JCX2 Love Story</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --bg-main: linear-gradient(135deg, #07101d 0%, #13253f 38%, #1f3d63 100%);
+      --panel: rgba(255,255,255,0.08);
+      --panel-strong: rgba(255,255,255,0.12);
+      --border: rgba(255,255,255,0.14);
+      --text: #f6f8fc;
+      --muted: #b7c4d6;
+      --accent: #9fd8ff;
+      --gold: #f7d48b;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top, rgba(122,172,240,0.22), transparent 26%), var(--bg-main);
+      background-attachment: fixed;
+    }
+
+    .shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 26px 18px 60px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 34px 28px;
+      position: relative;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 0.96;
+    }
+
+    .sub {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      max-width: 760px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #eef7ff;
+      font-size: 0.92rem;
+    }
+
+    .hero-image {
+      min-height: 100%;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(8,17,31,0.14), rgba(8,17,31,0.38)),
+        url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/wedding-portrait.jpg') center/cover no-repeat;
+    }
+
+    .hero-badge {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      background: rgba(8,17,31,0.72);
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 14px 16px;
+      border-radius: 18px;
+      max-width: 260px;
+      color: #fff;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .section {
+      margin-top: 22px;
+    }
+
+    .section-inner {
+      padding: 24px;
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 1.55rem;
+    }
+
+    .section p.lead {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .count-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .count-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 20px 12px;
+      text-align: center;
+    }
+
+    .count-value {
+      display: block;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .count-name {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.82rem;
+    }
+
+    .count-note {
+      margin-top: 14px;
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .story-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .story-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+    }
+
+    .story-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 18px;
+      padding-left: 16px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(159,216,255,0.7), rgba(247,212,139,0.45));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 22px;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(247,212,139,0.16);
+    }
+
+    .timeline-date {
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .photo {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .photo figcaption {
+      padding: 12px 14px 16px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    .wide-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 26px;
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero, .story-grid, .wide-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .count-grid, .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .hero-copy, .section-inner { padding: 20px; }
+      .photo img { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div class="panel hero-copy">
+        <p class="eyebrow">JCX2 • Love Story • Wedding Timeline</p>
+        <h1>Jesica + Jere</h1>
+        <p class="sub">A custom JCX2 page built around your wedding, your memories, your family moments, and the life you’ve been building together. From reconnecting after years apart to marrying on October 10, 2025 at 11:00 AM, this page turns your story into something that feels real, warm, and personal.</p>
+        <div class="meta">
+          <span class="chip">Wedding: 10-10-2025</span>
+          <span class="chip">Time: 11:00 AM</span>
+          <span class="chip">Georgetown chapter</span>
+          <span class="chip">First Christmas: 2025</span>
+        </div>
+      </div>
+      <div class="panel hero-image">
+        <div class="hero-badge">Wedding day portrait • the moment it became official • the start of your next chapter together</div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Marriage Counter</h2>
+        <p class="lead">A live counter tied to your wedding date. Before the ceremony it counts down. After the ceremony it counts how long you’ve been married.</p>
+        <div class="count-grid">
+          <div class="count-box"><span class="count-value" id="days">0</span><span class="count-name">Days</span></div>
+          <div class="count-box"><span class="count-value" id="hours">0</span><span class="count-name">Hours</span></div>
+          <div class="count-box"><span class="count-value" id="minutes">0</span><span class="count-name">Minutes</span></div>
+          <div class="count-box"><span class="count-value" id="seconds">0</span><span class="count-name">Seconds</span></div>
+        </div>
+        <div class="count-note" id="countNote">Counting from October 10, 2025 at 11:00 AM.</div>
+      </div>
+    </section>
+
+    <section class="wide-grid">
+      <div class="panel section">
+        <div class="section-inner">
+          <h2>The Rundown of Your Story</h2>
+          <div class="story-grid">
+            <div class="story-card">
+              <h3>Known for years, reconnected at the right time</h3>
+              <p>This wasn’t built on randomness. There was history there first. The reconnection came with familiarity, trust, and a sense that something old had found its right moment to become something new.</p>
+            </div>
+            <div class="story-card">
+              <h3>A simple invite that changed the whole direction</h3>
+              <p>Jesica reaching out about a comedy show became the opening scene to everything that followed. What looked casual on the surface turned into something much bigger and much more certain.</p>
+            </div>
+            <div class="story-card">
+              <h3>Fast, but not forced</h3>
+              <p>The pace mattered less than the clarity. Things moved quickly because they felt right. It wasn’t confusion or chaos. It was alignment, confidence, and momentum.</p>
+            </div>
+            <div class="story-card">
+              <h3>Marriage as a beginning, not a finish line</h3>
+              <p>October 10, 2025 wasn’t just a big day. It marked the start of home life, family memories, holidays, routines, and the shared identity you were creating together.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel section">
+        <div class="section-inner">
+          <h2>Relationship Timeline</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">High School Years</div>
+              <h3>The original connection</h3>
+              <p>You already knew each other long before the relationship officially began. That made the reconnection carry more meaning than a brand-new start.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">September 2025</div>
+              <h3>Reconnection</h3>
+              <p>Jesica reached back out and the door opened again. What followed came with speed, certainty, and a strong sense of timing.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">Shortly After</div>
+              <h3>The comedy show invite</h3>
+              <p>That one invite changed everything and gave the relationship its first real momentum.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">40 Days Later</div>
+              <h3>You knew</h3>
+              <p>The relationship moved into commitment quickly because both of you were clear about what it was.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">October 10, 2025 • 11:00 AM</div>
+              <h3>Wedding day</h3>
+              <p>You got married and officially began the next chapter together.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">After the Wedding</div>
+              <h3>Building life together</h3>
+              <p>Family moments, sports nights, everyday selfies, shared holidays, and a home life that made the relationship real in the day-to-day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Wedding Day & Early Marriage Moments</h2>
+        <p class="lead">These are the moments that feel foundational — wedding day, the drive, the celebration, and the transition into married life.</p>
+        <div class="gallery-grid">
+          <figure class="photo">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/wedding-portrait.jpg" alt="Wedding portrait of Jesica and Jere">
+            <figcaption>Your wedding portrait — the cleanest visual anchor for the whole page.</figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/wedding-drive.jpg" alt="Driving after wedding day">
+            <figcaption>The drive after the ceremony has that just-married energy — part celebration, part disbelief, part peace.</figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/bride-with-family.jpg" alt="Jesica with family on wedding day">
+            <figcaption>Wedding day also carried family meaning, not just the two of you but the people and relationships around the moment.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Everyday Life Together</h2>
+        <p class="lead">Not every important memory is formal. Some of the best ones are just real life — restaurants, car selfies, nights out, and the simple fact that you liked being together.</p>
+        <div class="gallery-grid">
+          <figure class="photo">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/restaurant-selfie.jpg" alt="Restaurant selfie together">
+            <figcaption>Everyday date energy — comfortable, simple, and solid.</figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/indoor-date.jpg" alt="Indoor selfie together">
+            <figcaption>The relationship looks strongest in the little moments too, not just the milestone ones.</figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/hat-night.jpg" alt="Night photo together in matching hats">
+            <figcaption>Matching energy, matching hats, shared vibe — the page needed one photo that feels playful and unmistakably you two.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Family, Sports, and Shared Life</h2>
+        <p class="lead">The relationship wasn’t just about romance. It was woven into real family life — softball fields, kids, traditions, and the everyday rhythm of a shared home.</p>
+        <div class="gallery-grid">
+          <figure class="photo">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/softball-family.jpg" alt="Softball family moment">
+            <figcaption>Sports nights and sideline life became part of the shared story too.</figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/first-christmas.jpg" alt="First Christmas 2025 family photo">
+            <figcaption>“The Cargill’s 1st Christmas 2025” turns the relationship into something bigger than a wedding date — a family chapter.</figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/getting-ready.jpg" alt="Fun candid getting ready photo">
+            <figcaption>The candid moments matter too — the kind of photo that shows personality, humor, and everyday life in the house.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Why This Page Works</h2>
+        <p class="lead">This isn’t built like a cheesy scrapbook. It’s built like a premium personal timeline — emotional, visual, and structured. It captures the wedding, the origin story, the family moments, the holidays, and the little pieces of life that actually make a marriage feel real.</p>
+      </div>
+    </section>
+
+    <div class="footer">JCX2 custom page • Jesica + Jere • married October 10, 2025 at 11:00 AM</div>
+  </div>
+
+  <script>
+    const weddingDate = new Date('2025-10-10T11:00:00');
+
+    function updateCounter() {
+      const now = new Date();
+      const diff = now - weddingDate;
+      const note = document.getElementById('countNote');
+
+      const delta = Math.abs(diff);
+      const days = Math.floor(delta / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((delta / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((delta / (1000 * 60)) % 60);
+      const seconds = Math.floor((delta / 1000) % 60);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+
+      note.textContent = diff >= 0
+        ? 'Counting time married since October 10, 2025 at 11:00 AM.'
+        : 'Countdown to your wedding date: October 10, 2025 at 11:00 AM.';
+    }
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
+  </script>
+</body>
+</html>
