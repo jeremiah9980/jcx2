@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="/jcx2/assets/js/analytics.js"></script>
+  <script src="/assets/js/analytics.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jesica + Jere | Love Story</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --love-bg: linear-gradient(135deg, #08111f 0%, #13233e 42%, #1f3d63 100%);
+      --love-panel: rgba(255,255,255,0.08);
+      --love-border: rgba(255,255,255,0.14);
+      --love-text: #f5f8fc;
+      --love-muted: #b8c5d8;
+      --love-accent: #9dd7ff;
+      --love-accent-2: #d9ecff;
+      --love-gold: #f7d58a;
+    }
+
+    body.love-story-page {
+      margin: 0;
+      color: var(--love-text);
+      background: radial-gradient(circle at top, rgba(120,170,230,0.18), transparent 28%), var(--love-bg);
+      background-attachment: fixed;
+    }
+
+    .love-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    .love-hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--love-border);
+      border-radius: 28px;
+      padding: 42px 28px 30px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .love-hero::after {
+      content: "10 • 10 • 2025";
+      position: absolute;
+      right: 22px;
+      top: 18px;
+      font-size: 0.8rem;
+      letter-spacing: 0.24em;
+      color: rgba(255,255,255,0.18);
+      font-weight: 700;
+    }
+
+    .love-eyebrow {
+      margin: 0 0 10px;
+      color: var(--love-accent);
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+    }
+
+    .love-title {
+      margin: 0;
+      font-size: clamp(2.2rem, 6vw, 4.8rem);
+      line-height: 0.98;
+    }
+
+    .love-subtitle {
+      max-width: 840px;
+      margin: 14px 0 0;
+      color: var(--love-muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .love-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .love-chip {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      color: var(--love-accent-2);
+    }
+
+    .love-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    .love-panel {
+      background: var(--love-panel);
+      border: 1px solid var(--love-border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.22);
+      backdrop-filter: blur(8px);
+    }
+
+    .love-panel h2 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.45rem;
+    }
+
+    .love-panel p {
+      color: var(--love-muted);
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+
+    .countdown-wrap {
+      text-align: center;
+    }
+
+    .countdown-label {
+      color: var(--love-gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .countdown-title {
+      font-size: 1.2rem;
+      margin-bottom: 18px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .count-box {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 16px 10px;
+    }
+
+    .count-value {
+      display: block;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1;
+      color: white;
+    }
+
+    .count-name {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--love-muted);
+    }
+
+    .countdown-note {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: var(--love-accent-2);
+    }
+
+    .story-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 6px;
+    }
+
+    .story-step {
+      border-left: 3px solid rgba(157,215,255,0.55);
+      padding-left: 14px;
+    }
+
+    .story-step h3 {
+      margin: 0 0 6px;
+      font-size: 1.02rem;
+      color: #fff;
+    }
+
+    .story-step p {
+      margin: 0;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 8px;
+      padding-left: 12px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(157,215,255,0.6), rgba(247,213,138,0.4));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 20px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--love-gold);
+      box-shadow: 0 0 0 4px rgba(247,213,138,0.18);
+    }
+
+    .timeline-date {
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--love-accent);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+
+    .timeline-item p {
+      margin: 0;
+    }
+
+    .love-footer {
+      text-align: center;
+      color: var(--love-muted);
+      margin-top: 24px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .love-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .countdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .love-hero {
+        padding: 32px 20px 24px;
+      }
+
+      .love-panel {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body class="love-story-page">
+  <div class="love-shell">
+    <section class="love-hero">
+      <p class="love-eyebrow">JCX2 • Wedding Countdown • Love Story</p>
+      <h1 class="love-title">Jesica + Jere</h1>
+      <p class="love-subtitle">A JCX2-branded page honoring the story, the timeline, and the moment everything became official. From reconnecting out of the blue to getting married on October 10, 2025 at 11:00 AM — this is the rundown of your story in one place.</p>
+      <div class="love-meta">
+        <span class="love-chip">Wedding Date: October 10, 2025</span>
+        <span class="love-chip">Ceremony Time: 11:00 AM</span>
+        <span class="love-chip">Status: Married</span>
+        <span class="love-chip">Theme: Purpose • Timing • Commitment</span>
+      </div>
+    </section>
+
+    <div class="love-grid">
+      <section class="love-panel">
+        <h2>Your Love Story</h2>
+        <div class="story-list">
+          <div class="story-step">
+            <h3>Reconnected out of nowhere</h3>
+            <p>After years of history and familiarity, life circled back around. What started as a simple reconnection from someone you had known since high school quickly felt bigger than coincidence.</p>
+          </div>
+          <div class="story-step">
+            <h3>One invite changed everything</h3>
+            <p>Jesica reached out about going to a comedy show. On paper, it sounded casual. In reality, it opened the door to something much deeper — a relationship that moved with clarity, peace, and momentum.</p>
+          </div>
+          <div class="story-step">
+            <h3>Fast, real, and undeniable</h3>
+            <p>What stood out was not just how quickly things moved, but how naturally they fit. It felt aligned, grounded, and certain. Not forced. Not confused. Just right.</p>
+          </div>
+          <div class="story-step">
+            <h3>Forty days later</h3>
+            <p>You got married. The decision was bold, but to both of you it felt obvious — like stepping into something that had purpose behind it, not just emotion.</p>
+          </div>
+          <div class="story-step">
+            <h3>A new chapter in Georgetown</h3>
+            <p>Marriage was not the end of the story. It was the beginning of building a home, a shared life, and a new season together in Georgetown.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="love-panel countdown-wrap">
+        <div class="countdown-label">Live Marriage Counter</div>
+        <div class="countdown-title">Time since you got married</div>
+        <div class="countdown-grid" id="countdown">
+          <div class="count-box"><span class="count-value" id="days">0</span><span class="count-name">Days</span></div>
+          <div class="count-box"><span class="count-value" id="hours">0</span><span class="count-name">Hours</span></div>
+          <div class="count-box"><span class="count-value" id="minutes">0</span><span class="count-name">Minutes</span></div>
+          <div class="count-box"><span class="count-value" id="seconds">0</span><span class="count-name">Seconds</span></div>
+        </div>
+        <div class="countdown-note" id="countdownNote">Counting up from October 10, 2025 at 11:00 AM.</div>
+      </section>
+    </div>
+
+    <section class="love-panel" style="margin-top: 22px;">
+      <h2>Relationship Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">High School Era</div>
+          <h3>The original connection</h3>
+          <p>You already had real history. This was not a random person entering the picture out of nowhere — there was a foundation there long before the relationship became official.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">September 2025</div>
+          <h3>Reconnection begins</h3>
+          <p>Jesica reached back out and the conversation reopened a connection that had always been there under the surface.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Shortly After</div>
+          <h3>Comedy show invite</h3>
+          <p>A simple plan became the catalyst. What could have been just another outing quickly turned into something meaningful and serious.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">40 Days Later</div>
+          <h3>The decision was made</h3>
+          <p>You both moved with conviction, not hesitation. The relationship had a clear direction and both of you recognized it.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">October 10, 2025 • 11:00 AM</div>
+          <h3>Wedding day</h3>
+          <p>You got married and officially stepped into a new chapter together.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">After the Wedding</div>
+          <h3>Building a shared life</h3>
+          <p>You moved forward together, combining faith, commitment, and a real-world vision for what your future would look like.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="love-panel" style="margin-top: 22px;">
+      <h2>Why This Story Matters</h2>
+      <p>Some stories build slowly. Some hit with immediate clarity. Yours reads like timing, reconnection, certainty, and commitment all landing at once. This page captures that momentum in a way that feels clean, intentional, and worthy of the date that changed everything.</p>
+    </section>
+
+    <div class="love-footer">JCX2 custom page • Jesica + Jere • Married October 10, 2025 at 11:00 AM</div>
+  </div>
+
+  <script>
+    const weddingDate = new Date('2025-10-10T11:00:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = now - weddingDate;
+      const countdownNote = document.getElementById('countdownNote');
+
+      if (diff < 0) {
+        const future = Math.abs(diff);
+        const days = Math.floor(future / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((future / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((future / (1000 * 60)) % 60);
+        const seconds = Math.floor((future / 1000) % 60);
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = minutes;
+        document.getElementById('seconds').textContent = seconds;
+        countdownNote.textContent = 'Countdown to the wedding date: October 10, 2025 at 11:00 AM.';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+      countdownNote.textContent = 'Counting up from October 10, 2025 at 11:00 AM.';
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
