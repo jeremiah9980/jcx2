@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="/jcx2/assets/js/analytics.js"></script>
+  <script src="/assets/js/analytics.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Cargill Countdown</title>
+  <style>
+    :root {
+      --bg: #08111f;
+      --bg2: #13253f;
+      --panel: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.12);
+      --text: #f7f9fc;
+      --muted: #b9c4d4;
+      --accent: #9fd8ff;
+      --gold: #f6d38b;
+      --shadow: 0 20px 50px rgba(0,0,0,0.3);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, rgba(110,170,235,0.2), transparent 24%), linear-gradient(180deg, var(--bg2), var(--bg));
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    .wrap {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 14px 14px 42px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+    .hero {
+      position: relative;
+      min-height: 72svh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(8,17,31,0.15) 0%, rgba(8,17,31,0.42) 45%, rgba(8,17,31,0.88) 100%),
+        url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/wedding-portrait.jpg') center/cover no-repeat;
+    }
+    .hero-content {
+      width: 100%;
+      padding: 24px 18px 20px;
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 7vw, 4.8rem);
+      line-height: 0.95;
+    }
+    .sub {
+      max-width: 760px;
+      margin: 12px 0 0;
+      color: #eef5ff;
+      line-height: 1.68;
+      font-size: 1rem;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 0.83rem;
+      color: #fff;
+    }
+    .section { margin-top: 14px; }
+    .section-inner { padding: 18px; }
+    .section h2 {
+      margin: 0 0 8px;
+      font-size: 1.3rem;
+    }
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .count-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 16px 10px;
+      text-align: center;
+    }
+    .count-value {
+      display: block;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1;
+    }
+    .count-name {
+      display: block;
+      margin-top: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+    .count-note {
+      margin-top: 12px;
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+    .video-shell {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.45)),
+        url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/restaurant-selfie.jpg') center/cover no-repeat;
+      min-height: 360px;
+      display: flex;
+      align-items: end;
+    }
+    .video-overlay {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(8,17,31,0.05), rgba(8,17,31,0.78));
+    }
+    .video-kicker {
+      font-size: 0.76rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .video-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .video-text {
+      color: #eef5ff;
+      line-height: 1.62;
+      font-size: 0.95rem;
+      max-width: 760px;
+    }
+    .video-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.12);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .button.secondary { background: rgba(8,17,31,0.36); }
+    .note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .story-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .story-card h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+    .story-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.93rem;
+    }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 18px;
+      padding: 0 10px;
+    }
+    @media (max-width: 780px) {
+      .hero { min-height: 68svh; }
+      .counter-grid { grid-template-columns: repeat(2, 1fr); }
+      .story-grid { grid-template-columns: 1fr; }
+      .video-shell { min-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="panel hero">
+      <div class="hero-content">
+        <p class="eyebrow">JCX2 • Countdown Collection</p>
+        <h1>Cargill Countdown</h1>
+        <p class="sub">A set of countdown videos capturing the days before Jesica became Jesica Ann Cargill. Built as a clean, cinematic page around the anticipation, the story, and the date everything changed.</p>
+        <div class="chips">
+          <span class="chip">Jesica Ann Cargill</span>
+          <span class="chip">10-10-2025</span>
+          <span class="chip">11:00 AM</span>
+          <span class="chip">10-12 video set</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Wedding Countdown</h2>
+        <p class="lead">This counter tracks the countdown to the moment Jesica officially became Jesica Ann Cargill. After that time, it flips to time married.</p>
+        <div class="counter-grid">
+          <div class="count-box"><span class="count-value" id="days">0</span><span class="count-name">Days</span></div>
+          <div class="count-box"><span class="count-value" id="hours">0</span><span class="count-name">Hours</span></div>
+          <div class="count-box"><span class="count-value" id="minutes">0</span><span class="count-name">Minutes</span></div>
+          <div class="count-box"><span class="count-value" id="seconds">0</span><span class="count-name">Seconds</span></div>
+        </div>
+        <div class="count-note" id="countNote">Countdown to October 10, 2025 at 11:00 AM.</div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Featured Countdown Video Set</h2>
+        <p class="lead">This section represents the countdown collection — the videos of Jesica counting down the days until she became Jesica Ann Cargill.</p>
+        <div class="video-shell">
+          <div class="video-overlay">
+            <div class="video-kicker">Featured Collection</div>
+            <div class="video-title">Jesica counting down the days</div>
+            <div class="video-text">This iCloud share contains the countdown set tied to the wedding date. Since iCloud shared links do not reliably expose raw autoplay-ready video files for inline playback on every browser, this section is styled to feel cinematic and opens the collection directly.</div>
+            <div class="video-actions">
+              <a class="button" href="https://share.icloud.com/photos/035gaP34S4X3I7Y8DwBuGqhMQ" target="_blank" rel="noopener noreferrer">Open Countdown Set</a>
+              <a class="button secondary" href="https://share.icloud.com/photos/035gaP34S4X3I7Y8DwBuGqhMQ" target="_blank" rel="noopener noreferrer">Watch in iCloud</a>
+            </div>
+            <div class="note">For true inline autoplay of the full countdown series, upload the actual MP4 or MOV files into the repo and I’ll wire them in as a swipeable in-page video carousel.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Why This Collection Matters</h2>
+        <div class="story-grid">
+          <div class="story-card">
+            <h3>It captures anticipation</h3>
+            <p>The countdown clips show the emotional lead-up to the wedding, not just the ceremony itself.</p>
+          </div>
+          <div class="story-card">
+            <h3>It marks identity becoming official</h3>
+            <p>The collection centers on the moment Jesica became Jesica Ann Cargill, giving the videos a clear narrative purpose.</p>
+          </div>
+          <div class="story-card">
+            <h3>It works as a standalone memory page</h3>
+            <p>This page can live next to the main love-story page as its own focused memory experience.</p>
+          </div>
+          <div class="story-card">
+            <h3>It can become a real video carousel later</h3>
+            <p>Once the actual files are uploaded, this can become a premium swipeable series with autoplay muted clips in-page.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">JCX2 custom page • Cargill Countdown • Jesica Ann Cargill countdown collection</div>
+  </div>
+
+  <script>
+    const weddingDate = new Date('2025-10-10T11:00:00');
+    function updateCounter() {
+      const now = new Date();
+      const diff = weddingDate - now;
+      const marriedDiff = now - weddingDate;
+      const useDiff = diff >= 0 ? diff : marriedDiff;
+      const days = Math.floor(useDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((useDiff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((useDiff / (1000 * 60)) % 60);
+      const seconds = Math.floor((useDiff / 1000) % 60);
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+      document.getElementById('countNote').textContent = diff >= 0
+        ? 'Countdown to October 10, 2025 at 11:00 AM.'
+        : 'Counting time married since October 10, 2025 at 11:00 AM.';
+    }
+    updateCounter();
+    setInterval(updateCounter, 1000);
+  </script>
+</body>
+</html>
