@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="/jcx2/assets/js/analytics.js"></script>
+  <script src="/assets/js/analytics.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>JC2 | Jesica + Jere</title>
+  <style>
+    :root {
+      --bg: #07101d;
+      --bg2: #13243d;
+      --panel: rgba(255,255,255,0.08);
+      --panel-strong: rgba(255,255,255,0.12);
+      --border: rgba(255,255,255,0.12);
+      --text: #f8f9fc;
+      --muted: #b8c4d4;
+      --accent: #ff8b3d;
+      --accent2: #ffd24a;
+      --soft: #9fd8ff;
+      --shadow: 0 20px 55px rgba(0,0,0,0.34);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255,139,61,0.18), transparent 20%),
+        radial-gradient(circle at 80% 10%, rgba(255,210,74,0.14), transparent 18%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    .wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 16px 14px 50px; }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+    .hero {
+      position: relative;
+      min-height: 82svh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .slides { position: absolute; inset: 0; }
+    .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.04);
+      transition: opacity 1.4s ease, transform 7s ease;
+    }
+    .slide.active { opacity: 1; transform: scale(1); }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(7,16,29,0.14) 0%, rgba(7,16,29,0.36) 45%, rgba(7,16,29,0.9) 100%);
+      pointer-events: none;
+    }
+    .hero-topbar {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(7,16,29,0.48);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 10px 14px 10px 10px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.24);
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255,210,74,0.22), rgba(255,139,61,0.16));
+      display: grid; place-items: center; overflow: hidden; flex: 0 0 auto;
+    }
+    .brand-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .brand-copy { line-height: 1.1; }
+    .brand-copy strong { display: block; font-size: 0.96rem; color: white; letter-spacing: 0.03em; }
+    .brand-copy span { display: block; margin-top: 3px; font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; }
+    .instagram-link {
+      display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 14px;
+      border-radius: 999px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.14);
+      text-decoration: none; font-weight: 600; font-size: 0.9rem; color: white; backdrop-filter: blur(8px);
+    }
+    .hero-content { position: relative; z-index: 2; width: 100%; padding: 24px 18px 22px; }
+    .eyebrow { margin: 0 0 8px; color: var(--soft); text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.74rem; font-weight: 700; }
+    h1 { margin: 0; font-size: clamp(2.4rem, 7vw, 5rem); line-height: 0.94; }
+    .sub { max-width: 780px; margin: 12px 0 0; color: #eef5ff; line-height: 1.68; font-size: 1rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .chip { padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.14); font-size: 0.83rem; color: #fff; }
+    .hero-dots { display: flex; gap: 7px; margin-top: 14px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: transform 0.3s ease, background 0.3s ease; }
+    .dot.active { background: var(--accent2); transform: scale(1.15); }
+    .section { margin-top: 14px; }
+    .section-inner { padding: 18px; }
+    .section h2 { margin: 0 0 8px; font-size: 1.34rem; }
+    .lead { margin: 0; color: var(--muted); line-height: 1.72; font-size: 0.96rem; }
+    .counter-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+    .count-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 16px 10px; text-align: center; }
+    .count-value { display: block; font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; line-height: 1; }
+    .count-name { display: block; margin-top: 7px; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.74rem; color: var(--muted); }
+    .count-note { margin-top: 12px; color: var(--soft); font-size: 0.9rem; }
+    .dual-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 14px; }
+    .link-card {
+      margin-top: 14px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 16px;
+    }
+    .link-copy h3 { margin: 0 0 5px; font-size: 1rem; }
+    .link-copy p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 0.92rem; max-width: 650px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 14px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.12); color: white; text-decoration: none;
+      font-weight: 600; font-size: 0.92rem; white-space: nowrap;
+    }
+    .button.warm { background: linear-gradient(135deg, rgba(255,139,61,0.85), rgba(255,210,74,0.75)); color: #1a1a1a; border-color: rgba(255,210,74,0.35); }
+    .playlist-embed {
+      margin-top: 16px; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.18); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+    .playlist-embed iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; display: block; }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+    .story-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 14px; }
+    .story-card h3 { margin: 0 0 6px; font-size: 1rem; }
+    .story-card p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 0.93rem; }
+    .video-shell {
+      position: relative; border-radius: 22px; overflow: hidden;
+      background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.45)), url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/wedding-drive.jpg') center/cover no-repeat;
+      min-height: 360px; display: flex; align-items: end;
+    }
+    .video-overlay { width: 100%; padding: 18px; background: linear-gradient(180deg, rgba(7,16,29,0.05), rgba(7,16,29,0.8)); }
+    .video-kicker { font-size: 0.76rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; margin-bottom: 8px; }
+    .video-title { font-size: 1.18rem; font-weight: 700; margin-bottom: 8px; }
+    .video-text { color: #eef5ff; line-height: 1.62; font-size: 0.95rem; max-width: 760px; }
+    .video-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .note { margin-top: 10px; color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+    .social-strip { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 14px; }
+    .social-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 16px; }
+    .social-card h3 { margin: 0 0 6px; font-size: 1rem; }
+    .social-card p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 0.93rem; }
+    .footer { text-align: center; color: var(--muted); font-size: 0.88rem; margin-top: 18px; padding: 0 10px; }
+    @media (max-width: 900px) { .dual-grid, .social-strip { grid-template-columns: 1fr; } }
+    @media (max-width: 780px) {
+      .hero { min-height: 74svh; }
+      .counter-grid { grid-template-columns: repeat(2, 1fr); }
+      .story-grid { grid-template-columns: 1fr; }
+      .video-shell { min-height: 300px; }
+      .link-card { align-items: flex-start; }
+      .hero-topbar { flex-direction: column; align-items: flex-start; }
+      .instagram-link { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="panel hero">
+      <div class="slides" id="slides">
+        <div class="slide active" style="background-image:url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/wedding-portrait.jpg')"></div>
+        <div class="slide" style="background-image:url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/wedding-drive.jpg')"></div>
+        <div class="slide" style="background-image:url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/softball-family.jpg')"></div>
+        <div class="slide" style="background-image:url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/first-christmas.jpg')"></div>
+        <div class="slide" style="background-image:url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/restaurant-selfie.jpg')"></div>
+      </div>
+      <div class="hero-topbar">
+        <a class="brand-badge" href="https://www.instagram.com/jc2.twinflame.fit" target="_blank" rel="noopener noreferrer">
+          <span class="brand-mark">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/branding/jc2-logo.png" alt="JC2 logo" />
+          </span>
+          <span class="brand-copy">
+            <strong>JC2</strong>
+            <span>Twin Flame Fit</span>
+          </span>
+        </a>
+        <a class="instagram-link" href="https://www.instagram.com/jc2.twinflame.fit" target="_blank" rel="noopener noreferrer">Follow @jc2.twinflame.fit</a>
+      </div>
+      <div class="hero-content">
+        <p class="eyebrow">JC2 • Jesica + Jere • Twin Flame Fit</p>
+        <h1>Our Love Story</h1>
+        <p class="sub">A branded home page built around your relationship, your wedding, your countdowns, and the life you’ve been building together — now tied directly into the JC2 identity and your Instagram presence.</p>
+        <div class="chips">
+          <span class="chip">10-10-2025</span>
+          <span class="chip">11:00 AM</span>
+          <span class="chip">JC2 Brand</span>
+          <span class="chip">Twin Flame Fit</span>
+          <span class="chip">@jc2.twinflame.fit</span>
+        </div>
+        <div class="hero-dots" id="dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dual-grid">
+      <div class="panel">
+        <div class="section-inner">
+          <h2>6 Month Anniversary Countdown</h2>
+          <p class="lead">A live ticker counting down to your six month anniversary.</p>
+          <div class="counter-grid">
+            <div class="count-box"><span class="count-value" id="annDays">0</span><span class="count-name">Days</span></div>
+            <div class="count-box"><span class="count-value" id="annHours">0</span><span class="count-name">Hours</span></div>
+            <div class="count-box"><span class="count-value" id="annMinutes">0</span><span class="count-name">Minutes</span></div>
+            <div class="count-box"><span class="count-value" id="annSeconds">0</span><span class="count-name">Seconds</span></div>
+          </div>
+          <div class="count-note" id="annNote">Counting down to April 10, 2026 at 11:00 AM CST.</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="section-inner">
+          <h2>Cargill Countdown Collection</h2>
+          <p class="lead">Jump straight into the countdown video series leading up to the day Jesica became Jesica Ann Cargill.</p>
+          <div class="playlist-embed">
+            <iframe
+              src="https://www.youtube.com/embed/videoseries?list=PLx8Rm6IVQ2hJTdWkgshBPGjHMOgGJWKYh"
+              title="Cargill Countdown YouTube Playlist"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="link-card" style="margin-top:14px;">
+            <div class="link-copy">
+              <h3>YouTube Playlist Edition</h3>
+              <p>The full countdown collection now plays directly in this section, with the standalone page still available if you want a dedicated playlist view.</p>
+            </div>
+            <a class="button warm" href="cargill-countdown-youtube.html">Open Full Countdown Page</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Marriage Counter</h2>
+        <p class="lead">A live counter tied to the moment you got married on October 10, 2025 at 11:00 AM.</p>
+        <div class="counter-grid">
+          <div class="count-box"><span class="count-value" id="days">0</span><span class="count-name">Days</span></div>
+          <div class="count-box"><span class="count-value" id="hours">0</span><span class="count-name">Hours</span></div>
+          <div class="count-box"><span class="count-value" id="minutes">0</span><span class="count-name">Minutes</span></div>
+          <div class="count-box"><span class="count-value" id="seconds">0</span><span class="count-name">Seconds</span></div>
+        </div>
+        <div class="count-note" id="countNote">Counting from October 10, 2025 at 11:00 AM CST.</div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>What JC2 Represents</h2>
+        <div class="story-grid">
+          <div class="story-card"><h3>Two people, one identity</h3><p>JC2 gives the relationship a recognizable brand language — not just names, but a shared identity that feels bigger than a single page.</p></div>
+          <div class="story-card"><h3>Energy, movement, fire</h3><p>The flame mark adds a stronger visual personality. It feels more like your own brand and less like a generic wedding layout.</p></div>
+          <div class="story-card"><h3>Love story + lifestyle</h3><p>Bringing in Twin Flame Fit and Instagram gives the page a modern home-base feel instead of just a memory page.</p></div>
+          <div class="story-card"><h3>Built to grow</h3><p>This now works as a main home page that can expand into videos, social, fitness, milestones, and future relationship content.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Our Story</h2>
+        <div class="story-grid">
+          <div class="story-card"><h3>Known for years, reconnected at the right time</h3><p>You already had real history. That made the reconnection feel bigger than chance and gave everything that followed a stronger foundation.</p></div>
+          <div class="story-card"><h3>The invite that changed everything</h3><p>A comedy show invite turned into momentum, clarity, and a relationship that moved fast because it felt right.</p></div>
+          <div class="story-card"><h3>Fast, but not forced</h3><p>The speed came from certainty. It fit. It made sense. You both knew what it was becoming.</p></div>
+          <div class="story-card"><h3>Marriage became the start</h3><p>Wedding day was not the finish line. It was the start of home life, family memories, holidays, sports, routines, and shared identity.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section social-strip">
+      <div class="panel">
+        <div class="section-inner">
+          <h2>Instagram Presence</h2>
+          <div class="social-card"><h3>@jc2.twinflame.fit</h3><p>This page now ties your main love story into the Instagram brand so visitors have a clear path from the site to your shared social identity.</p></div>
+          <div class="link-card">
+            <div class="link-copy"><h3>Follow the brand</h3><p>Use the Instagram account as the living, public-facing side of the story while this page remains the branded home base.</p></div>
+            <a class="button warm" href="https://www.instagram.com/jc2.twinflame.fit" target="_blank" rel="noopener noreferrer">Open Instagram</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="section-inner">
+          <h2>Featured Video Moment</h2>
+          <div class="video-shell">
+            <div class="video-overlay">
+              <div class="video-kicker">Featured Video</div>
+              <div class="video-title">Your cinematic memory</div>
+              <div class="video-text">The home page still keeps a cinematic memory block so the experience feels emotional and visual, not just informational.</div>
+              <div class="video-actions">
+                <a class="button" href="https://share.icloud.com/photos/0f8H-fHuduLm8jXfW2OpcYeog" target="_blank" rel="noopener noreferrer">Open Video</a>
+                <a class="button" href="cargill-countdown-youtube.html">Open Playlist</a>
+              </div>
+              <div class="note">For true autoplay video on-page, upload a direct MP4 or MOV into the repo and I’ll wire it in.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">JC2 branded home page • Jesica + Jere • Twin Flame Fit • @jc2.twinflame.fit</div>
+  </div>
+
+  <script>
+    const weddingDate = new Date('2025-10-10T11:00:00-05:00');
+    const sixMonthAnniversary = new Date('2026-04-10T11:00:00-05:00');
+
+    function updateCounter() {
+      const now = new Date();
+      const diff = now - weddingDate;
+      const delta = Math.abs(diff);
+      const days = Math.floor(delta / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((delta / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((delta / (1000 * 60)) % 60);
+      const seconds = Math.floor((delta / 1000) % 60);
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+      document.getElementById('countNote').textContent = diff >= 0 ? 'Counting time married since October 10, 2025 at 11:00 AM CST.' : 'Countdown to your wedding date: October 10, 2025 at 11:00 AM CST.';
+    }
+
+    function updateAnniversaryCounter() {
+      const now = new Date();
+      const diff = sixMonthAnniversary - now;
+      const delta = Math.abs(diff);
+      const days = Math.floor(delta / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((delta / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((delta / (1000 * 60)) % 60);
+      const seconds = Math.floor((delta / 1000) % 60);
+      document.getElementById('annDays').textContent = days;
+      document.getElementById('annHours').textContent = hours;
+      document.getElementById('annMinutes').textContent = minutes;
+      document.getElementById('annSeconds').textContent = seconds;
+      document.getElementById('annNote').textContent = diff >= 0 ? 'Counting down to April 10, 2026 at 11:00 AM CST.' : 'Happy 6 month anniversary — six months arrived on April 10, 2026 at 11:00 AM CST.';
+    }
+
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    let current = 0;
+    function rotateSlides() {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    updateCounter();
+    updateAnniversaryCounter();
+    setInterval(updateCounter, 1000);
+    setInterval(updateAnniversaryCounter, 1000);
+    setInterval(rotateSlides, 4200);
+  </script>
+</body>
+</html>
