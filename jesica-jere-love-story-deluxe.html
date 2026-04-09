@@ -5,18 +5,20 @@
   <script src="/assets/js/analytics.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Jesica + Jere | Deluxe Love Story</title>
+  <title>JC2 | Jesica + Jere</title>
   <style>
     :root {
-      --bg: #08111f;
-      --bg2: #13253f;
+      --bg: #07101d;
+      --bg2: #13243d;
       --panel: rgba(255,255,255,0.08);
+      --panel-strong: rgba(255,255,255,0.12);
       --border: rgba(255,255,255,0.12);
-      --text: #f7f9fc;
-      --muted: #b9c4d4;
-      --accent: #9fd8ff;
-      --gold: #f6d38b;
-      --shadow: 0 20px 50px rgba(0,0,0,0.3);
+      --text: #f8f9fc;
+      --muted: #b8c4d4;
+      --accent: #ff8b3d;
+      --accent2: #ffd24a;
+      --soft: #9fd8ff;
+      --shadow: 0 20px 55px rgba(0,0,0,0.34);
       --radius: 24px;
     }
 
@@ -26,7 +28,10 @@
       padding: 0;
       color: var(--text);
       font-family: Inter, Arial, Helvetica, sans-serif;
-      background: radial-gradient(circle at top, rgba(110,170,235,0.2), transparent 24%), linear-gradient(180deg, var(--bg2), var(--bg));
+      background:
+        radial-gradient(circle at top, rgba(255,139,61,0.18), transparent 20%),
+        radial-gradient(circle at 80% 10%, rgba(255,210,74,0.14), transparent 18%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
@@ -35,9 +40,9 @@
 
     .wrap {
       width: 100%;
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 14px 14px 42px;
+      padding: 16px 14px 50px;
     }
 
     .panel {
@@ -51,7 +56,7 @@
 
     .hero {
       position: relative;
-      min-height: 78svh;
+      min-height: 82svh;
       display: flex;
       align-items: flex-end;
       overflow: hidden;
@@ -81,37 +86,115 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(8,17,31,0.18) 0%, rgba(8,17,31,0.38) 45%, rgba(8,17,31,0.84) 100%);
+      background: linear-gradient(180deg, rgba(7,16,29,0.14) 0%, rgba(7,16,29,0.36) 45%, rgba(7,16,29,0.9) 100%);
       pointer-events: none;
+    }
+
+    .hero-topbar {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(7,16,29,0.48);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 10px 14px 10px 10px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.24);
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255,210,74,0.22), rgba(255,139,61,0.16));
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .brand-copy {
+      line-height: 1.1;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.96rem;
+      color: white;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 3px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .instagram-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.14);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: white;
+      backdrop-filter: blur(8px);
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
       width: 100%;
-      padding: 22px 18px 20px;
+      padding: 24px 18px 22px;
     }
 
     .eyebrow {
       margin: 0 0 8px;
-      color: var(--accent);
+      color: var(--soft);
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.16em;
       font-size: 0.74rem;
       font-weight: 700;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.4rem, 7vw, 4.8rem);
-      line-height: 0.95;
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      line-height: 0.94;
     }
 
     .sub {
-      max-width: 760px;
+      max-width: 780px;
       margin: 12px 0 0;
       color: #eef5ff;
-      line-height: 1.65;
+      line-height: 1.68;
       font-size: 1rem;
     }
 
@@ -146,27 +229,20 @@
     }
 
     .dot.active {
-      background: var(--gold);
+      background: var(--accent2);
       transform: scale(1.15);
     }
 
-    .section {
-      margin-top: 14px;
-    }
-
-    .section-inner {
-      padding: 18px;
-    }
-
+    .section { margin-top: 14px; }
+    .section-inner { padding: 18px; }
     .section h2 {
       margin: 0 0 8px;
-      font-size: 1.3rem;
+      font-size: 1.34rem;
     }
-
     .lead {
       margin: 0;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.72;
       font-size: 0.96rem;
     }
 
@@ -203,8 +279,62 @@
 
     .count-note {
       margin-top: 12px;
-      color: var(--accent);
+      color: var(--soft);
       font-size: 0.9rem;
+    }
+
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+    }
+
+    .link-card {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .link-copy h3 {
+      margin: 0 0 5px;
+      font-size: 1rem;
+    }
+
+    .link-copy p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.92rem;
+      max-width: 650px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.12);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+
+    .button.warm {
+      background: linear-gradient(135deg, rgba(255,139,61,0.85), rgba(255,210,74,0.75));
+      color: #1a1a1a;
+      border-color: rgba(255,210,74,0.35);
     }
 
     .story-grid {
@@ -248,12 +378,12 @@
     .video-overlay {
       width: 100%;
       padding: 18px;
-      background: linear-gradient(180deg, rgba(8,17,31,0.05), rgba(8,17,31,0.78));
+      background: linear-gradient(180deg, rgba(7,16,29,0.05), rgba(7,16,29,0.8));
     }
 
     .video-kicker {
       font-size: 0.76rem;
-      color: var(--gold);
+      color: var(--accent2);
       text-transform: uppercase;
       letter-spacing: 0.15em;
       font-weight: 700;
@@ -280,30 +410,53 @@
       margin-top: 14px;
     }
 
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.12);
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.92rem;
-    }
-
-    .button.secondary {
-      background: rgba(8,17,31,0.36);
-    }
-
     .note {
       margin-top: 10px;
       color: var(--muted);
       font-size: 0.85rem;
       line-height: 1.5;
+    }
+
+    .social-strip {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+    }
+
+    .social-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .social-card h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .social-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.93rem;
+    }
+
+    .playlist-embed {
+      margin-top: 14px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.28);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .playlist-embed iframe {
+      display: block;
+      width: 100%;
+      min-height: 720px;
+      border: 0;
+      background: #000;
     }
 
     .footer {
@@ -314,11 +467,24 @@
       padding: 0 10px;
     }
 
+    @media (max-width: 900px) {
+      .dual-grid, .social-strip { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 780px) {
-      .hero { min-height: 72svh; }
+      .hero { min-height: 74svh; }
       .counter-grid { grid-template-columns: repeat(2, 1fr); }
       .story-grid { grid-template-columns: 1fr; }
       .video-shell { min-height: 300px; }
+      .link-card { align-items: flex-start; }
+      .hero-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .instagram-link {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -332,15 +498,33 @@
         <div class="slide" style="background-image:url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/first-christmas.jpg')"></div>
         <div class="slide" style="background-image:url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/restaurant-selfie.jpg')"></div>
       </div>
+
+      <div class="hero-topbar">
+        <a class="brand-badge" href="https://www.instagram.com/jc2.twinflame.fit" target="_blank" rel="noopener noreferrer">
+          <span class="brand-mark">
+            <img src="https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/branding/jc2-logo.png" alt="JC2 logo" />
+          </span>
+          <span class="brand-copy">
+            <strong>JC2</strong>
+            <span>Twin Flame Fit</span>
+          </span>
+        </a>
+
+        <a class="instagram-link" href="https://www.instagram.com/jc2.twinflame.fit" target="_blank" rel="noopener noreferrer">
+          Follow @jc2.twinflame.fit
+        </a>
+      </div>
+
       <div class="hero-content">
-        <p class="eyebrow">JCX2 • Deluxe Story • Slideshow Hero</p>
-        <h1>Jesica + Jere</h1>
-        <p class="sub">A richer version of your page with a subtle fading hero slideshow, a cleaner story layout, and a cinematic video section built around your shared memories.</p>
+        <p class="eyebrow">JC2 • Jesica + Jere • Twin Flame Fit</p>
+        <h1>Our Love Story</h1>
+        <p class="sub">A branded home page built around your relationship, your wedding, your countdowns, and the life you’ve been building together — now tied directly into the JC2 identity and your Instagram presence.</p>
         <div class="chips">
           <span class="chip">10-10-2025</span>
           <span class="chip">11:00 AM</span>
-          <span class="chip">Married</span>
-          <span class="chip">Love Story</span>
+          <span class="chip">JC2 Brand</span>
+          <span class="chip">Twin Flame Fit</span>
+          <span class="chip">@jc2.twinflame.fit</span>
         </div>
         <div class="hero-dots" id="dots">
           <span class="dot active"></span>
@@ -352,23 +536,78 @@
       </div>
     </section>
 
+    <section class="section dual-grid">
+      <div class="panel">
+        <div class="section-inner">
+          <h2>6 Month Anniversary Countdown</h2>
+          <p class="lead">A live ticker counting down to your six month anniversary.</p>
+          <div class="counter-grid">
+            <div class="count-box"><span class="count-value" id="annDays">0</span><span class="count-name">Days</span></div>
+            <div class="count-box"><span class="count-value" id="annHours">0</span><span class="count-name">Hours</span></div>
+            <div class="count-box"><span class="count-value" id="annMinutes">0</span><span class="count-name">Minutes</span></div>
+            <div class="count-box"><span class="count-value" id="annSeconds">0</span><span class="count-name">Seconds</span></div>
+          </div>
+          <div class="count-note" id="annNote">Counting down to April 10, 2026 at 11:00 AM CST.</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="section-inner">
+          <h2>Cargill Countdown Collection</h2>
+          <p class="lead">The full countdown playlist is now embedded right into the love story page, so visitors can stay inside the experience while watching the build-up to 10.10.25.</p>
+          <div class="playlist-embed">
+            <iframe
+              src="cargill-countdown-youtube.html"
+              title="Cargill Countdown Playlist"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="panel section">
       <div class="section-inner">
         <h2>Marriage Counter</h2>
-        <p class="lead">Before the ceremony it counts down. After the ceremony it counts how long you’ve been married.</p>
+        <p class="lead">A live counter tied to the moment you got married on October 10, 2025 at 11:00 AM.</p>
         <div class="counter-grid">
           <div class="count-box"><span class="count-value" id="days">0</span><span class="count-name">Days</span></div>
           <div class="count-box"><span class="count-value" id="hours">0</span><span class="count-name">Hours</span></div>
           <div class="count-box"><span class="count-value" id="minutes">0</span><span class="count-name">Minutes</span></div>
           <div class="count-box"><span class="count-value" id="seconds">0</span><span class="count-name">Seconds</span></div>
         </div>
-        <div class="count-note" id="countNote">Counting from October 10, 2025 at 11:00 AM.</div>
+        <div class="count-note" id="countNote">Counting from October 10, 2025 at 11:00 AM CST.</div>
       </div>
     </section>
 
     <section class="panel section">
       <div class="section-inner">
-        <h2>The Story</h2>
+        <h2>The Jesica + Jere Story</h2>
+        <div class="story-grid">
+          <div class="story-card">
+            <h3>Thirty years of history, right timing</h3>
+            <p>This story did not start with strangers. It started with a connection that had existed for years, then came back around at exactly the right moment and hit with real clarity.</p>
+          </div>
+          <div class="story-card">
+            <h3>One invite changed the direction</h3>
+            <p>A simple comedy show invite opened the door, but what followed moved far beyond one night out. It became a fast, undeniable shift into something serious, intentional, and lasting.</p>
+          </div>
+          <div class="story-card">
+            <h3>Forty days from reconnecting to marriage</h3>
+            <p>The pace became part of the story because it reflected certainty, not confusion. When it clicked, it clicked hard, and both of you leaned into what felt real instead of dragging it out.</p>
+          </div>
+          <div class="story-card">
+            <h3>10.10.25 became the launch point</h3>
+            <p>The wedding was not framed like an ending. It became the official beginning of Jesica and Jere as a married team, a household, and a shared identity under the JC2 brand.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <div class="section-inner">
+        <h2>Our Story</h2>
         <div class="story-grid">
           <div class="story-card">
             <h3>Known for years, reconnected at the right time</h3>
@@ -390,30 +629,50 @@
       </div>
     </section>
 
-    <section class="panel section">
-      <div class="section-inner">
-        <h2>Cinematic Video Moment</h2>
-        <p class="lead">I added a cinematic section for your iCloud video. Because iCloud shared links do not reliably expose a direct embeddable video file for autoplay in every browser, this section is styled like an autoplay hero and opens the video directly in iCloud when tapped.</p>
-        <div class="video-shell">
-          <div class="video-overlay">
-            <div class="video-kicker">Featured Video</div>
-            <div class="video-title">Your shared iCloud moment</div>
-            <div class="video-text">This section is designed to feel cinematic on the page while keeping the actual video source intact. On supported devices, the tap-through opens the iCloud shared video immediately.</div>
-            <div class="video-actions">
-              <a class="button" href="https://share.icloud.com/photos/0f8H-fHuduLm8jXfW2OpcYeog" target="_blank" rel="noopener noreferrer">Open Video</a>
-              <a class="button secondary" href="https://share.icloud.com/photos/0f8H-fHuduLm8jXfW2OpcYeog" target="_blank" rel="noopener noreferrer">Watch Fullscreen</a>
+    <section class="section social-strip">
+      <div class="panel">
+        <div class="section-inner">
+          <h2>Instagram Presence</h2>
+          <div class="social-card">
+            <h3>@jc2.twinflame.fit</h3>
+            <p>This page now ties your main love story into the Instagram brand so visitors have a clear path from the site to your shared social identity.</p>
+          </div>
+          <div class="link-card">
+            <div class="link-copy">
+              <h3>Follow the brand</h3>
+              <p>Use the Instagram account as the living, public-facing side of the story while this page remains the branded home base.</p>
             </div>
-            <div class="note">If you want true inline autoplay video on the page, send me the actual MP4 or MOV file and I’ll wire it in directly with muted loop playback.</div>
+            <a class="button warm" href="https://www.instagram.com/jc2.twinflame.fit" target="_blank" rel="noopener noreferrer">Open Instagram</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="section-inner">
+          <h2>Featured Video Moment</h2>
+          <div class="video-shell">
+            <div class="video-overlay">
+              <div class="video-kicker">Featured Video</div>
+              <div class="video-title">Your cinematic memory</div>
+              <div class="video-text">The home page still keeps a cinematic memory block so the experience feels emotional and visual, not just informational.</div>
+              <div class="video-actions">
+                <a class="button" href="https://share.icloud.com/photos/0f8H-fHuduLm8jXfW2OpcYeog" target="_blank" rel="noopener noreferrer">Open Video</a>
+                <a class="button" href="cargill-countdown-youtube.html">Open Playlist</a>
+              </div>
+              <div class="note">For true autoplay video on-page, upload a direct MP4 or MOV into the repo and I’ll wire it in.</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="footer">JCX2 deluxe page • Jesica + Jere • slideshow hero + cinematic video section</div>
+    <div class="footer">JC2 branded home page • Jesica + Jere • Twin Flame Fit • @jc2.twinflame.fit</div>
   </div>
 
   <script>
-    const weddingDate = new Date('2025-10-10T11:00:00');
+    const weddingDate = new Date('2025-10-10T11:00:00-05:00');
+    const sixMonthAnniversary = new Date('2026-04-10T11:00:00-05:00');
+
     function updateCounter() {
       const now = new Date();
       const diff = now - weddingDate;
@@ -427,8 +686,25 @@
       document.getElementById('minutes').textContent = minutes;
       document.getElementById('seconds').textContent = seconds;
       document.getElementById('countNote').textContent = diff >= 0
-        ? 'Counting time married since October 10, 2025 at 11:00 AM.'
-        : 'Countdown to your wedding date: October 10, 2025 at 11:00 AM.';
+        ? 'Counting time married since October 10, 2025 at 11:00 AM CST.'
+        : 'Countdown to your wedding date: October 10, 2025 at 11:00 AM CST.';
+    }
+
+    function updateAnniversaryCounter() {
+      const now = new Date();
+      const diff = sixMonthAnniversary - now;
+      const delta = Math.abs(diff);
+      const days = Math.floor(delta / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((delta / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((delta / (1000 * 60)) % 60);
+      const seconds = Math.floor((delta / 1000) % 60);
+      document.getElementById('annDays').textContent = days;
+      document.getElementById('annHours').textContent = hours;
+      document.getElementById('annMinutes').textContent = minutes;
+      document.getElementById('annSeconds').textContent = seconds;
+      document.getElementById('annNote').textContent = diff >= 0
+        ? 'Counting down to April 10, 2026 at 11:00 AM CST.'
+        : 'Happy 6 month anniversary — six months arrived on April 10, 2026 at 11:00 AM CST.';
     }
 
     const slides = Array.from(document.querySelectorAll('.slide'));
@@ -443,7 +719,9 @@
     }
 
     updateCounter();
+    updateAnniversaryCounter();
     setInterval(updateCounter, 1000);
+    setInterval(updateAnniversaryCounter, 1000);
     setInterval(rotateSlides, 4200);
   </script>
 </body>
