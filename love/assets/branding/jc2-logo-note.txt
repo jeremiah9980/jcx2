@@ -1,0 +1,8 @@
+Place the JC2 logo image in this folder as jc2-logo.png so the /love/ page can reference it as love/assets/branding/jc2-logo.png.
+
+Source logo provided in chat:
+- JC2 flame mark
+- 10/10 lockup
+
+Recommended file name:
+- jc2-logo.png
