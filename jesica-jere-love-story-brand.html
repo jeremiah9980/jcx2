@@ -632,11 +632,149 @@
       }
     }
 
+  
+    .brand-wallpaper-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-wallpaper-section::before {
+      content: "";
+      position: absolute;
+      right: -120px;
+      bottom: -80px;
+      width: 380px;
+      height: 380px;
+      background: url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/branding/jc2-logo.png') no-repeat center/contain;
+      opacity: 0.06;
+      transform: rotate(-8deg);
+      pointer-events: none;
+    }
+
+    .brand-wallpaper-section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 82% 20%, rgba(255,139,61,0.10), transparent 24%),
+        radial-gradient(circle at 14% 82%, rgba(255,210,74,0.07), transparent 20%);
+      pointer-events: none;
+    }
+
+    .brand-wallpaper-section .section-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-brand-bg {
+      position: absolute;
+      right: 4%;
+      top: 10%;
+      width: min(42vw, 440px);
+      aspect-ratio: 1 / 1;
+      background-image: url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/branding/jc2-logo.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      opacity: 0.10;
+      filter: blur(1px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .instagram-showcase {
+      margin-top: 16px;
+      padding: 20px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .instagram-intro {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .instagram-intro-copy {
+      max-width: 760px;
+    }
+
+    .instagram-intro-copy h3 {
+      margin: 0 0 6px;
+      font-size: 1.04rem;
+    }
+
+    .instagram-intro-copy p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.94rem;
+    }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+
+    .instagram-reel-card {
+      padding: 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+
+    .instagram-reel-card blockquote.instagram-media {
+      margin: 0 !important;
+      min-width: 100% !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      border-radius: 14px !important;
+      overflow: hidden !important;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .footer-brand img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 900px) {
+      .instagram-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-brand-bg {
+        width: min(58vw, 340px);
+        top: 14%;
+        right: 2%;
+      }
+    }
+
   </style>
 </head>
 <body>
   <div class="wrap">
 <section class="panel hero">
+      <div class="hero-brand-bg"></div>
       <div class="slides" id="slides">
         <div class="slide active" style="background-image:url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/wedding-portrait.jpg')"></div>
         <div class="slide" style="background-image:url('https://raw.githubusercontent.com/jeremiah9980/jcx2/main/assets/love-story/wedding-drive.jpg')"></div>
@@ -695,7 +833,7 @@
     </section>
 
     
-    <section class="panel section">
+    <section class="panel section brand-wallpaper-section">
       <div class="section-inner">
         <h2>What JC² Means</h2>
         <div class="story-grid">
@@ -721,7 +859,7 @@
 
 
     
-    <section class="panel section">
+    <section class="panel section brand-wallpaper-section">
       <div class="section-inner">
         <h2>Our Story</h2>
         <div class="story-grid">
@@ -808,7 +946,63 @@
         </div>
       </div>
     </section>
-    <section class="panel section">
+    
+    <section class="panel section brand-wallpaper-section">
+      <div class="section-inner">
+        <h2>Instagram Reels Showcase</h2>
+        <p class="lead">A bigger, cleaner reel wall built directly from your real Instagram links so the page feels alive, current, and connected to the story you are actively building together.</p>
+        <div class="instagram-showcase">
+          <div class="instagram-intro">
+            <div class="instagram-intro-copy">
+              <h3>@jc2.twinflame.fit</h3>
+              <p>This reel showcase pulls real JC² moments into the page itself — creating a stronger visual story hub instead of just sending visitors off to Instagram.</p>
+            </div>
+            <a class="button warm" href="https://www.instagram.com/jc2.twinflame.fit/" target="_blank" rel="noopener noreferrer">Open Full Profile</a>
+          </div>
+          <div class="instagram-grid">
+            <div class="instagram-reel-card">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/jc2.twinflame.fit/reel/DOe39qtDQK3/"
+                data-instgrm-version="14"
+                style="background:#FFF; border:0; box-shadow:none; margin:0; padding:0;"></blockquote>
+            </div>
+            <div class="instagram-reel-card">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/jc2.twinflame.fit/reel/DOzSI_PjbzV/"
+                data-instgrm-version="14"
+                style="background:#FFF; border:0; box-shadow:none; margin:0; padding:0;"></blockquote>
+            </div>
+            <div class="instagram-reel-card">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/jc2.twinflame.fit/reel/DPBw7iAjSUU/"
+                data-instgrm-version="14"
+                style="background:#FFF; border:0; box-shadow:none; margin:0; padding:0;"></blockquote>
+            </div>
+            <div class="instagram-reel-card">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/jc2.twinflame.fit/reel/DQ9CHftjcHu/"
+                data-instgrm-version="14"
+                style="background:#FFF; border:0; box-shadow:none; margin:0; padding:0;"></blockquote>
+            </div>
+            <div class="instagram-reel-card">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/jc2.twinflame.fit/reel/DS3tg6pjWah/"
+                data-instgrm-version="14"
+                style="background:#FFF; border:0; box-shadow:none; margin:0; padding:0;"></blockquote>
+            </div>
+            <div class="instagram-reel-card">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/jc2.twinflame.fit/reel/DVQ9ZTKjUv3/"
+                data-instgrm-version="14"
+                style="background:#FFF; border:0; box-shadow:none; margin:0; padding:0;"></blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="panel section brand-wallpaper-section">
       <div class="section-inner">
         <h2>Cargill Countdown</h2>
         <p class="lead">A featured video moment from the Cargill Countdown collection.</p>
