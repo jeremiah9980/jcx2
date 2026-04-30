@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet" />
+  <title>DFPS / CPS Timeline — Cargill Matter</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --ink: #e5e7eb;
+      --muted: #9ca3af;
+      --line: #334155;
+      --accent: #38bdf8;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+      --ok: #22c55e;
+      --soft: rgba(56,189,248,.12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.15), transparent 38%),
+        radial-gradient(circle at top right, rgba(245,158,11,.12), transparent 36%),
+        var(--bg);
+      line-height: 1.55;
+    }
+
+    a { color: var(--accent); }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 70px;
+    }
+
+    .hero {
+      border: 1px solid rgba(148,163,184,.28);
+      background: linear-gradient(135deg, rgba(15,23,42,.92), rgba(30,41,59,.85));
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.35);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(239,68,68,.12);
+      color: #fecaca;
+      border: 1px solid rgba(239,68,68,.35);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 8px;
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+
+    .subtitle {
+      max-width: 900px;
+      color: #cbd5e1;
+      font-size: 18px;
+      margin: 0 0 18px;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(245,158,11,.45);
+      background: rgba(245,158,11,.11);
+      color: #fde68a;
+      font-weight: 650;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      padding: 15px;
+      border-radius: 16px;
+      background: rgba(15,23,42,.75);
+      border: 1px solid rgba(148,163,184,.20);
+    }
+
+    .stat .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 800;
+    }
+
+    .stat .value {
+      margin-top: 6px;
+      font-weight: 850;
+      font-size: 18px;
+    }
+
+    .section {
+      margin-top: 26px;
+      padding: 24px;
+      border: 1px solid rgba(148,163,184,.22);
+      background: rgba(15,23,42,.72);
+      border-radius: 24px;
+    }
+
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 25px;
+      letter-spacing: -.03em;
+    }
+
+    .section p {
+      color: #cbd5e1;
+      margin: 0 0 12px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 6px;
+    }
+
+    .filter-btn {
+      cursor: pointer;
+      border: 1px solid rgba(148,163,184,.32);
+      color: #e5e7eb;
+      background: rgba(30,41,59,.85);
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-weight: 750;
+      font-size: 13px;
+    }
+
+    .filter-btn.active {
+      background: var(--soft);
+      border-color: rgba(56,189,248,.7);
+      color: #bae6fd;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 24px;
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 5px;
+      bottom: 5px;
+      width: 2px;
+      background: linear-gradient(var(--accent), rgba(148,163,184,.2));
+    }
+
+    .event {
+      position: relative;
+      margin: 0 0 18px;
+      padding: 18px 18px 17px;
+      border-radius: var(--radius);
+      background: rgba(17,24,39,.92);
+      border: 1px solid rgba(148,163,184,.23);
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      left: -26px;
+      top: 24px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 3px rgba(56,189,248,.18);
+    }
+
+    .event-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .date {
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      font-size: 11px;
+      line-height: 1;
+      padding: 6px 8px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-weight: 900;
+      background: rgba(148,163,184,.14);
+      color: #cbd5e1;
+      border: 1px solid rgba(148,163,184,.16);
+    }
+
+    .tag.report { background: rgba(56,189,248,.12); color: #bae6fd; border-color: rgba(56,189,248,.28); }
+    .tag.visit { background: rgba(34,197,94,.12); color: #bbf7d0; border-color: rgba(34,197,94,.28); }
+    .tag.contact { background: rgba(168,85,247,.13); color: #e9d5ff; border-color: rgba(168,85,247,.28); }
+    .tag.safety { background: rgba(245,158,11,.12); color: #fde68a; border-color: rgba(245,158,11,.28); }
+    .tag.gap { background: rgba(239,68,68,.12); color: #fecaca; border-color: rgba(239,68,68,.28); }
+
+    .event h3 {
+      margin: 4px 0 8px;
+      font-size: 19px;
+      letter-spacing: -.025em;
+    }
+
+    .event p { margin: 0; color: #d1d5db; }
+
+    .event ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+      color: #d1d5db;
+    }
+
+    .source-note {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(148,163,184,.22);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .card {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(30,41,59,.72);
+      border: 1px solid rgba(148,163,184,.18);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+
+    .card ul {
+      margin: 0 0 0 19px;
+      padding: 0;
+      color: #cbd5e1;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 18px;
+      color: #94a3b8;
+      font-size: 13px;
+      border-top: 1px solid rgba(148,163,184,.20);
+    }
+
+    .print-only { display: none; }
+
+    @media (max-width: 880px) {
+      .quick-grid, .two-col { grid-template-columns: 1fr; }
+      .hero, .section { padding: 20px; }
+      .timeline { padding-left: 22px; }
+      .event::before { left: -23px; }
+    }
+
+    @media print {
+      body { background: white; color: #111827; }
+      .page { width: 100%; padding: 0; }
+      .hero, .section, .event, .card {
+        background: white;
+        color: #111827;
+        border-color: #d1d5db;
+        box-shadow: none;
+      }
+      .subtitle, .section p, .event p, .event ul, .card ul { color: #111827; }
+      .controls { display: none; }
+      .timeline::before { background: #9ca3af; }
+      .event::before { border-color: white; }
+      .print-only { display: block; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">Confidential — Unpublished / Noindex Page</div>
+      <h1>DFPS / CPS Timeline</h1>
+      <p class="subtitle">
+        Chronological timeline of DFPS/CPS reports, contacts, home visits, child interviews,
+        collateral contacts, safety assessments, and the later 2023 CPS-related follow-up involving
+        Stephen Dalton.
+      </p>
+
+      <div class="notice">
+        This page is intended for private legal review only. It contains sensitive family and DFPS/CPS-related
+        information involving minors. Do not publish, index, share publicly, or link from navigation without legal approval.
+      </div>
+
+      <section class="quick-grid" aria-label="case summary">
+        <div class="stat">
+          <div class="label">Primary DFPS Case</div>
+          <div class="value">Case #48897625</div>
+        </div>
+        <div class="stat">
+          <div class="label">Intake Received</div>
+          <div class="value">Nov. 8, 2021</div>
+        </div>
+        <div class="stat">
+          <div class="label">AR Initiated</div>
+          <div class="value">Nov. 10, 2021</div>
+        </div>
+        <div class="stat">
+          <div class="label">Closure</div>
+          <div class="value">Dec. 8, 2021 — No Danger</div>
+        </div>
+      </section>
+    </header>
+
+    <section class="section">
+      <h2>Document Basis</h2>
+      <p>
+        This timeline is compiled from the redacted DFPS Alternative Response Report, the original Texas Statewide
+        Abuse/Neglect/Exploitation report confirmation materials, the later screenshot packet referencing CPS
+        Investigator John Williams, and the encrypted DFPS email wrapper from Katherine Andersen.
+      </p>
+      <p>
+        Language below separates documented DFPS actions from allegations, concerns, screenshots, and reporter statements.
+        Items connected to Stephen Dalton are framed as reported concerns unless independently documented in the uploaded
+        material.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Case Snapshot — 2021 DFPS Alternative Response</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>DFPS Case Metadata</h3>
+          <ul>
+            <li><strong>Case Name:</strong> Cargill, Deanna H</li>
+            <li><strong>Case Number:</strong> 48897625</li>
+            <li><strong>County:</strong> Williamson</li>
+            <li><strong>Caseworker:</strong> Jennifer D. Freeman</li>
+            <li><strong>Office:</strong> Round Rock DFPS office</li>
+            <li><strong>Closure Reason:</strong> Close — No Danger Indicators / CPS Decision</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Assessment Outcomes</h3>
+          <ul>
+            <li><strong>Deanna household:</strong> Initial safety assessment marked Safe on Nov. 15, 2021.</li>
+            <li><strong>Jeremiah household:</strong> Initial safety assessment marked Safe on Nov. 17, 2021.</li>
+            <li><strong>Final risk level:</strong> Low for Deanna household on Dec. 7, 2021.</li>
+            <li><strong>Safety Plan:</strong> No.</li>
+            <li><strong>Family Plan:</strong> No.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Timeline</h2>
+      <p>Use the filters to isolate reports, visits, contacts, safety assessments, or unresolved documentation gaps.</p>
+
+      <div class="controls" aria-label="timeline filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="report">Reports</button>
+        <button class="filter-btn" data-filter="visit">Visits / Interviews</button>
+        <button class="filter-btn" data-filter="contact">Contacts</button>
+        <button class="filter-btn" data-filter="safety">Safety / Closure</button>
+        <button class="filter-btn" data-filter="gap">Gaps / Follow-up</button>
+      </div>
+
+      <div class="timeline" id="timeline">
+        <article class="event" data-type="report">
+          <div class="event-header">
+            <div class="date">Oct. 8, 2021</div>
+            <div class="tags"><span class="tag report">Background Incident</span></div>
+          </div>
+          <h3>Restaurant / car incident later referenced in DFPS report</h3>
+          <p>
+            The intake narrative later referenced an alleged Oct. 8 incident at a restaurant that reportedly carried over
+            into the car, with concerns that Kelsie said her mother was verbally abusive to her.
+          </p>
+          <div class="source-note">Source basis: 2021 DFPS intake narrative / reporter statement.</div>
+        </article>
+
+        <article class="event" data-type="report">
+          <div class="event-header">
+            <div class="date">Oct. 15, 2021</div>
+            <div class="tags"><span class="tag report">Background Incident</span></div>
+          </div>
+          <h3>Recorded vehicle incident involving alleged verbal abuse</h3>
+          <p>
+            The DFPS intake narrative states that Oct. 15 was the date of the recorded verbal-abuse event in the vehicle.
+            Kassidy was identified as being present in the car, and Kinsley was identified as the person who recorded the
+            video.
+          </p>
+          <div class="source-note">Source basis: 2021 DFPS intake narrative / reporter statement.</div>
+        </article>
+
+        <article class="event" data-type="report">
+          <div class="event-header">
+            <div class="date">Nov. 7, 2021 — 8:36 PM</div>
+            <div class="tags"><span class="tag report">Report Submitted</span></div>
+          </div>
+          <h3>Texas Statewide Abuse, Neglect, and Exploitation report submitted</h3>
+          <p>
+            An online DFPS report was submitted. The confirmation materials identify confirmation number
+            <strong>3db28435</strong>. The report raised concerns about emotional abuse / psychological state, neglectful
+            supervision, physical abuse / injuries to a child, living conditions, domestic violence concerns involving
+            Stephen Dalton, and concerns related to the children being taken to Stephen Dalton’s residence.
+          </p>
+          <div class="source-note">Source basis: Texas Statewide Abuse, Neglect, and Exploitation reporting confirmation and DFPS intake narrative.</div>
+        </article>
+
+        <article class="event" data-type="report">
+          <div class="event-header">
+            <div class="date">Nov. 8, 2021</div>
+            <div class="tags"><span class="tag report">DFPS Intake</span></div>
+          </div>
+          <h3>DFPS intake received — Case #48897625</h3>
+          <p>
+            DFPS opened the matter as an Alternative Response Report under case name <strong>Cargill, Deanna H</strong>,
+            case number <strong>48897625</strong>. The intake listed Kelsie as the primary alleged victim and Deanna
+            as alleged perpetrator. Kassidy and Kinsley were also identified in the intake narrative.
+          </p>
+          <div class="source-note">Source basis: Redacted DFPS Alternative Response Report.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 8, 2021 — 3:12 PM</div>
+            <div class="tags"><span class="tag contact">Law Enforcement Notice</span></div>
+          </div>
+          <h3>DFPS law enforcement notification</h3>
+          <p>
+            The DFPS contact log shows a notification to law enforcement by letter. This appears to be an administrative
+            notification after intake.
+          </p>
+          <div class="source-note">Source basis: DFPS Alternative Response Contacts log.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 9, 2021 — 7:30 PM / 7:44 PM</div>
+            <div class="tags"><span class="tag contact">Formal Screening</span></div>
+          </div>
+          <h3>DFPS formal screening and reporter collateral contact</h3>
+          <p>
+            Formal screening occurred at the DFPS office. A collateral telephone contact with the reporter at 7:44 PM
+            documented concerns about living conditions at the mother/boyfriend’s home, Kelsie’s therapy with Grace Moon,
+            alleged domestic violence involving Deanna and Stephen Dalton, alleged cracked ribs, allegations involving
+            Alice Dalton, and the recording of Deanna allegedly being verbally aggressive toward Kelsie while siblings
+            were in the vehicle.
+          </p>
+          <div class="source-note">Source basis: DFPS Alternative Response Contacts log and formal screening narrative.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 10, 2021</div>
+            <div class="tags"><span class="tag report">AR Initiated</span><span class="tag contact">Therapist Attempt</span></div>
+          </div>
+          <h3>Alternative Response initiated</h3>
+          <p>
+            DFPS initiated Alternative Response. The contact log also reflects an attempted contact with Grace Moon,
+            Kelsie’s therapist, at approximately 8:38 AM, with a message left.
+          </p>
+          <div class="source-note">Source basis: DFPS case metadata and contact log.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 15, 2021 — 5:30 AM</div>
+            <div class="tags"><span class="tag contact">Scheduling</span></div>
+          </div>
+          <h3>DFPS scheduling text with Deanna</h3>
+          <p>
+            Jennifer Freeman texted Deanna to reschedule. Deanna responded that she and the children could meet at
+            approximately 5:00 PM that day.
+          </p>
+          <div class="source-note">Source basis: DFPS contact log.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 15, 2021 — 2:36 PM</div>
+            <div class="tags"><span class="tag contact">Email</span></div>
+          </div>
+          <h3>Deanna emailed DFPS regarding Kelsie not being returned</h3>
+          <p>
+            Deanna emailed DFPS stating that Jeremiah would not return Kelsie and that she needed to reschedule.
+          </p>
+          <div class="source-note">Source basis: DFPS contact log.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 15, 2021 — 2:54 PM</div>
+            <div class="tags"><span class="tag contact">Text</span></div>
+          </div>
+          <h3>DFPS text contact with Jeremiah</h3>
+          <p>
+            The contact log records a text contact with Jeremiah before the 5:00 PM home visit.
+          </p>
+          <div class="source-note">Source basis: DFPS contact log.</div>
+        </article>
+
+        <article class="event" data-type="visit">
+          <div class="event-header">
+            <div class="date">Nov. 15, 2021 — 5:00 PM</div>
+            <div class="tags"><span class="tag visit">Face-to-Face Visit</span></div>
+          </div>
+          <h3>DFPS visit at Deanna’s residence</h3>
+          <p>
+            Jennifer Freeman conducted a face-to-face Alternative Response family assessment at Deanna’s residence.
+            Deanna gave verbal permission to enter. Freeman discussed Alternative Response and provided the Parent’s Guide.
+            The visit included household information, Deanna’s relationship with Stephen Dalton, roommate Charles Estey,
+            and child supervision details.
+          </p>
+          <div class="source-note">Source basis: DFPS contact log and family assessment narrative.</div>
+        </article>
+
+        <article class="event" data-type="visit">
+          <div class="event-header">
+            <div class="date">Nov. 15, 2021 — 5:00 PM</div>
+            <div class="tags"><span class="tag visit">Child Interview</span></div>
+          </div>
+          <h3>Kassidy interview / observation at Deanna’s residence</h3>
+          <p>
+            Kassidy was interviewed and observed. DFPS documented no injuries or bruises, healthy body weight, no signs
+            of malnourishment, cheerful presentation, and loving interactions with family. She reported feeling safe at
+            both homes and with Mr. Dalton.
+          </p>
+          <div class="source-note">Source basis: DFPS child contact narrative.</div>
+        </article>
+
+        <article class="event" data-type="visit">
+          <div class="event-header">
+            <div class="date">Nov. 15, 2021 — 5:00 PM</div>
+            <div class="tags"><span class="tag visit">Child Interview</span></div>
+          </div>
+          <h3>Kinsley interview / observation at Deanna’s residence</h3>
+          <p>
+            Kinsley was interviewed and observed. DFPS documented that she was clean/neat, had no bruises or injuries,
+            had healthy body weight, showed no signs of malnourishment, and denied seeing drugs or alcohol in either
+            parent’s home.
+          </p>
+          <div class="source-note">Source basis: DFPS child contact narrative.</div>
+        </article>
+
+        <article class="event" data-type="safety">
+          <div class="event-header">
+            <div class="date">Nov. 15–16, 2021</div>
+            <div class="tags"><span class="tag safety">Safety Assessment</span></div>
+          </div>
+          <h3>Initial safety assessment — Deanna household marked Safe</h3>
+          <p>
+            DFPS completed the initial safety assessment for Deanna’s household. The safety decision was marked
+            <strong>Safe</strong>. The narrative notes the intake alleged emotional abuse of Kelsie and mentioned domestic
+            violence. Kassidy and Kinsley denied seeing physical abuse, made no outcry, and had no bruises or injuries.
+            The record notes Jeremiah had removed Kelsie from the home before the visit and that a courtesy contact was
+            sent out for Jeremiah’s home.
+          </p>
+          <div class="source-note">Source basis: DFPS safety assessment for Deanna household.</div>
+        </article>
+
+        <article class="event" data-type="gap">
+          <div class="event-header">
+            <div class="date">Date not separately timestamped</div>
+            <div class="tags"><span class="tag gap">Documentation Gap</span><span class="tag visit">School Interview</span></div>
+          </div>
+          <h3>Kelsie school interview referenced but not separately timestamped</h3>
+          <p>
+            Kelsie later reported during the Nov. 17 contact that she had a formal CPS interview at school and was upset
+            about it. The current uploaded records confirm the interview was referenced, but do not show a separate
+            standalone entry with exact school-interview date, time, worker, and location.
+          </p>
+          <div class="source-note">Source basis: Nov. 17 DFPS contact narrative; documentation gap noted for follow-up.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 17, 2021 — 4:37 PM</div>
+            <div class="tags"><span class="tag contact">Phone Call</span></div>
+          </div>
+          <h3>Katherine Andersen called Jeremiah to schedule visit</h3>
+          <p>
+            Katherine Andersen called Jeremiah. Jeremiah stated the family was available that evening. Andersen said she
+            could come at 6:00 PM, and Jeremiah agreed.
+          </p>
+          <div class="source-note">Source basis: DFPS contact narrative.</div>
+        </article>
+
+        <article class="event" data-type="visit">
+          <div class="event-header">
+            <div class="date">Nov. 17, 2021 — 6:30 PM</div>
+            <div class="tags"><span class="tag visit">Face-to-Face Visit</span></div>
+          </div>
+          <h3>DFPS visit at Jeremiah’s residence</h3>
+          <p>
+            Katherine Andersen arrived at Jeremiah’s residence. Jeremiah answered the door and gave permission to enter.
+            Andersen met with the family in the living room. Kelsie appeared upset and said the earlier CPS school
+            interview “didn’t go well.”
+          </p>
+          <div class="source-note">Source basis: DFPS contact narrative.</div>
+        </article>
+
+        <article class="event" data-type="visit">
+          <div class="event-header">
+            <div class="date">Nov. 17, 2021 — 6:45 PM</div>
+            <div class="tags"><span class="tag visit">Kelsie Interview</span></div>
+          </div>
+          <h3>Kelsie face-to-face interview at Jeremiah’s residence</h3>
+          <p>
+            Kelsie reported feeling uncomfortable with her mother and Stephen due to how they treated her. She reported
+            her mother cussed/yelled at her about school work and said she struggled with Spanish and Geometry. She denied
+            seeing Deanna and Stephen get physical, but reported hearing phone arguments and threats to property. She
+            reported staying at Stephen’s house and sleeping on the couch. She said she wished she could stay with her
+            father more when uncomfortable. DFPS documented that she denied adults hitting children, denied drug concerns,
+            and appeared clean/well dressed with no obvious marks or bruises, though visibly upset/anxious at times.
+          </p>
+          <div class="source-note">Source basis: DFPS Kelsie contact narrative.</div>
+        </article>
+
+        <article class="event" data-type="visit">
+          <div class="event-header">
+            <div class="date">Nov. 17, 2021 — 7:45 PM</div>
+            <div class="tags"><span class="tag visit">Observation</span></div>
+          </div>
+          <h3>Observation of Myles and Micah during Jeremiah residence visit</h3>
+          <p>
+            Andersen observed twin boys Myles and Micah. The record states they appeared bonded with each other and with
+            Kassidy.
+          </p>
+          <div class="source-note">Source basis: DFPS contact narrative.</div>
+        </article>
+
+        <article class="event" data-type="safety">
+          <div class="event-header">
+            <div class="date">Nov. 17–18, 2021</div>
+            <div class="tags"><span class="tag safety">Safety Assessment</span></div>
+          </div>
+          <h3>Initial safety assessment — Jeremiah household marked Safe</h3>
+          <p>
+            DFPS completed the initial safety assessment for Jeremiah’s household. The safety decision was marked
+            <strong>Safe</strong>. Jeremiah and Meredith denied domestic violence and stated arguments did not become
+            physical. Kelsie denied observing violence between Jeremiah and Meredith. Jeremiah’s home was described as
+            appropriate with food, water, and working utilities.
+          </p>
+          <div class="source-note">Source basis: DFPS safety assessment for Jeremiah household.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 19, 2021 — 11:15 AM</div>
+            <div class="tags"><span class="tag contact">Therapist Collateral</span></div>
+          </div>
+          <h3>Grace Moon collateral call</h3>
+          <p>
+            Jennifer Freeman called Grace Moon, Kelsie’s therapist. Moon verified she was Kelsie’s therapist and that
+            she saw Kelsie biweekly for emotional support. Moon said things would be better if the parents could get
+            along, denied seeing violence or malnourishment, said she had not seen bruises/marks in video sessions, and
+            stated she had overheard Deanna screaming at the children, but denied current safety concerns for Kelsie with
+            either parent.
+          </p>
+          <div class="source-note">Source basis: DFPS therapist collateral narrative.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 19, 2021 — 11:30 AM</div>
+            <div class="tags"><span class="tag contact">Text</span></div>
+          </div>
+          <h3>DFPS text contact with Deanna</h3>
+          <p>
+            The contact log shows a text contact with Deanna. The currently reviewed excerpt does not contain a detailed
+            narrative for the text itself.
+          </p>
+          <div class="source-note">Source basis: DFPS contact log.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 22, 2021 — 6:45 PM</div>
+            <div class="tags"><span class="tag contact">Phone Call</span></div>
+          </div>
+          <h3>Freeman called Deanna regarding collateral contacts</h3>
+          <p>
+            Jennifer Freeman called Deanna to discuss collateral contacts. Deanna identified her mother, Jackie Dagestad,
+            as a collateral and explained that a face-to-face visit would be better due to hearing difficulty.
+          </p>
+          <div class="source-note">Source basis: DFPS contact narrative.</div>
+        </article>
+
+        <article class="event" data-type="visit">
+          <div class="event-header">
+            <div class="date">Nov. 23, 2021 — 5:30 PM</div>
+            <div class="tags"><span class="tag visit">Collateral Visit</span></div>
+          </div>
+          <h3>Face-to-face collateral visit with Jackie Dagestad</h3>
+          <p>
+            Freeman met Jackie Dagestad at her residence. Dagestad denied safety concerns, said she saw the children two
+            to three times per month, verified she had been to Deanna’s home and found it sanitary, denied seeing bruises
+            or injuries, said basic needs were met at both parents’ homes, and stated she would call CPS if she had concerns.
+          </p>
+          <div class="source-note">Source basis: DFPS collateral narrative.</div>
+        </article>
+
+        <article class="event" data-type="contact">
+          <div class="event-header">
+            <div class="date">Nov. 23, 2021 — 7:45 PM</div>
+            <div class="tags"><span class="tag contact">Stephen Dalton Collateral</span></div>
+          </div>
+          <h3>Collateral phone call with Stephen Dalton</h3>
+          <p>
+            Freeman called Stephen Dalton. Dalton denied concerns for Deanna’s children while in her care, verified the
+            children had spent time at his home, denied cursing at children, denied domestic violence with Deanna, and
+            characterized one incident as accidentally stepping on Deanna.
+          </p>
+          <div class="source-note">Source basis: DFPS collateral narrative.</div>
+        </article>
+
+        <article class="event" data-type="safety">
+          <div class="event-header">
+            <div class="date">Dec. 7, 2021</div>
+            <div class="tags"><span class="tag safety">Risk Assessment</span></div>
+          </div>
+          <h3>Final risk assessment — Deanna household Low risk</h3>
+          <p>
+            DFPS risk assessment listed Deanna’s household final risk level as <strong>Low</strong>.
+          </p>
+          <div class="source-note">Source basis: DFPS Safety and Risk Assessments Summary.</div>
+        </article>
+
+        <article class="event" data-type="safety">
+          <div class="event-header">
+            <div class="date">Dec. 8, 2021</div>
+            <div class="tags"><span class="tag safety">Case Closure</span></div>
+          </div>
+          <h3>Alternative Response approved / closed</h3>
+          <p>
+            The Alternative Response was approved/closed. The closure reason was listed as
+            <strong>Close — No Danger Indicators / CPS Decision</strong>. The record shows no safety plan and no family
+            plan completed.
+          </p>
+          <div class="source-note">Source basis: DFPS case metadata and closure fields.</div>
+        </article>
+
+        <article class="event" data-type="report">
+          <div class="event-header">
+            <div class="date">Dec. 22, 2022</div>
+            <div class="tags"><span class="tag report">Later Arrest-Related Event</span></div>
+          </div>
+          <h3>Stephen Dalton arrest-related event date referenced</h3>
+          <p>
+            In the later text to CPS Investigator John Williams, Jeremiah stated that police/arrest records showed
+            <strong>Dec. 22</strong> as the event date involving Stephen Dalton. The uploaded screenshot packet also
+            includes a mugshot-style page identifying Stephen Eric Dalton. This is treated as a referenced record in the
+            packet, not as a complete criminal case file in the uploaded DFPS materials.
+          </p>
+          <div class="source-note">Source basis: 2023 screenshot packet / reporter text to CPS Investigator John Williams.</div>
+        </article>
+
+        <article class="event" data-type="gap">
+          <div class="event-header">
+            <div class="date">Mar. 22, 2023 — 11:22 AM</div>
+            <div class="tags"><span class="tag contact">Second CPS Matter</span><span class="tag gap">Incomplete Packet</span></div>
+          </div>
+          <h3>CPS Investigator John Williams texted Jeremiah</h3>
+          <p>
+            The screenshot packet shows CPS Investigator John Williams texting Jeremiah: “When you have a moment, can you
+            give me a call.” This appears connected to a later/second CPS-related investigation involving Mr. Dalton and
+            Deanna Cargill, rather than the original 2021 Alternative Response case.
+          </p>
+          <div class="source-note">Source basis: 2023 screenshot packet.</div>
+        </article>
+
+        <article class="event" data-type="gap">
+          <div class="event-header">
+            <div class="date">Likely Mar. 23, 2023 — 9:03 PM</div>
+            <div class="tags"><span class="tag gap">Reporter Follow-up</span></div>
+          </div>
+          <h3>Jeremiah responded to John Williams regarding school interviews and prior report</h3>
+          <p>
+            Jeremiah’s text stated he had missed Williams’s earlier contact and that his children had been contacted and
+            interviewed at school regarding Mr. Dalton and Deanna Cargill. Jeremiah stated he was not made aware that the
+            children had been interviewed by CPS. He asked whether the Nov. 7, 2021 report on Deanna had been reviewed
+            in connection with the recent investigation and referenced the prior concerns regarding Deanna taking the
+            children to Stephen Dalton’s house.
+          </p>
+          <div class="source-note">Source basis: 2023 screenshot packet / text message to CPS Investigator John Williams.</div>
+        </article>
+
+        <article class="event" data-type="gap">
+          <div class="event-header">
+            <div class="date">Likely Mar. 23, 2023 — 9:03 PM</div>
+            <div class="tags"><span class="tag gap">Second CPS Matter</span></div>
+          </div>
+          <h3>Jeremiah requested information and complaint process guidance</h3>
+          <p>
+            In the same message, Jeremiah requested: information about the children’s interactions with CPS, whether his
+            initial report had been reviewed, how to file a report/complaint regarding the initial case worker and case
+            handling, and an email address to send additional documentation. He also referenced working with Kati/Katherine
+            Andersen, Travis County Unit 32, and stated she had come to his house.
+          </p>
+          <div class="source-note">Source basis: 2023 screenshot packet / text message to CPS Investigator John Williams.</div>
+        </article>
+
+        <article class="event" data-type="gap">
+          <div class="event-header">
+            <div class="date">Apr. 26, 2023 — 10:58 PM UTC</div>
+            <div class="tags"><span class="tag contact">Encrypted DFPS Email</span><span class="tag gap">Body Unreadable</span></div>
+          </div>
+          <h3>Encrypted DFPS email from Katherine Andersen</h3>
+          <p>
+            The uploaded <code>message.html</code> wrapper shows an encrypted Microsoft Office 365 message from
+            <strong>Katherine Andersen &lt;Katherine.Andersen@dfps.texas.gov&gt;</strong> to Jeremiah with subject
+            <strong>RE: Kelsie Cargill</strong>, dated April 26, 2023. The static upload exposes the email metadata, but
+            the actual message body is encrypted and not readable from the HTML wrapper alone.
+          </p>
+          <div class="source-note">Source basis: encrypted DFPS email wrapper metadata.</div>
+        </article>
+
+        <article class="event" data-type="gap">
+          <div class="event-header">
+            <div class="date">Unresolved / Records Needed</div>
+            <div class="tags"><span class="tag gap">Missing Records</span></div>
+          </div>
+          <h3>Full second CPS case record not present in current upload</h3>
+          <p>
+            The uploaded documents support that a later 2023 CPS-related matter was referenced after the Stephen Dalton
+            arrest-related information surfaced, and that the children were reportedly interviewed at school. However,
+            the current upload does not contain a full second DFPS case packet equivalent to the 33-page 2021 Alternative
+            Response Report. Needed records include the second case number, intake date, allegations summary, assigned
+            investigator, school interview notes, disposition, and closure documentation.
+          </p>
+          <div class="source-note">Source basis: comparison of uploaded records; second matter is documented by screenshots and encrypted email metadata only.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Condensed Findings</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Confirmed DFPS / CPS Visits in Uploaded Records</h3>
+          <ul>
+            <li><strong>Nov. 15, 2021:</strong> Deanna residence visit; Kassidy and Kinsley interviewed/observed.</li>
+            <li><strong>Nov. 17, 2021:</strong> Jeremiah residence visit; Kelsie interviewed; Jeremiah household assessed.</li>
+            <li><strong>Nov. 23, 2021:</strong> Maternal grandmother collateral visit.</li>
+            <li><strong>School interview:</strong> referenced by Kelsie, but not separately timestamped in the uploaded records.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Major Documentation Gaps</h3>
+          <ul>
+            <li>Standalone school interview record for Kelsie and any siblings interviewed in 2021 or 2023.</li>
+            <li>Full second CPS report/case packet after Stephen Dalton arrest-related information surfaced.</li>
+            <li>Second case number, intake date, assigned investigator, disposition, and closure finding.</li>
+            <li>Readable contents of the April 26, 2023 encrypted DFPS email.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <strong>Internal note:</strong> This page uses “alleged,” “reported,” and “referenced” language intentionally.
+      It is designed for private legal/evidence review and should not be represented as a final court finding or DFPS
+      finding beyond the specific DFPS outcomes shown in the uploaded records.
+    </footer>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll(".filter-btn");
+    const events = document.querySelectorAll(".event");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+
+        buttons.forEach((b) => b.classList.remove("active"));
+        button.classList.add("active");
+
+        events.forEach((event) => {
+          const show = filter === "all" || event.dataset.type === filter;
+          event.style.display = show ? "" : "none";
+        });
+      });
+    });
+  </script>
+</body>
+</html>
