@@ -1,0 +1,640 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Behavioral Analysis — Jere, Jesica & Deanna Communications</title>
+<style>
+:root{
+  --bg:#0a0a0a; --panel:#111827; --card:#ffffff; --ink:#111827; --muted:#6b7280;
+  --line:#e5e7eb; --red:#dc2626; --amber:#d97706; --green:#16a34a; --blue:#2563eb; --purple:#7c3aed;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:linear-gradient(180deg,#0a0a0a 0,#111827 360px,#f3f4f6 360px);line-height:1.55}
+.page{width:min(1280px,calc(100% - 28px));margin:0 auto;padding:34px 0 72px}
+.hero{color:#fff;padding:34px 0}
+.kicker{font-size:12px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#fca5a5}
+h1{font-size:clamp(34px,5.5vw,64px);line-height:1;margin:10px 0 14px;letter-spacing:-.055em}
+.subtitle{font-size:18px;color:#d1d5db;max-width:980px}
+.pillrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.pill{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);border-radius:999px;padding:8px 12px;font-size:13px;color:#fff}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;margin:18px 0;box-shadow:0 16px 32px rgba(17,24,39,.08)}
+h2{font-size:28px;margin:0 0 12px;letter-spacing:-.03em}
+h3{font-size:19px;margin:22px 0 8px}
+p{margin:0 0 12px}
+.grid{display:grid;gap:16px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.box{background:#f9fafb;border:1px solid var(--line);border-radius:18px;padding:18px}
+.gcode{background:#111827;color:#f9fafb;border:1px solid #374151;border-radius:18px;padding:18px;margin:14px 0}
+.gcode strong{color:#fca5a5}
+.warn{background:#fffbeb;border-left:6px solid var(--amber);color:#78350f;border-radius:14px;padding:14px 16px;margin:14px 0}
+.good{background:#f0fdf4;border-left:6px solid var(--green);color:#14532d;border-radius:14px;padding:14px 16px;margin:14px 0}
+.bad{background:#fef2f2;border-left:6px solid var(--red);color:#7f1d1d;border-radius:14px;padding:14px 16px;margin:14px 0}
+.blue{background:#eff6ff;border-left:6px solid var(--blue);color:#1e3a8a;border-radius:14px;padding:14px 16px;margin:14px 0}
+table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:14px}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f9fafb;color:#374151;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+tr:last-child td{border-bottom:0}
+.tag{display:inline-block;font-size:12px;font-weight:900;border-radius:999px;padding:6px 9px;margin:2px 4px 2px 0}
+.tag.red{background:#fee2e2;color:#991b1b}.tag.green{background:#dcfce7;color:#166534}.tag.amber{background:#fef3c7;color:#92400e}.tag.blue{background:#dbeafe;color:#1d4ed8}.tag.purple{background:#ede9fe;color:#5b21b6}.tag.gray{background:#f3f4f6;color:#374151}
+.quote{background:#f9fafb;border-left:4px solid #9ca3af;border-radius:0 14px 14px 0;padding:12px 14px;white-space:pre-wrap;font-size:13px;color:#374151}
+.timeline{border-left:4px solid #fecaca;padding-left:22px;margin-left:6px}
+.event{position:relative;padding:0 0 24px 18px}
+.event:before{content:"";position:absolute;left:-32px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--red);box-shadow:0 0 0 6px #fee2e2}
+.date{color:#b91c1c;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.06em}
+.score{font-size:28px;font-weight:900;letter-spacing:-.04em}
+.small{font-size:13px;color:var(--muted)}
+@media(max-width:920px){.grid.two,.grid.three,.grid.four{grid-template-columns:1fr}table{display:block;overflow-x:auto;white-space:nowrap}.card{padding:18px}}
+</style>
+</head>
+<body>
+<main class="page">
+<header class="hero">
+  <div class="kicker">GCODE Behavioral Analysis</div>
+  <h1>Strategies Used + Conflict Starters vs Non-Conflict Communications</h1>
+  <p class="subtitle">
+    A full behavioral read of the Jere / Jesica / Deanna communications. This is not a clinical diagnosis.
+    It is a pattern analysis of observable communication moves, escalation triggers, de-escalation moves,
+    role battles, and which messages start conflict versus solve problems.
+  </p>
+  <div class="pillrow">
+    <span class="pill">Scope: Jere / Jesica / Deanna communications</span>
+    <span class="pill">Includes Oct. 17–19 conflict packet</span>
+    <span class="pill">Includes Jan–Feb group-thread record</span>
+    <span class="pill">Private working draft — redact before public use</span>
+  </div>
+</header>
+
+<section class="card">
+  <h2>1. Executive Behavioral Read</h2>
+  <div class="gcode">
+    <strong>GCODE read:</strong> The conflict does not start because the adults lack information.
+    The conflict starts when information is packaged with blame, urgency, public pressure, child-emotional leverage,
+    role competition, or third-party threat. When the messages stay child-specific and action-specific, the communication
+    works. When the messages become “who is the good parent, who is abandoning the kids, who controls the dugout,
+    who owes money, who is hiding something, who is poisoning the narrative,” the thread turns into a live grenade.
+  </div>
+  <p>
+    The record shows three different communication modes operating in the same family system:
+  </p>
+  <div class="grid three">
+    <div class="box">
+      <h3>Functional mode</h3>
+      <p>Doctor notes, prescriptions, pickups, dance logistics, reading, school attendance, softball equipment, practice schedules.</p>
+      <span class="tag green">Solves problems</span>
+    </div>
+    <div class="box">
+      <h3>Pressure mode</h3>
+      <p>Money urgency, school stability fear, child disappointment, public/team reputation, immediate demands, blame framing.</p>
+      <span class="tag amber">Raises heat</span>
+    </div>
+    <div class="box">
+      <h3>Control mode</h3>
+      <p>Who is included, who pays, who coaches, who is in the dugout, who has access, who gets blocked, who gets the official platform.</p>
+      <span class="tag red">Starts fights</span>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>2. Core Conflict Formula</h2>
+  <div class="bad">
+    <strong>Conflict starts when a practical issue is converted into an identity accusation.</strong>
+    The issue may begin as money, medicine, practice, pickup, or school. It escalates when the message changes from
+    “what needs to happen?” to “this proves what kind of person you are.”
+  </div>
+  <table>
+    <thead>
+      <tr><th>Practical Issue</th><th>Conflict Conversion</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>“Can you send money for bills?”</td>
+        <td>“You are choosing someone you just met over your children.”</td>
+        <td>Money issue becomes moral indictment.</td>
+      </tr>
+      <tr>
+        <td>“Kass needs valentines for school.”</td>
+        <td>“This is chaos / Deanna has to take ownership.”</td>
+        <td>Small logistics issue becomes parenting critique.</td>
+      </tr>
+      <tr>
+        <td>“Who will be at softball practice?”</td>
+        <td>“Step aside as coach / distraction issue.”</td>
+        <td>Activity support becomes status and control battle.</td>
+      </tr>
+      <tr>
+        <td>“Kids are at Jere’s house during bad weather.”</td>
+        <td>“You shouldn’t have taken them / you do whatever you want.”</td>
+        <td>Safety decision becomes possession/control dispute.</td>
+      </tr>
+      <tr>
+        <td>“Kass needs a therapist appointment.”</td>
+        <td>“S people are involved / delete these texts / something legal is coming.”</td>
+        <td>Mental-health support becomes secrecy and outside-threat lane.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <h2>3. Strategies / Communication Moves Used by Each Person</h2>
+
+  <h3>Deanna — observed communication strategies</h3>
+  <table>
+    <thead>
+      <tr><th>Strategy / Move</th><th>What it looks like in the record</th><th>Behavioral effect</th><th>Conflict rating</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Urgency pressure</strong></td>
+        <td>Messages demand money, decisions, doctor notes, or answers now/today, often tied to groceries, gas, school, bills, or games.</td>
+        <td>Creates immediate pressure and narrows the other person’s ability to respond calmly.</td>
+        <td><span class="tag amber">Escalates if repeated</span></td>
+      </tr>
+      <tr>
+        <td><strong>Child-emotional leverage</strong></td>
+        <td>Money or adult conflict is tied to whether children feel abandoned, disappointed, unstable, unable to play softball, or forced to change schools.</td>
+        <td>Turns adult logistics into a moral-parenting trial. It increases guilt and defensiveness.</td>
+        <td><span class="tag red">Starts conflict</span></td>
+      </tr>
+      <tr>
+        <td><strong>Narrative seeding / public pressure</strong></td>
+        <td>Threats or references to friends, family, team parents, coaches, or others knowing “proof” or being disgusted.</td>
+        <td>Creates fear of reputation damage and pushes the conflict outside the parent channel.</td>
+        <td><span class="tag red">Starts conflict</span></td>
+      </tr>
+      <tr>
+        <td><strong>Scarcity framing</strong></td>
+        <td>Repeated references to not being able to afford bills, groceries, medical bills, car repairs, rehab costs, and softball dues.</td>
+        <td>May be factually important, but when repeated inside unrelated threads it pulls every topic back to financial blame.</td>
+        <td><span class="tag amber">Context + pressure</span></td>
+      </tr>
+      <tr>
+        <td><strong>Defensive maternal-role protection</strong></td>
+        <td>Responds strongly when Jesica is perceived as replacing mom moments, making decisions, managing money, or entering team space.</td>
+        <td>Protects role identity but can frame Jesica as threat even when Jesica is performing logistics.</td>
+        <td><span class="tag amber">Can escalate</span></td>
+      </tr>
+      <tr>
+        <td><strong>Softening / cooperation reset</strong></td>
+        <td>Uses “thank you,” accepts help, says she wants to put kids first, invites Jesica to bring concerns directly, agrees to be respectful.</td>
+        <td>Restores cooperation and shows the system can stabilize.</td>
+        <td><span class="tag green">De-escalates</span></td>
+      </tr>
+      <tr>
+        <td><strong>Facts/actions filter</strong></td>
+        <td>Says she cares about facts, actions, receipts, and what adults do to support the girls.</td>
+        <td>Can be stabilizing when actually paired with clean documentation.</td>
+        <td><span class="tag green">Useful</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Jere — observed communication strategies</h3>
+  <table>
+    <thead>
+      <tr><th>Strategy / Move</th><th>What it looks like in the record</th><th>Behavioral effect</th><th>Conflict rating</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Documentation / ledger defense</strong></td>
+        <td>Responds to money claims with payment history, dates, and amounts.</td>
+        <td>Useful for accuracy, but can feel dismissive if the other person is communicating panic.</td>
+        <td><span class="tag blue">Neutral / defensive</span></td>
+      </tr>
+      <tr>
+        <td><strong>Procedural control</strong></td>
+        <td>Moves issues into AppClose, references court orders, asks for clear communication, and pushes formal lanes.</td>
+        <td>Stabilizes the record, but can feel like legal positioning if the immediate child need is not acknowledged first.</td>
+        <td><span class="tag green">Stabilizes when calm</span></td>
+      </tr>
+      <tr>
+        <td><strong>Delegating finance to Jesica</strong></td>
+        <td>Announces Jesica will manage payments because finances are combined.</td>
+        <td>Creates transparency inside marriage but triggers Deanna’s replacement/control anxiety around a spouse entering co-parent finance matters.</td>
+        <td><span class="tag amber">High-trigger move</span></td>
+      </tr>
+      <tr>
+        <td><strong>Safety override</strong></td>
+        <td>During bad weather, prioritizes not driving the kids back over weekend-possession expectations.</td>
+        <td>Safety logic is valid, but late notice creates conflict exposure.</td>
+        <td><span class="tag amber">Valid but poorly buffered</span></td>
+      </tr>
+      <tr>
+        <td><strong>Role reclaiming</strong></td>
+        <td>States he is re-engaging in softball and after-school routines, then asks Deanna to step aside as a coach/dugout adult.</td>
+        <td>Can be framed as father involvement, but also reads as turf control if it removes mom from a role she already occupies.</td>
+        <td><span class="tag red">Starts role conflict</span></td>
+      </tr>
+      <tr>
+        <td><strong>Boundary shutdown</strong></td>
+        <td>Mentions blocking for the day, refusing back-and-forth, or ending circular disputes.</td>
+        <td>Can prevent spiraling, but if used before confirming child logistics it can look like control or avoidance.</td>
+        <td><span class="tag amber">Depends on timing</span></td>
+      </tr>
+      <tr>
+        <td><strong>Functional notice</strong></td>
+        <td>Provides pickup notice, church notice, doctor/school coordination, and practice/game scheduling.</td>
+        <td>Low-conflict and child-centered.</td>
+        <td><span class="tag green">Does not start conflict</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Jesica — observed communication strategies</h3>
+  <table>
+    <thead>
+      <tr><th>Strategy / Move</th><th>What it looks like in the record</th><th>Behavioral effect</th><th>Conflict rating</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Logistics caregiver</strong></td>
+        <td>Takes kids to appointments, tracks temperature, food, reading, medication, notes, prescriptions, tickets, practice, and equipment.</td>
+        <td>Strong stabilizing function. She solves practical problems.</td>
+        <td><span class="tag green">Does not start conflict</span></td>
+      </tr>
+      <tr>
+        <td><strong>Maternal bridge</strong></td>
+        <td>Steps back from Kass’ first dance so Deanna can chaperone and have the mom moment.</td>
+        <td>Major de-escalation. This protects Kass and respects Deanna’s role.</td>
+        <td><span class="tag green">De-escalates</span></td>
+      </tr>
+      <tr>
+        <td><strong>Organized-task authority</strong></td>
+        <td>Pushes structure, planning, ownership, and “this chaos cannot work for me.”</td>
+        <td>Can improve operations, but becomes inflammatory when delivered as a lecture during stress.</td>
+        <td><span class="tag amber">Can escalate</span></td>
+      </tr>
+      <tr>
+        <td><strong>Critique / accountability push</strong></td>
+        <td>Calls out last-minute planning, says Deanna needs to take ownership, and frames child logistics as chaos.</td>
+        <td>May be partially true, but tone creates shame and defensiveness.</td>
+        <td><span class="tag red">Escalates conflict</span></td>
+      </tr>
+      <tr>
+        <td><strong>Alliance building</strong></td>
+        <td>Attempts to build a “D’s and J’s” protective circle around the girls and align with Deanna against outside parties.</td>
+        <td>Can temporarily build cooperation, but risks creating an us-vs-them covert lane.</td>
+        <td><span class="tag amber">Risky</span></td>
+      </tr>
+      <tr>
+        <td><strong>Secrecy / threat framing</strong></td>
+        <td>Tells Deanna to delete texts, warns something legal is coming, references S’s/K’s, and says she has notes.</td>
+        <td>Major record-integrity risk. It introduces paranoia and hidden agendas into child communication.</td>
+        <td><span class="tag red">Starts/contaminates conflict</span></td>
+      </tr>
+      <tr>
+        <td><strong>Platform repair</strong></td>
+        <td>Offers to pay AppClose monthly fee and move all correspondence back to AppClose.</td>
+        <td>Correct structural fix, even if the surrounding conflict is already hot.</td>
+        <td><span class="tag green">Stabilizes</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <h2>4. Communications That Start Conflict vs Not</h2>
+  <table>
+    <thead>
+      <tr><th>Communication Type</th><th>Example Pattern</th><th>Classification</th><th>Why It Starts or Avoids Conflict</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Clear child update</strong></td>
+        <td>“On my way to pick Kass up from school after speaking with nurse.”</td>
+        <td><span class="tag green">Does not start conflict</span></td>
+        <td>Specific child, specific action, no blame, no moral accusation.</td>
+      </tr>
+      <tr>
+        <td><strong>Simple child-care question</strong></td>
+        <td>“Did she eat?” / “Can y’all take her?” / “Can you send the doctor note?”</td>
+        <td><span class="tag green">Does not start conflict</span></td>
+        <td>Asks for needed information or action without attacking anyone.</td>
+      </tr>
+      <tr>
+        <td><strong>Offer of help</strong></td>
+        <td>“I can take her to the doctor.” / “I’ll read with her.” / “Let us know if you want us to take her.”</td>
+        <td><span class="tag green">De-escalates</span></td>
+        <td>Reduces burden and focuses on the child.</td>
+      </tr>
+      <tr>
+        <td><strong>Thank-you / acknowledgment</strong></td>
+        <td>“Ty.” / “Thank you.” / “Perfect.”</td>
+        <td><span class="tag green">De-escalates</span></td>
+        <td>Reinforces cooperation and lowers defensive tone.</td>
+      </tr>
+      <tr>
+        <td><strong>Parent-role respect</strong></td>
+        <td>Jesica saying Deanna should chaperone the first dance if she can.</td>
+        <td><span class="tag green">Strong de-escalation</span></td>
+        <td>Removes stepmom-vs-mom competition and protects the child’s milestone.</td>
+      </tr>
+      <tr>
+        <td><strong>Accusation attached to logistics</strong></td>
+        <td>“You are a liar & coward.” / “You selfish fuck.” / “You’re choosing someone over your children.”</td>
+        <td><span class="tag red">Starts conflict</span></td>
+        <td>Turns a practical issue into character assassination.</td>
+      </tr>
+      <tr>
+        <td><strong>Child-guilt framing</strong></td>
+        <td>“Please explain to Kass why…” / “Your kids are watching.”</td>
+        <td><span class="tag red">Starts conflict</span></td>
+        <td>Uses children’s emotional position as leverage in adult dispute.</td>
+      </tr>
+      <tr>
+        <td><strong>Public reputation threat</strong></td>
+        <td>“I’m going to make sure all friends/family see proof.” / references to team parents knowing.</td>
+        <td><span class="tag red">Starts conflict</span></td>
+        <td>Turns co-parent issue into public narrative warfare.</td>
+      </tr>
+      <tr>
+        <td><strong>Unilateral role demand</strong></td>
+        <td>“I need you to step aside as a coach.”</td>
+        <td><span class="tag red">Starts role conflict</span></td>
+        <td>May be a boundary, but it removes an adult from a visible child-support role without a shared plan.</td>
+      </tr>
+      <tr>
+        <td><strong>Late notice after action already happened</strong></td>
+        <td>Kids are already at another house / weather is unsafe / other parent learns after the fact.</td>
+        <td><span class="tag amber">Conflict trigger</span></td>
+        <td>Even if the underlying action is reasonable, lack of notice makes it feel like control or exclusion.</td>
+      </tr>
+      <tr>
+        <td><strong>Lecture during stress</strong></td>
+        <td>“This is chaos,” “someone needs to take ownership,” “Deanna it has to be you.”</td>
+        <td><span class="tag amber">Escalates</span></td>
+        <td>The point may be valid, but shame-heavy delivery triggers defensiveness.</td>
+      </tr>
+      <tr>
+        <td><strong>Secrecy instruction</strong></td>
+        <td>“Delete these texts.”</td>
+        <td><span class="tag red">Major conflict contaminant</span></td>
+        <td>Creates legal/record risk and makes the communication look covert.</td>
+      </tr>
+      <tr>
+        <td><strong>Vague outside-threat warnings</strong></td>
+        <td>“Something legal is coming.” / “S’s and K’s are involved.”</td>
+        <td><span class="tag red">Starts paranoia/conflict</span></td>
+        <td>Creates fear and suspicion without actionable, verified facts.</td>
+      </tr>
+      <tr>
+        <td><strong>Clean boundary</strong></td>
+        <td>“I’ll respond to the child-related issue only. Please send expenses separately.”</td>
+        <td><span class="tag green">Does not start conflict</span></td>
+        <td>Separates lanes without insulting anyone.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <h2>5. Conflict Starter Index</h2>
+  <p>The strongest conflict starters in this record are not random. They fall into repeatable categories.</p>
+  <div class="grid two">
+    <div class="box">
+      <h3>Highest-risk starters</h3>
+      <ul>
+        <li><strong>Character attacks:</strong> liar, coward, selfish, irresponsible, bad parent framing.</li>
+        <li><strong>Public exposure threats:</strong> telling friends, family, team parents, coaches, or others.</li>
+        <li><strong>Child-as-proof language:</strong> using the children’s feelings to prove an adult is wrong.</li>
+        <li><strong>Replacement language:</strong> framing Jesica as a stranger/wife deciding for the kids.</li>
+        <li><strong>Unilateral demands:</strong> step aside, remove yourself, accept these terms, blocked for today.</li>
+        <li><strong>Delete/secrecy behavior:</strong> anything that suggests hiding or destroying the record.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Lowest-risk starters</h3>
+      <ul>
+        <li><strong>Child update:</strong> who, what, when, where, what action was taken.</li>
+        <li><strong>Direct request:</strong> one request, one deadline, no backstory.</li>
+        <li><strong>Receipt/documentation:</strong> attach document and identify amount/date/category.</li>
+        <li><strong>Offer help:</strong> “I can take her,” “I can pick it up,” “I can upload the note.”</li>
+        <li><strong>Role-respect:</strong> leave room for mom/dad moments without competition.</li>
+        <li><strong>Repair statement:</strong> “I should have communicated earlier. Going forward I’ll notify you before X.”</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>6. Timeline Heat Map</h2>
+  <table>
+    <thead>
+      <tr><th>Date / Cluster</th><th>Main Issue</th><th>Conflict Heat</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Oct. 17–19</td>
+        <td>Money / bills / Jesica finances / team-public pressure</td>
+        <td><span class="score" style="color:#dc2626">10/10</span></td>
+        <td>Accusations, child leverage, public threat language, spouse-role conflict, claimed unmet financial expectations.</td>
+      </tr>
+      <tr>
+        <td>Jan. 20–23</td>
+        <td>Sick child / doctor / prescriptions / school notes</td>
+        <td><span class="score" style="color:#16a34a">2/10</span></td>
+        <td>Mostly functional, helpful, and child-specific.</td>
+      </tr>
+      <tr>
+        <td>Jan. 24</td>
+        <td>Weather / possession / communication failure</td>
+        <td><span class="score" style="color:#d97706">7/10</span></td>
+        <td>Safety decision plus poor notice plus possession expectation equals conflict.</td>
+      </tr>
+      <tr>
+        <td>Feb. 4–5</td>
+        <td>Softball dues / MacBook legal issue / medical bills</td>
+        <td><span class="score" style="color:#dc2626">9/10</span></td>
+        <td>Too many serious issues merged: legal exposure, job, insurance, child support, sports, unpaid bills.</td>
+      </tr>
+      <tr>
+        <td>Feb. 9–10</td>
+        <td>First dance</td>
+        <td><span class="score" style="color:#16a34a">1/10</span></td>
+        <td>Jesica de-escalates by honoring Deanna’s mom role.</td>
+      </tr>
+      <tr>
+        <td>Feb. 11–12</td>
+        <td>Re-engagement / Oly pickup / catcher gear</td>
+        <td><span class="score" style="color:#d97706">5/10</span></td>
+        <td>Mostly logistical but loaded by softball role tension.</td>
+      </tr>
+      <tr>
+        <td>Feb. 12</td>
+        <td>Valentine’s items</td>
+        <td><span class="score" style="color:#d97706">7/10</span></td>
+        <td>Small issue escalates because planning, money, time, and blame collide.</td>
+      </tr>
+      <tr>
+        <td>Feb. 18</td>
+        <td>Mental health / outside parties / delete texts</td>
+        <td><span class="score" style="color:#dc2626">8/10</span></td>
+        <td>Starts cooperative, then gets contaminated by secrecy, outside-party suspicion, and legal warnings.</td>
+      </tr>
+      <tr>
+        <td>Feb. 18–19</td>
+        <td>Coaches / dugout / stepping aside</td>
+        <td><span class="score" style="color:#dc2626">9/10</span></td>
+        <td>Direct role conflict in public child-activity arena.</td>
+      </tr>
+      <tr>
+        <td>Return to AppClose</td>
+        <td>Platform correction</td>
+        <td><span class="score" style="color:#16a34a">3/10</span></td>
+        <td>Correct structural move, but after damage was done.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <h2>7. Behavioral Pattern Map</h2>
+  <div class="grid two">
+    <div class="box">
+      <h3>The Deanna loop</h3>
+      <ol>
+        <li>Feels financial or parental-role pressure.</li>
+        <li>Frames issue through child stability and sacrifice.</li>
+        <li>Escalates urgency and moral stakes.</li>
+        <li>Pulls in outside visibility or implies others know.</li>
+        <li>Softens after contact/cooperation resumes.</li>
+      </ol>
+      <div class="warn"><strong>Best counter:</strong> Validate the child-centered issue, separate the money/role dispute, and request receipts or specific action. Do not debate character.</div>
+    </div>
+    <div class="box">
+      <h3>The Jere loop</h3>
+      <ol>
+        <li>Receives blame-heavy or vague demand.</li>
+        <li>Moves to facts, dates, order terms, payment history, or boundaries.</li>
+        <li>Tries to reclaim structure/control.</li>
+        <li>May overcorrect into unilateral terms.</li>
+        <li>Shuts down when the conversation becomes circular.</li>
+      </ol>
+      <div class="warn"><strong>Best counter:</strong> Lead with practical child acknowledgment before facts/order language. Boundaries work better after the child need is answered.</div>
+    </div>
+    <div class="box">
+      <h3>The Jesica loop</h3>
+      <ol>
+        <li>Sees a practical gap and steps in hard.</li>
+        <li>Solves logistics quickly and emotionally invests.</li>
+        <li>Gets frustrated by disorganization or perceived manipulation.</li>
+        <li>Starts lecturing, investigating, or alliance-building.</li>
+        <li>Can either repair with warmth or escalate with secrecy/threat framing.</li>
+      </ol>
+      <div class="warn"><strong>Best counter:</strong> Keep Jesica in logistics/support lane. No finances/legal conspiracy lane. No delete-text lane. No parenting-competence lectures.</div>
+    </div>
+    <div class="box">
+      <h3>The group-thread loop</h3>
+      <ol>
+        <li>Starts with a child issue.</li>
+        <li>Someone adds money, role, legal, or outside-party context.</li>
+        <li>Everyone starts solving different problems at once.</li>
+        <li>Tone shifts from logistics to blame.</li>
+        <li>The original child issue becomes secondary.</li>
+      </ol>
+      <div class="warn"><strong>Best counter:</strong> Split threads. One issue per AppClose message. Stop after the action is complete.</div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>8. What Is Actually Manipulative vs What Is Just Stress?</h2>
+  <table>
+    <thead>
+      <tr><th>Behavior</th><th>Could be stress</th><th>Starts looking strategic when...</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Repeated urgent messages</td>
+        <td>Money, work, kids, medical issues, and time pressure are real.</td>
+        <td>The urgency is paired with insults, public pressure, or child guilt.</td>
+      </tr>
+      <tr>
+        <td>Talking about children’s emotional state</td>
+        <td>A parent should care if a child feels abandoned or unstable.</td>
+        <td>The child’s emotion is used to force adult compliance or win an argument.</td>
+      </tr>
+      <tr>
+        <td>Bringing in coaches/relatives</td>
+        <td>Sometimes outside adults are needed for child logistics.</td>
+        <td>They are used to validate a narrative, apply pressure, or create reputation risk.</td>
+      </tr>
+      <tr>
+        <td>Blocking or refusing back-and-forth</td>
+        <td>Can be healthy if the thread is abusive or circular.</td>
+        <td>It happens before child logistics are confirmed or is used to impose unilateral terms.</td>
+      </tr>
+      <tr>
+        <td>Jesica helping</td>
+        <td>Normal spouse/step-household support during Jere’s time.</td>
+        <td>She becomes gatekeeper over money, legal messaging, or parent-role decisions.</td>
+      </tr>
+      <tr>
+        <td>Deanna asserting mom role</td>
+        <td>Normal and valid in major child moments.</td>
+        <td>It becomes a way to reject any support from Jere’s household regardless of child benefit.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <h2>9. Best Response Strategy Going Forward</h2>
+  <div class="gcode">
+    <strong>GCODE operating rule:</strong> Do not answer the emotional bait. Answer the child need. Document the adult issue separately.
+  </div>
+  <h3>Three-line response model</h3>
+  <div class="quote">1. Acknowledge the child-related issue.
+2. State the action being taken.
+3. Move unrelated adult/legal/money issues to a separate AppClose thread.</div>
+
+  <h3>Example — money + child guilt</h3>
+  <div class="quote">I understand you are raising a financial issue and are concerned about stability for the girls.
+
+For this thread, I’m going to keep the focus on Kass’ school/softball logistics:
+[answer child issue]
+
+Please send the financial issue separately with the amount, date, receipt/bill, and the section of the order you are relying on.</div>
+
+  <h3>Example — public/team pressure</h3>
+  <div class="quote">I’m not going to discuss adult financial or co-parent disputes with team parents, coaches, or the children.
+
+For softball, the only items I will address are:
+1. dues,
+2. equipment,
+3. schedule,
+4. transportation,
+5. adult conduct at practices/games.</div>
+
+  <h3>Example — Jesica role</h3>
+  <div class="quote">Jesica may assist with logistics during my household time, including transportation, appointments, and activity coordination.
+
+Major parent decisions remain between the parents. If there is a specific concern about logistics, please identify the child, date, and action needed.</div>
+
+  <h3>Example — late-notice repair</h3>
+  <div class="quote">You are right that I should have communicated earlier.
+
+The reason I made the decision was:
+[short reason]
+
+Going forward, I will send notice before the change whenever possible. For now, the current child-related plan is:
+[plan]</div>
+</section>
+
+<section class="card">
+  <h2>10. Final GCODE Conclusion</h2>
+  <div class="gcode">
+    <strong>Final read:</strong> Conflict starts when the adults stop treating communication as a child-support tool and start using it as a courtroom, scoreboard, confession booth, reputation-defense system, or power map.
+    The fix is not “everyone be nice.” The fix is hard structure:
+    AppClose, one topic, one child, one action, one deadline, no insults, no child messengers, no public pressure, no delete-texts, no dugout politics, no side-channel gossip.
+  </div>
+  <p class="small">Generated 2026-05-02 04:30. Private working analysis. Redact before public use.</p>
+</section>
+</main>
+</body>
+</html>
