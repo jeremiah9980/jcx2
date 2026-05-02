@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Focused Communication Analysis: Jere, Jesica & Deanna</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --card: #ffffff;
+      --ink: #172033;
+      --muted: #64748b;
+      --soft: #f8fafc;
+      --line: #e2e8f0;
+      --blue: #2563eb;
+      --green: #16a34a;
+      --amber: #d97706;
+      --red: #dc2626;
+      --purple: #7c3aed;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 260px, #f1f5f9 260px);
+      line-height: 1.55;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 72px;
+    }
+
+    .hero {
+      color: white;
+      padding: 42px 0 36px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+      color: #cbd5e1;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      color: #dbeafe;
+      font-size: 18px;
+      max-width: 860px;
+      margin-top: 18px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .pill {
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.08);
+      color: #f8fafc;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      backdrop-filter: blur(8px);
+    }
+
+    .section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 26px;
+      margin: 20px 0;
+      box-shadow: 0 12px 28px rgba(15,23,42,.08);
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 26px;
+      letter-spacing: -0.025em;
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 18px;
+    }
+
+    p { margin: 0 0 12px; }
+
+    .note {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-left: 5px solid var(--blue);
+      color: #1e3a8a;
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin-top: 14px;
+    }
+
+    .warning {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid var(--amber);
+      color: #7c2d12;
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin-top: 14px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid.cards {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 126px;
+    }
+
+    .stat .num {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #0f172a;
+      display: block;
+    }
+
+    .stat .label {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .stat .sub {
+      display: block;
+      margin-top: 10px;
+      color: #334155;
+      font-size: 13px;
+    }
+
+    .bar-card {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .bar-row {
+      margin: 12px 0;
+    }
+
+    .bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 6px;
+      gap: 12px;
+    }
+
+    .bar-track {
+      height: 13px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--blue);
+    }
+
+    .bar.green { background: var(--green); }
+    .bar.amber { background: var(--amber); }
+    .bar.red { background: var(--red); }
+    .bar.purple { background: var(--purple); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f5f9;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #475569;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      line-height: 1;
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #075985;
+      font-weight: 700;
+      margin-right: 6px;
+      white-space: nowrap;
+    }
+
+    .tag.green { background: #dcfce7; color: #166534; }
+    .tag.amber { background: #fef3c7; color: #92400e; }
+    .tag.red { background: #fee2e2; color: #991b1b; }
+    .tag.purple { background: #ede9fe; color: #5b21b6; }
+
+    .timeline {
+      position: relative;
+      padding-left: 22px;
+      border-left: 3px solid #dbeafe;
+      margin-left: 4px;
+    }
+
+    .event {
+      position: relative;
+      padding: 0 0 20px 18px;
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      left: -29px;
+      top: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 5px #eff6ff;
+    }
+
+    .date {
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .quote {
+      border-left: 4px solid #cbd5e1;
+      padding: 12px 14px;
+      background: #f8fafc;
+      color: #334155;
+      border-radius: 0 12px 12px 0;
+      margin: 14px 0;
+      font-size: 14px;
+    }
+
+    .role-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .role-card h3 { margin-top: 0; }
+
+    .template {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+    }
+
+    .footer {
+      color: #475569;
+      text-align: center;
+      font-size: 13px;
+      padding: 24px 0 0;
+    }
+
+    @media (max-width: 900px) {
+      .grid.cards, .grid.two {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 20px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">Focused Communication Review</div>
+      <h1>Jere, Jesica & Deanna Communication Analysis</h1>
+      <p class="subtitle">
+        A neutral, child-centered review of communications involving Jeremiah “Jere” Cargill,
+        Jesica Cargill, and Deanna Cargill, focused on AppClose usage, role boundaries,
+        escalation points, co-parenting logistics, and practical improvements.
+      </p>
+      <div class="meta-row">
+        <span class="pill">Scope: Jere / Jesica / Deanna only</span>
+        <span class="pill">Primary source: AppClose export</span>
+        <span class="pill">Review period: Oct. 22, 2025 – Apr. 30, 2026</span>
+        <span class="pill">Neutral pattern analysis — not legal advice</span>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>1. Scope and Purpose</h2>
+      <p>
+        This page narrows the broader communication review to only the communication pattern
+        between Jere, Jesica, and Deanna. It does not attempt to analyze every unrelated third-party
+        dispute, every outside family member, or every separate legal issue unless that topic appears
+        inside the three-party communication dynamic.
+      </p>
+      <p>
+        The purpose is to identify communication patterns, escalation points, role confusion,
+        child-centered concerns, and practical steps that would reduce conflict and improve
+        clarity going forward.
+      </p>
+      <div class="note">
+        <strong>Important framing:</strong> This analysis does not diagnose anyone, determine intent,
+        assign legal fault, or replace attorney review. It focuses on observable message patterns,
+        timing, topics, tone, and consistency with child-centered communication principles.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>2. Source Basis</h2>
+      <div class="grid two">
+        <div class="role-card">
+          <h3>Communication Data Reviewed</h3>
+          <p>
+            The core communication source is an AppClose records export generated April 26, 2026,
+            covering the available AppClose history through April 30, 2026. A prior normalized
+            analysis reviewed a structured 390-message subset from October 22, 2025 through
+            March 6, 2026.
+          </p>
+        </div>
+        <div class="role-card">
+          <h3>Court-Order Framework</h3>
+          <p>
+            The court-order framework requires non-emergency communications to use AppClose,
+            requires child-focused notice and coordination, and directs the parties to minimize
+            children’s exposure to harmful parental conflict.
+          </p>
+        </div>
+      </div>
+      <div class="warning">
+        Street-level addresses, private identifiers, children’s private details, and unrelated
+        personal information should be redacted before this page is published publicly.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>3. Executive Summary</h2>
+      <p>
+        The three-party communication dynamic appears to intensify after late October 2025, when
+        AppClose was reactivated as the formal channel and Jesica’s inclusion in the thread became
+        a point of objection. Deanna’s messages are the highest-volume portion of the dataset,
+        particularly around housing, rent, school stability, and emotional impact on the children.
+        Jere’s responses tend to be more formal, boundary-based, and court-order-oriented. Jesica’s
+        direct participation appears more limited and generally supportive or logistical, but her
+        presence itself becomes a recurring conflict trigger.
+      </p>
+      <p>
+        The strongest escalation pattern is not routine school, medical, or sports logistics. Those
+        categories are often workable. The highest escalation occurs when adult financial disputes,
+        housing concerns, custody expectations, and Jesica’s role become combined into the same
+        communication thread.
+      </p>
+      <p>
+        The most useful improvement is not “more communication.” It is cleaner routing:
+        child logistics through AppClose, financial/legal disputes separated from child-facing
+        emotional language, and Jesica’s role defined as support/logistics during Jere’s household
+        and possession time rather than as a replacement co-parent.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>4. Quantitative Snapshot</h2>
+      <p>
+        The structured 390-message subset provides the clearest normalized statistics for sender
+        volume, tone, and topic breakdown.
+      </p>
+      <div class="grid cards">
+        <div class="stat">
+          <span class="num">390</span>
+          <span class="label">messages in structured subset</span>
+          <span class="sub">Oct. 22, 2025 – Mar. 6, 2026</span>
+        </div>
+        <div class="stat">
+          <span class="num">267</span>
+          <span class="label">messages from Deanna</span>
+          <span class="sub">Approx. 68% of structured subset</span>
+        </div>
+        <div class="stat">
+          <span class="num">76</span>
+          <span class="label">messages from Jere</span>
+          <span class="sub">Approx. 20% of structured subset</span>
+        </div>
+        <div class="stat">
+          <span class="num">47</span>
+          <span class="label">messages from Jesica</span>
+          <span class="sub">Approx. 12% of structured subset</span>
+        </div>
+      </div>
+
+      <div class="grid two" style="margin-top:16px;">
+        <div class="bar-card">
+          <h3>Sender Distribution</h3>
+          <div class="bar-row">
+            <div class="bar-label"><span>Deanna</span><strong>267 / 68%</strong></div>
+            <div class="bar-track"><div class="bar" style="width:68%"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>Jere</span><strong>76 / 20%</strong></div>
+            <div class="bar-track"><div class="bar green" style="width:20%"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>Jesica</span><strong>47 / 12%</strong></div>
+            <div class="bar-track"><div class="bar purple" style="width:12%"></div></div>
+          </div>
+        </div>
+
+        <div class="bar-card">
+          <h3>Tone Distribution</h3>
+          <div class="bar-row">
+            <div class="bar-label"><span>Neutral</span><strong>262</strong></div>
+            <div class="bar-track"><div class="bar" style="width:67%"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>Cooperative / Neutral</span><strong>102</strong></div>
+            <div class="bar-track"><div class="bar green" style="width:26%"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>Accusatory / Escalatory</span><strong>26</strong></div>
+            <div class="bar-track"><div class="bar red" style="width:7%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bar-card" style="margin-top:16px;">
+        <h3>Topic Concentration</h3>
+        <div class="bar-row">
+          <div class="bar-label"><span>General / broad topic</span><strong>225</strong></div>
+          <div class="bar-track"><div class="bar" style="width:100%"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Housing / rent / stability</span><strong>94</strong></div>
+          <div class="bar-track"><div class="bar amber" style="width:42%"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Communication platform / AppClose</span><strong>28</strong></div>
+          <div class="bar-track"><div class="bar purple" style="width:12%"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Child welfare / school</span><strong>20</strong></div>
+          <div class="bar-track"><div class="bar green" style="width:9%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>5. Participant Role Pattern</h2>
+      <div class="grid three">
+        <div class="role-card">
+          <h3>Jere</h3>
+          <p>
+            Jere’s messages tend to be lower-volume and more formal. The pattern is usually
+            documentation, clarification, legal/order references, address or notice updates, and
+            efforts to redirect disputed issues back to the court-order framework.
+          </p>
+          <p>
+            <strong>Strength:</strong> structure, documentation, formal notice, boundary setting.
+          </p>
+          <p>
+            <strong>Risk:</strong> messages can read as legal escalation if every response becomes
+            court-focused instead of first acknowledging the practical child issue.
+          </p>
+        </div>
+
+        <div class="role-card">
+          <h3>Jesica</h3>
+          <p>
+            Jesica’s direct message volume is limited compared with Deanna and Jere. Her role appears
+            most often as spouse, household support, transportation/logistics support, and stability
+            support during Jere’s possession or family time.
+          </p>
+          <p>
+            <strong>Strength:</strong> supportive, logistical, and usually not the highest-conflict sender.
+          </p>
+          <p>
+            <strong>Risk:</strong> her inclusion becomes a trigger when the role is undefined or framed
+            as participation in co-parent decision-making rather than household support.
+          </p>
+        </div>
+
+        <div class="role-card">
+          <h3>Deanna</h3>
+          <p>
+            Deanna sends the highest volume of messages in the structured subset. Her messages often
+            initiate concerns about rent, housing stability, school impact, therapy, possession, and
+            the children’s emotional security.
+          </p>
+          <p>
+            <strong>Strength:</strong> active notice-giving, high responsiveness, and frequent focus on
+            children’s needs.
+          </p>
+          <p>
+            <strong>Risk:</strong> escalation increases when financial stress, custody expectations,
+            blame language, Jesica’s role, and child emotional impact are combined in one thread.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>6. Key Timeline</h2>
+      <div class="timeline">
+        <div class="event">
+          <div class="date">October 22, 2025</div>
+          <p>
+            Jere uses AppClose to provide a child-health/school update: Kinsley is sick,
+            threw up at school, has a doctor appointment, and he is picking her up.
+          </p>
+          <span class="tag green">Child Welfare</span><span class="tag">Notice</span>
+        </div>
+
+        <div class="event">
+          <div class="date">October 31, 2025</div>
+          <p>
+            Deanna indicates she had not been actively using AppClose and says the last prior use was
+            January 2019. The same day, the thread shifts into therapy notice, rent concerns, housing
+            stability, and questions about whether the children’s living situation will change.
+          </p>
+          <span class="tag purple">AppClose Transition</span><span class="tag amber">Housing / Rent</span>
+        </div>
+
+        <div class="event">
+          <div class="date">October 31, 2025 — Jere Response</div>
+          <p>
+            Jere responds by redirecting communication to AppClose, referencing the court-order
+            framework, providing formal address-change notice, and stating that any modification
+            should be handled through counsel or court process.
+          </p>
+          <span class="tag">Boundary / Notice</span><span class="tag green">Documentation</span>
+        </div>
+
+        <div class="event">
+          <div class="date">November 1, 2025</div>
+          <p>
+            Deanna objects to Jesica being included in the AppClose thread and asks for her removal.
+            Jere then sends a formal boundary message stating that communication should remain
+            respectful, child-related, and consistent with the court orders. Jere also frames Jesica’s
+            involvement as lawful, supportive, and related to schedules, transportation, and stability.
+          </p>
+          <span class="tag red">Role Conflict</span><span class="tag purple">Jesica Inclusion</span>
+        </div>
+
+        <div class="event">
+          <div class="date">November 4–7, 2025</div>
+          <p>
+            The communications include property/access issues, belongings, vehicle-related items,
+            and logistical disputes. This category is smaller than the housing/rent category but can
+            escalate quickly when practical items are tied to blame or threats.
+          </p>
+          <span class="tag amber">Property / Access</span>
+        </div>
+
+        <div class="event">
+          <div class="date">November 6, 2025</div>
+          <p>
+            Jere sends a formal objection regarding alleged possession/access interference and child
+            supervision concerns, requesting confirmation of Kassidy’s location and future notice for
+            attendance, care, supervision, or health changes.
+          </p>
+          <span class="tag red">Possession / Safety</span><span class="tag">Formal Notice</span>
+        </div>
+
+        <div class="event">
+          <div class="date">January–March 2026</div>
+          <p>
+            The normalized dataset shows a later shift toward AppClose platform use, general
+            coordination, and lower overall escalation compared with the late-October/November spike.
+          </p>
+          <span class="tag green">Stabilization</span><span class="tag purple">AppClose Use</span>
+        </div>
+
+        <div class="event">
+          <div class="date">April 17–21, 2026</div>
+          <p>
+            Later AppClose excerpts show functional coordination around medicine/school response,
+            softball raffle tickets, financial stress updates, and birthday-related logistics involving
+            Jesica’s support.
+          </p>
+          <span class="tag green">School / Medical</span><span class="tag">Sports / Logistics</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>7. Pattern Findings</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Observed Dynamic</th>
+            <th>Communication Risk</th>
+            <th>Best Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>AppClose reactivation</strong></td>
+            <td>AppClose became the central channel again after long inactivity.</td>
+            <td>Confusion about who is included, what belongs in the thread, and what counts as notice.</td>
+            <td>Use AppClose for all non-emergency child matters and begin each thread with a clear subject tag.</td>
+          </tr>
+          <tr>
+            <td><strong>Housing/rent escalation</strong></td>
+            <td>Financial/housing stress became tied to children’s school stability and emotional security.</td>
+            <td>Adult financial conflict can spill into child-centered communication and heighten distress.</td>
+            <td>Separate child logistics from financial/legal disputes. Keep child updates factual and non-blaming.</td>
+          </tr>
+          <tr>
+            <td><strong>Jesica role ambiguity</strong></td>
+            <td>Jesica’s inclusion triggered objections when her role was not clearly defined.</td>
+            <td>Stepparent/spouse involvement can be interpreted as overreach if not limited to logistics/support.</td>
+            <td>Define Jesica as Jere’s spouse and household support for transportation, caregiving, and logistics during Jere’s time.</td>
+          </tr>
+          <tr>
+            <td><strong>Child welfare/school updates</strong></td>
+            <td>Medical, school, and daily logistics are often more functional than financial dispute threads.</td>
+            <td>Escalation occurs when routine logistics are bundled with blame or unrelated history.</td>
+            <td>Use short update templates with date, child, issue, action taken, and requested response.</td>
+          </tr>
+          <tr>
+            <td><strong>Message clustering</strong></td>
+            <td>High-stress periods include multiple messages in short succession seeking immediate answers.</td>
+            <td>Clusters can pressure a response and increase emotional tone.</td>
+            <td>Send one complete message, then wait for the response window unless there is an emergency.</td>
+          </tr>
+          <tr>
+            <td><strong>Legal/order references</strong></td>
+            <td>Jere frequently redirects to court orders, formal notice, and documentation.</td>
+            <td>Helpful for recordkeeping, but can feel escalatory if used before acknowledging the practical issue.</td>
+            <td>Lead with child-focused acknowledgment, then cite the order only when necessary.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>8. Child-Centered Communication Flags</h2>
+      <p>
+        The most important concern is not simply whether messages are positive or negative. The core
+        issue is whether children are being protected from adult disputes and whether the adults are
+        keeping communication focused on concrete needs.
+      </p>
+      <div class="grid two">
+        <div class="role-card">
+          <h3>Risk-raising patterns</h3>
+          <ul>
+            <li>Referencing children’s fear, housing loss, school change, or emotional distress inside financial dispute messages.</li>
+            <li>Character labels about either parent, spouse, or household.</li>
+            <li>Requests that children be told adult financial or legal explanations.</li>
+            <li>Combining possession, money, therapy, school, and spouse conflict into one thread.</li>
+            <li>Using children as the emotional proof point for an adult disagreement.</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <h3>Stabilizing patterns</h3>
+          <ul>
+            <li>Short factual updates about school, medical care, pickup, and activities.</li>
+            <li>Clear confirmations such as “on the way,” “received,” “already spoke to the nurse,” or “thank you.”</li>
+            <li>Using AppClose as the central record for non-emergency issues.</li>
+            <li>Separating adult finance/legal disputes from daily child logistics.</li>
+            <li>Documenting notices without adding character attacks.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>9. Recommended Communication Protocol</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Who Should Communicate</th>
+            <th>Required Content</th>
+            <th>Suggested Format</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>School / attendance</td>
+            <td>Jere and Deanna; Jesica only if directly helping with pickup/dropoff.</td>
+            <td>Child, date, issue, action taken, pickup/dropoff impact.</td>
+            <td><span class="tag">[School]</span> short factual update.</td>
+          </tr>
+          <tr>
+            <td>Medical / medicine</td>
+            <td>Jere and Deanna; caregiver may confirm logistics.</td>
+            <td>Symptoms, provider/nurse contact, medication, appointment, follow-up needed.</td>
+            <td><span class="tag green">[Medical]</span> notice + response request.</td>
+          </tr>
+          <tr>
+            <td>Sports / activities</td>
+            <td>Whichever household is handling the event; Jesica may assist with logistics during Jere’s time.</td>
+            <td>Event, time, location, fees, transportation, equipment.</td>
+            <td><span class="tag purple">[Activity]</span> checklist style.</td>
+          </tr>
+          <tr>
+            <td>Possession / exchanges</td>
+            <td>Jere and Deanna only unless a designated adult is handling physical pickup/dropoff.</td>
+            <td>Time, place, reason for change, written agreement if needed.</td>
+            <td><span class="tag amber">[Possession]</span> direct notice.</td>
+          </tr>
+          <tr>
+            <td>Expenses / reimbursement</td>
+            <td>Jere and Deanna.</td>
+            <td>Receipt, amount, child, category, due date, whether previously agreed.</td>
+            <td><span class="tag amber">[Expense]</span> receipt + amount only.</td>
+          </tr>
+          <tr>
+            <td>Disputes / legal disagreement</td>
+            <td>Jere and Deanna; counsel if represented.</td>
+            <td>Specific issue, order section if needed, requested remedy.</td>
+            <td><span class="tag red">[Dispute]</span> no insults, no child blame.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>10. Message Templates</h2>
+      <h3>Best all-purpose AppClose format</h3>
+      <div class="template">[Topic Tag] Child / Date / Action Needed
+
+Child:
+Date / Time:
+Issue:
+Action already taken:
+What I need from you:
+Response requested by:
+
+Please keep this thread limited to this topic so we can avoid confusion and keep the communication child-focused.</div>
+
+      <h3>Boundary response when a thread becomes personal</h3>
+      <div class="template">Received.
+
+I’m willing to address the child-related issue. I’m not going to respond to personal comments, character statements, or unrelated history in this thread.
+
+For clarity, the child-related issue I understand is:
+[briefly restate issue]
+
+My response:
+[brief factual response]
+
+If there is another child-related action needed, please send it as a separate AppClose message with the specific request.</div>
+
+      <h3>Jesica-role clarification</h3>
+      <div class="template">For clarity, Jesica is included only as my spouse and household support where the issue involves transportation, caregiving, scheduling, or logistics during my possession time.
+
+Major conservatorship decisions remain between the parents unless otherwise ordered or agreed in writing. Her involvement is not intended to replace either parent or create conflict; it is intended to support stability and logistics for the children.</div>
+
+      <h3>Financial issue separation</h3>
+      <div class="template">I understand this involves a financial concern.
+
+To keep the children protected from adult conflict, I am asking that we separate financial/legal issues from child logistics. Please send any reimbursement request with the receipt, amount, date, child, and basis for the request.
+
+For today’s child-related logistics, my understanding is:
+[school / pickup / medical / activity issue]
+
+My response:
+[brief factual response]</div>
+    </section>
+
+    <section class="section">
+      <h2>11. Recommended Findings for a Summary Page</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Finding</th>
+            <th>Plain-English Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Most communication is not inherently hostile.</td>
+            <td>The structured subset shows most messages are neutral or cooperative/neutral, with escalation concentrated in specific topics and dates.</td>
+          </tr>
+          <tr>
+            <td>Escalation is topic-driven.</td>
+            <td>Housing/rent, Jesica’s inclusion, property/access, and possession/safety disputes carry higher escalation risk than routine school or sports logistics.</td>
+          </tr>
+          <tr>
+            <td>Jesica’s role should be defined, not debated repeatedly.</td>
+            <td>Her participation works best when limited to logistics/support during Jere’s household time and not framed as a substitute conservator.</td>
+          </tr>
+          <tr>
+            <td>Children should not be the message channel.</td>
+            <td>Adult financial, housing, legal, and relationship disputes should not be routed through or explained to the children as blame narratives.</td>
+          </tr>
+          <tr>
+            <td>AppClose can reduce conflict if used cleanly.</td>
+            <td>The tool works best when each thread has one topic, one requested action, and no unrelated commentary.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>12. Bottom Line</h2>
+      <p>
+        The communication record shows a family system under stress, but it also shows that the
+        communication can function when messages are short, factual, child-centered, and limited to
+        one topic. The pattern becomes less stable when adult financial strain, housing concerns,
+        legal threats, spouse-role objections, and children’s emotional reactions are merged together.
+      </p>
+      <p>
+        The practical path forward is a strict communication protocol: AppClose for all
+        non-emergency child matters, Jere and Deanna as the primary decision-makers, Jesica as
+        clearly defined household/logistics support during Jere’s time, and no use of the children as
+        messengers or emotional leverage in adult disputes.
+      </p>
+    </section>
+
+    <footer class="footer">
+      Prepared as a neutral communication-pattern summary. Redact sensitive data before public posting.
+    </footer>
+  </main>
+</body>
+</html>
