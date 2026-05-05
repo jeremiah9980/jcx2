@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Analysis Assistant — JCX2</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    html, body { height: 100%; margin: 0; }
+
+    .ai-page-wrap {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── Header ── */
+    .ai-header {
+      background: #0f1830;
+      border-bottom: 1px solid #30446f;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      gap: 12px;
+    }
+    .ai-header-left { display: flex; align-items: center; gap: 12px; }
+    .ai-header-left h1 {
+      margin: 0; font-size: 1.05rem; color: #eef4ff;
+      display: flex; align-items: center; gap: 9px;
+    }
+    .ai-live-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #6ee7b7; box-shadow: 0 0 7px #6ee7b7;
+      animation: livepulse 2s infinite; display: inline-block;
+    }
+    @keyframes livepulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
+    .ai-header small { color: #6ee7b7; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; }
+    .ai-header-right { display: flex; align-items: center; gap: 10px; }
+    .ai-header a {
+      color: #9ec5ff; font-size: .82rem; text-decoration: none;
+      border: 1px solid #30446f; padding: 5px 12px; border-radius: 6px;
+    }
+    .ai-header a:hover { background: rgba(255,255,255,.05); }
+    #ai-key-status {
+      font-size: .78rem; padding: 4px 12px; border-radius: 6px;
+      border: 1px solid #30446f; background: rgba(255,255,255,.03);
+    }
+    #ai-key-status.connected { color: #6ee7b7; border-color: rgba(110,231,183,.35); }
+    #ai-key-status.missing { color: #e8b7bf; border-color: rgba(232,183,191,.35); }
+
+    /* ── Layout ── */
+    .ai-body {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ── */
+    .ai-sidebar {
+      width: 230px;
+      flex-shrink: 0;
+      background: #0f1830;
+      border-right: 1px solid #30446f;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 14px 0;
+    }
+    .ai-sidebar-title {
+      color: #6ee7b7; font-size: .7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .12em;
+      padding: 0 14px 8px;
+    }
+    .ai-sidebar a {
+      display: block; padding: 7px 14px; color: #bfd0f0;
+      font-size: .82rem; text-decoration: none; border-left: 2px solid transparent;
+      transition: background .12s, border-color .12s;
+    }
+    .ai-sidebar a:hover, .ai-sidebar a.active {
+      background: rgba(255,255,255,.04); border-left-color: #2563eb; color: #eef4ff;
+    }
+    .ai-sidebar-section { margin-top: 14px; }
+    .ai-prompt-chip {
+      display: block; margin: 4px 10px; padding: 7px 10px;
+      background: #1a2546; border: 1px solid #30446f; border-radius: 8px;
+      color: #9ec5ff; font-size: .78rem; cursor: pointer; text-align: left;
+      transition: background .12s;
+    }
+    .ai-prompt-chip:hover { background: #23315a; color: #eef4ff; }
+
+    /* ── Chat Area ── */
+    .ai-chat-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0b1020, #0f1830);
+    }
+
+    #ai-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scrollbar-width: thin;
+      scrollbar-color: #30446f transparent;
+    }
+    #ai-messages::-webkit-scrollbar { width: 5px; }
+    #ai-messages::-webkit-scrollbar-track { background: transparent; }
+    #ai-messages::-webkit-scrollbar-thumb { background: #30446f; border-radius: 4px; }
+
+    .ai-msg-row { display: flex; gap: 10px; max-width: 860px; width: 100%; }
+    .ai-msg-row.user { align-self: flex-end; flex-direction: row-reverse; }
+    .ai-msg-row.assistant { align-self: flex-start; }
+    .ai-avatar {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+    }
+    .ai-avatar.bot { background: linear-gradient(135deg,#2563eb,#1d4ed8); }
+    .ai-avatar.user { background: #1a2546; border: 1px solid #30446f; }
+    .ai-bubble {
+      padding: 12px 16px; border-radius: 14px; font-size: .87rem;
+      line-height: 1.6; white-space: pre-wrap; word-wrap: break-word; max-width: 680px;
+    }
+    .ai-msg-row.user .ai-bubble {
+      background: #2563eb; color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .ai-msg-row.assistant .ai-bubble {
+      background: #1a2546; color: #eef4ff;
+      border: 1px solid #30446f; border-bottom-left-radius: 4px;
+    }
+    .ai-msg-row.system-note {
+      align-self: center;
+    }
+    .ai-msg-row.system-note .ai-bubble {
+      background: rgba(110,231,183,.07); color: #6ee7b7;
+      border: 1px solid rgba(110,231,183,.2); font-size: .8rem; text-align: center;
+      border-radius: 8px;
+    }
+    .ai-cursor {
+      display: inline-block; width: 2px; height: 1em;
+      background: #6ee7b7; animation: blink .7s infinite; vertical-align: text-bottom;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── Input Row ── */
+    .ai-input-area {
+      padding: 14px 20px;
+      border-top: 1px solid #30446f;
+      background: #0f1830;
+      flex-shrink: 0;
+    }
+    .ai-input-row {
+      display: flex; gap: 10px; align-items: flex-end;
+      max-width: 860px; margin: auto;
+    }
+    #ai-input {
+      flex: 1; background: #1a2546; border: 1px solid #30446f;
+      border-radius: 10px; color: #eef4ff; padding: 11px 14px;
+      font-size: .88rem; resize: none; outline: none;
+      height: 44px; max-height: 120px; font-family: inherit; line-height: 1.45;
+    }
+    #ai-input:focus { border-color: #3b82f6; }
+    #ai-send {
+      background: linear-gradient(135deg,#2563eb,#1d4ed8);
+      border: none; border-radius: 10px; color: #fff;
+      padding: 0 18px; height: 44px; cursor: pointer; font-size: 18px;
+      transition: opacity .15s; flex-shrink: 0;
+    }
+    #ai-send:hover { opacity: .88; }
+    #ai-send:disabled { opacity: .4; cursor: not-allowed; }
+    .ai-input-hint {
+      text-align: center; color: #4a5f8a; font-size: .72rem; margin-top: 6px;
+    }
+
+    /* ── API Key Modal ── */
+    #ai-key-modal {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.75); display: flex;
+      align-items: center; justify-content: center; padding: 16px;
+    }
+    #ai-key-modal.hidden { display: none; }
+    #ai-key-box {
+      background: #16213c; border: 1px solid #30446f; border-radius: 18px;
+      padding: 32px; width: 100%; max-width: 420px;
+      box-shadow: 0 10px 50px rgba(0,0,0,.7);
+    }
+    #ai-key-box h2 { margin: 0 0 8px; font-size: 1.15rem; color: #eef4ff; }
+    #ai-key-box p { color: #bfd0f0; font-size: .84rem; margin: 0 0 18px; line-height: 1.55; }
+    #ai-key-field {
+      width: 100%; box-sizing: border-box;
+      background: #0f1830; border: 1px solid #30446f; border-radius: 9px;
+      color: #eef4ff; padding: 11px 14px; font-size: .85rem;
+      outline: none; margin-bottom: 14px; font-family: monospace;
+    }
+    #ai-key-field:focus { border-color: #3b82f6; }
+    .ai-key-actions { display: flex; gap: 10px; }
+    #ai-save-key {
+      flex: 1; background: #2563eb; border: none; border-radius: 9px;
+      color: #fff; padding: 11px; cursor: pointer; font-size: .9rem; font-weight: 600;
+    }
+    #ai-save-key:hover { background: #1d4ed8; }
+    #ai-cancel-key {
+      background: none; border: 1px solid #30446f; border-radius: 9px;
+      color: #9ec5ff; padding: 11px 16px; cursor: pointer; font-size: .9rem;
+    }
+    #ai-cancel-key:hover { background: rgba(255,255,255,.05); }
+    .ai-key-footer { margin-top: 14px; font-size: .76rem; color: #4a5f8a; }
+    .ai-key-footer a { color: #6ee7b7; }
+
+    @media (max-width: 640px) {
+      .ai-sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="ai-page-wrap">
+
+  <!-- Header -->
+  <header class="ai-header">
+    <div class="ai-header-left">
+      <h1><span class="ai-live-dot"></span>AI Analysis Assistant</h1>
+      <small>Powered by Claude</small>
+    </div>
+    <div class="ai-header-right">
+      <span id="ai-key-status" class="missing">No key set</span>
+      <button onclick="openKeyModal()" style="background:#1a2546;border:1px solid #30446f;border-radius:8px;color:#9ec5ff;padding:6px 14px;cursor:pointer;font-size:.82rem;">🔑 API Key</button>
+      <button onclick="clearChat()" style="background:none;border:1px solid #30446f;border-radius:8px;color:#9ec5ff;padding:6px 12px;cursor:pointer;font-size:.82rem;">↺ Clear</button>
+      <a href="index.html">← Back</a>
+    </div>
+  </header>
+
+  <div class="ai-body">
+
+    <!-- Sidebar -->
+    <aside class="ai-sidebar">
+      <div class="ai-sidebar-title">Package Pages</div>
+      <a href="index.html">Overview</a>
+      <a href="behavior-analysis.html">Behavior Analysis</a>
+      <a href="children-profiles.html">Family Profiles</a>
+      <a href="deanna-profile.html">Deanna Profile</a>
+      <a href="sharon-profile.html">Sharon Profile</a>
+      <a href="third-party-influence-analysis.html">Third-Party Influence</a>
+      <a href="full-communication-analysis.html">Full Communication Analysis</a>
+      <a href="advanced-analysis.html">Advanced Analysis</a>
+      <a href="timeline.html">Timeline</a>
+
+      <div class="ai-sidebar-section">
+        <div class="ai-sidebar-title">Quick Prompts</div>
+        <button class="ai-prompt-chip" onclick="usePrompt(this)">Summarize Deanna's communication patterns</button>
+        <button class="ai-prompt-chip" onclick="usePrompt(this)">What does third-party influence analysis show?</button>
+        <button class="ai-prompt-chip" onclick="usePrompt(this)">Explain the triangulation model</button>
+        <button class="ai-prompt-chip" onclick="usePrompt(this)">What are the main co-parenting conflict drivers?</button>
+        <button class="ai-prompt-chip" onclick="usePrompt(this)">Summarize Kelsie's developmental profile</button>
+        <button class="ai-prompt-chip" onclick="usePrompt(this)">What tone categories appear most frequently?</button>
+        <button class="ai-prompt-chip" onclick="usePrompt(this)">How does narrative inconsistency manifest in the communications?</button>
+        <button class="ai-prompt-chip" onclick="usePrompt(this)">What does the February parallel timeline reveal?</button>
+      </div>
+    </aside>
+
+    <!-- Chat -->
+    <div class="ai-chat-area">
+      <div id="ai-messages"></div>
+      <div class="ai-input-area">
+        <div class="ai-input-row">
+          <textarea id="ai-input" placeholder="Ask about the analysis, timeline, behavior patterns, profiles…" rows="1"></textarea>
+          <button id="ai-send" onclick="handleSend()">➤</button>
+        </div>
+        <p class="ai-input-hint">Press Enter to send · Shift+Enter for newline</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- API Key Modal -->
+<div id="ai-key-modal" class="hidden">
+  <div id="ai-key-box">
+    <h2>🔑 Connect to Claude AI</h2>
+    <p>Enter your Anthropic API key to activate the AI assistant. Your key is stored only in your browser's local storage and sent directly to Anthropic — never to any other server.</p>
+    <input id="ai-key-field" type="password" placeholder="sk-ant-api03-…" autocomplete="off" spellcheck="false"/>
+    <div class="ai-key-actions">
+      <button id="ai-save-key" onclick="saveKey()">Save & Connect</button>
+      <button id="ai-cancel-key" onclick="closeKeyModal()">Cancel</button>
+    </div>
+    <p class="ai-key-footer">Get your API key at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a></p>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'jcx2_anthropic_key';
+const MODEL = 'claude-sonnet-4-6';
+const SYSTEM_PROMPT = `You are an AI analysis assistant embedded in a Communication Timeline & Analysis Package — a structured legal and co-parenting review tool.
+
+PACKAGE CONTENTS:
+- AppClose co-parenting message export analysis (Oct 2021 – present)
+- Behavioral profiles: Deanna Cargill (co-parent / primary source of conflict escalation), Sharon (maternal grandmother, caregiving dispute, third-party conflict expansion), Stephanie (situational third-party influence, social/message spillover)
+- Children's profiles: Kelsie (identity/mental health timeline, school supports, attendance), Kinsley (athletics, school, youth development), Kassidy (elementary, softball, ARD/dyslexia control pattern documented)
+- Third-party influence analysis using triangulation model
+- Timeline data: full event timeline, February parallel timeline (Feb 2024), accusations timeline
+- Tone classifications: neutral/cooperative, accusatory/escalatory, clarification/boundary
+- Communication categories: logistical, child-focused
+- Advanced analysis: narrative inconsistency detection, conflict escalation map, behavior role classification
+- AppClose structured message dataset (CSV/XLSX)
+- October 2021 DFPS incident documented in Deanna profile
+
+KEY FINDINGS ACROSS PACKAGE:
+- Deanna exhibits accusatory/escalatory tone in a significant portion of communications
+- Sharon is tied to caregiving narrative disputes and conflict windows as a triangulation participant
+- Stephanie shows situational influence via social media and message spillover
+- Kassidy's ARD process shows documented control patterns related to dyslexia evaluation
+- February 2024 parallel timeline reveals conflicting narratives about schedule and child access
+- Triangulation model: Deanna (center), Sharon and Stephanie as external amplifiers
+
+YOUR ROLE:
+Help users understand the analysis, navigate the package, and interpret behavioral patterns and timeline events. Be professional, neutral, and concise. Reference specific profiles or sections by name. Do not speculate beyond what the documented data suggests. For specific message-level data, note the user should check the AppClose dataset or transcript files.`;
+
+let apiKey = localStorage.getItem(STORAGE_KEY) || '';
+let messages = [];
+let isStreaming = false;
+
+function updateKeyStatus() {
+  const el = document.getElementById('ai-key-status');
+  if (apiKey) {
+    el.textContent = '● Connected';
+    el.className = 'connected';
+  } else {
+    el.textContent = 'No key set';
+    el.className = 'missing';
+  }
+}
+
+function openKeyModal() {
+  document.getElementById('ai-key-field').value = apiKey;
+  document.getElementById('ai-key-modal').classList.remove('hidden');
+}
+function closeKeyModal() {
+  document.getElementById('ai-key-modal').classList.add('hidden');
+}
+
+document.getElementById('ai-key-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'ai-key-modal') closeKeyModal();
+});
+
+function saveKey() {
+  const val = document.getElementById('ai-key-field').value.trim();
+  if (!val.startsWith('sk-ant-')) {
+    document.getElementById('ai-key-field').style.borderColor = '#e8b7bf';
+    return;
+  }
+  apiKey = val;
+  localStorage.setItem(STORAGE_KEY, apiKey);
+  closeKeyModal();
+  updateKeyStatus();
+  appendNote('API key saved. Claude is ready!');
+}
+
+function appendMsg(role, text) {
+  const container = document.getElementById('ai-messages');
+  const row = document.createElement('div');
+  row.className = `ai-msg-row ${role}`;
+
+  if (role === 'system-note') {
+    row.innerHTML = `<div class="ai-bubble">${text}</div>`;
+  } else {
+    const avatar = document.createElement('div');
+    avatar.className = `ai-avatar ${role === 'user' ? 'user' : 'bot'}`;
+    avatar.textContent = role === 'user' ? '👤' : '🤖';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'ai-bubble';
+    bubble.textContent = text;
+
+    row.appendChild(avatar);
+    row.appendChild(bubble);
+  }
+
+  container.appendChild(row);
+  container.scrollTop = container.scrollHeight;
+  return row;
+}
+
+function appendNote(text) {
+  appendMsg('system-note', text);
+}
+
+function clearChat() {
+  messages = [];
+  document.getElementById('ai-messages').innerHTML = '';
+  showWelcome();
+}
+
+function showWelcome() {
+  const welcomeText =
+    'Hello! I\'m your AI analysis assistant for this Communication Timeline & Analysis Package, powered by Claude.\n\n' +
+    'I have full context of the package contents including:\n' +
+    '• Behavioral profiles (Deanna, Sharon, Stephanie, and the children)\n' +
+    '• Communication tone analysis and categories\n' +
+    '• Timeline events and parallel timeline data\n' +
+    '• Third-party influence and triangulation model\n' +
+    '• Advanced analysis findings\n\n' +
+    (apiKey
+      ? 'Ready to help. Use the quick prompts on the left or ask me anything about the analysis.'
+      : '⚠️  No API key set. Click the 🔑 API Key button above to connect to Claude and get started.');
+  appendMsg('assistant', welcomeText);
+}
+
+function usePrompt(btn) {
+  const input = document.getElementById('ai-input');
+  input.value = btn.textContent.trim();
+  input.style.height = 'auto';
+  input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+  input.focus();
+}
+
+async function handleSend() {
+  if (isStreaming) return;
+  const input = document.getElementById('ai-input');
+  const sendBtn = document.getElementById('ai-send');
+  const text = input.value.trim();
+  if (!text) return;
+
+  if (!apiKey) { openKeyModal(); return; }
+
+  input.value = '';
+  input.style.height = 'auto';
+  appendMsg('user', text);
+  messages.push({ role: 'user', content: text });
+
+  isStreaming = true;
+  sendBtn.disabled = true;
+
+  // Build assistant bubble with cursor
+  const container = document.getElementById('ai-messages');
+  const row = document.createElement('div');
+  row.className = 'ai-msg-row assistant';
+  const avatar = document.createElement('div');
+  avatar.className = 'ai-avatar bot';
+  avatar.textContent = '🤖';
+  const bubble = document.createElement('div');
+  bubble.className = 'ai-bubble';
+  const cursor = document.createElement('span');
+  cursor.className = 'ai-cursor';
+  bubble.appendChild(cursor);
+  row.appendChild(avatar);
+  row.appendChild(bubble);
+  container.appendChild(row);
+  container.scrollTop = container.scrollHeight;
+
+  let fullText = '';
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        max_tokens: 1500,
+        stream: true,
+        system: SYSTEM_PROMPT,
+        messages
+      })
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.error?.message || `API error ${resp.status}`);
+    }
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (data === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.type === 'content_block_delta' && parsed.delta?.type === 'text_delta') {
+            fullText += parsed.delta.text;
+            bubble.textContent = fullText;
+            bubble.appendChild(cursor);
+            container.scrollTop = container.scrollHeight;
+          }
+        } catch (_) {}
+      }
+    }
+
+    bubble.textContent = fullText;
+    messages.push({ role: 'assistant', content: fullText });
+
+  } catch (err) {
+    bubble.textContent = `Error: ${err.message}`;
+    bubble.style.color = '#e8b7bf';
+    messages.pop();
+  } finally {
+    isStreaming = false;
+    sendBtn.disabled = false;
+    document.getElementById('ai-input').focus();
+  }
+}
+
+document.getElementById('ai-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+});
+document.getElementById('ai-input').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+
+// Init
+updateKeyStatus();
+showWelcome();
+</script>
+</body>
+</html>
