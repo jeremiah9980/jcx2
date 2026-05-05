@@ -23,6 +23,7 @@
         <a href="deanna-profile.html">Deanna Profile</a>
         <a href="full-communication-analysis.html">Full Communication Analysis</a>
         <a href="advanced-analysis.html">Advanced Analysis</a>
+        <a href="ai-assistant.html" style="color:#6ee7b7;font-weight:600;">✦ AI Assistant</a>
       </nav>
     </div>
   </header>
@@ -62,6 +63,30 @@
       </div>
     </section>
 
+    <section class="panel" style="border-color:#3b6ea8;background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(19,27,50,.95));">
+      <h2 style="display:flex;align-items:center;gap:10px;">
+        <span style="width:10px;height:10px;border-radius:50%;background:#6ee7b7;box-shadow:0 0 8px #6ee7b7;display:inline-block;animation:pulse2 2s infinite;"></span>
+        AI Analysis Assistant
+        <span style="font-size:.75rem;color:#6ee7b7;font-weight:400;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(110,231,183,.3);padding:2px 8px;border-radius:999px;">Live · Powered by Claude</span>
+      </h2>
+      <style>@keyframes pulse2{0%,100%{opacity:1}50%{opacity:.4}}</style>
+      <p class="muted">Ask questions about the analysis, behavioral patterns, timeline events, or any profile in this package. The AI assistant has full context of all content and responds in real time using Claude.</p>
+      <div class="card-grid">
+        <a class="analysis-card" href="ai-assistant.html" style="border-color:#3b6ea8;background:linear-gradient(135deg,#1a2e5a,#1a2546);">
+          <div class="icon">🤖</div>
+          <h3>Open AI Assistant</h3>
+          <p>Full-page chat interface with sidebar navigation, quick-prompt chips, and streaming Claude responses.</p>
+          <span class="card-button" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);">Launch Assistant -></span>
+        </a>
+        <div class="analysis-card" style="border-color:#3b6ea8;background:rgba(37,99,235,.05);cursor:default;">
+          <div class="icon">💬</div>
+          <h3>Floating Chat Widget</h3>
+          <p>The 🤖 button in the bottom-right corner gives you quick chat access on any page in the package without leaving your current view.</p>
+          <span style="display:inline-block;margin-top:10px;color:#6ee7b7;font-size:.82rem;">Available on all pages ✓</span>
+        </div>
+      </div>
+    </section>
+
     <section class="panel">
       <h2>Analysis Tools & Reference Pages</h2>
       <div class="card-grid">
@@ -83,5 +108,6 @@
       </div>
     </section>
   </main>
+  <script src="assets/js/ai-chat.js"></script>
 </body>
 </html>
