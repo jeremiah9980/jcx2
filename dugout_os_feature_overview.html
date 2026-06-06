@@ -1,0 +1,268 @@
+
+<style>
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.w{padding:1rem 0;font-family:var(--font-sans)}
+.lbl{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:10px}
+.div{height:0.5px;background:var(--color-border-tertiary);margin:1.5rem 0}
+
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:1.5rem}
+.feat-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 14px 12px;position:relative;overflow:hidden}
+.feat-top{position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--border-radius-lg) var(--border-radius-lg) 0 0}
+.feat-icon{font-size:20px;color:var(--color-text-secondary);margin-bottom:8px;display:block}
+.feat-name{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.feat-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.55}
+.feat-tag{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:11px;padding:2px 8px;border-radius:20px;border:0.5px solid}
+
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-bottom:1.5rem}
+.ai-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+.ai-mode{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px;display:flex;align-items:center;gap:6px}
+.ai-out{font-size:11px;color:var(--color-text-tertiary);line-height:1.5}
+
+.int-row{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem}
+.int-item{display:flex;align-items:center;gap:10px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px}
+.int-icon{width:32px;height:32px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.int-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.int-desc{font-size:11px;color:var(--color-text-tertiary);margin-top:1px}
+.int-status{margin-left:auto;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;flex-shrink:0;border:0.5px solid}
+
+.phase-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:2px;background:var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:1.5rem}
+.phase-cell{background:var(--color-background-primary);padding:14px 12px}
+.phase-n{font-size:11px;font-weight:500;margin-bottom:6px}
+.phase-title{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
+.phase-ul{list-style:none;display:flex;flex-direction:column;gap:3px}
+.phase-ul li{font-size:11px;color:var(--color-text-secondary);padding-left:10px;position:relative}
+.phase-ul li::before{content:'→';position:absolute;left:0;color:var(--color-text-tertiary);font-size:10px}
+
+.rev-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:1.5rem}
+.rev-table th{padding:8px 10px;text-align:left;font-size:11px;font-weight:500;color:var(--color-text-tertiary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.rev-table td{padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)}
+.rev-table tr:last-child td{border-bottom:none;font-weight:500;color:var(--color-text-primary)}
+</style>
+
+<div class="w">
+<h2 class="sr-only">DugoutOS feature set overview covering eight core modules, six AI coaching modes, five integrations, five build phases, and the SaaS revenue model</h2>
+
+<div class="lbl">Core modules</div>
+<div class="feat-grid">
+  <div class="feat-card">
+    <div class="feat-top" style="background:#7F77DD"></div>
+    <i class="ti ti-clipboard-list feat-icon c-purple" style="color:#7F77DD" aria-hidden="true"></i>
+    <div class="feat-name">Practice planning</div>
+    <div class="feat-desc">AI-generated plans from roster, stats, and season phase. Drill library, station assignments, timing.</div>
+    <span class="feat-tag" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">Live</span>
+  </div>
+  <div class="feat-card">
+    <div class="feat-top" style="background:#378ADD"></div>
+    <i class="ti ti-chart-bar feat-icon" style="color:#378ADD" aria-hidden="true"></i>
+    <div class="feat-name">Player development</div>
+    <div class="feat-desc">Per-player dashboards, coach notes, stat trends. Separate coach and parent views.</div>
+    <span class="feat-tag" style="background:#E6F1FB;color:#0C447C;border-color:#85B7EB">In build</span>
+  </div>
+  <div class="feat-card">
+    <div class="feat-top" style="background:#1D9E75"></div>
+    <i class="ti ti-trophy feat-icon" style="color:#1D9E75" aria-hidden="true"></i>
+    <div class="feat-name">Tournament ops</div>
+    <div class="feat-desc">Bracket tracking, hotel info, PDF itinerary + .ics calendar export.</div>
+    <span class="feat-tag" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5">In build</span>
+  </div>
+  <div class="feat-card">
+    <div class="feat-top" style="background:#D85A30"></div>
+    <i class="ti ti-message-circle feat-icon" style="color:#D85A30" aria-hidden="true"></i>
+    <div class="feat-name">Parent comms</div>
+    <div class="feat-desc">BAND post generator, practice reminders, game day announcements. AI drafts, coach approves.</div>
+    <span class="feat-tag" style="background:#FAECE7;color:#712B13;border-color:#F0997B">In build</span>
+  </div>
+  <div class="feat-card">
+    <div class="feat-top" style="background:#BA7517"></div>
+    <i class="ti ti-heart feat-icon" style="color:#BA7517" aria-hidden="true"></i>
+    <div class="feat-name">Fundraising tools</div>
+    <div class="feat-desc">Campaign management, donor tracking, booster emails, sponsor impact reports.</div>
+    <span class="feat-tag" style="background:#FAEEDA;color:#633806;border-color:#EF9F27">Planned</span>
+  </div>
+  <div class="feat-card">
+    <div class="feat-top" style="background:#7F77DD"></div>
+    <i class="ti ti-layout-dashboard feat-icon" style="color:#7F77DD" aria-hidden="true"></i>
+    <div class="feat-name">Multi-org dashboard</div>
+    <div class="feat-desc">Director view across 10U / 12U / 14U. All teams, coaches, finances in one place.</div>
+    <span class="feat-tag" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">Year 2</span>
+  </div>
+  <div class="feat-card">
+    <div class="feat-top" style="background:#378ADD"></div>
+    <i class="ti ti-radar feat-icon" style="color:#378ADD" aria-hidden="true"></i>
+    <div class="feat-name">NCS roster monitor</div>
+    <div class="feat-desc">Python + GitHub Actions scraper. Tracks competitor 12U Central TX roster changes in real time.</div>
+    <span class="feat-tag" style="background:#E6F1FB;color:#0C447C;border-color:#85B7EB">Live</span>
+  </div>
+  <div class="feat-card">
+    <div class="feat-top" style="background:#1D9E75"></div>
+    <i class="ti ti-user-circle feat-icon" style="color:#1D9E75" aria-hidden="true"></i>
+    <div class="feat-name">Athlete profiles</div>
+    <div class="feat-desc">Per-player GitHub Pages sites with stats, video wall, and recruiting info. Every Bananas player gets one.</div>
+    <span class="feat-tag" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5">Live</span>
+  </div>
+</div>
+
+<div class="div"></div>
+<div class="lbl">AI coaching modes</div>
+<div class="ai-grid">
+  <div class="ai-card">
+    <div class="ai-mode"><i class="ti ti-target" style="font-size:14px;color:#7F77DD" aria-hidden="true"></i>Head coach</div>
+    <div class="ai-out">Roster + stats + phase → practice plan, lineup, pitching rotation</div>
+  </div>
+  <div class="ai-card">
+    <div class="ai-mode"><i class="ti ti-adjustments" style="font-size:14px;color:#378ADD" aria-hidden="true"></i>Asst coach</div>
+    <div class="ai-out">Station assignments, drill library, position group plans</div>
+  </div>
+  <div class="ai-card">
+    <div class="ai-mode"><i class="ti ti-speakerphone" style="font-size:14px;color:#D85A30" aria-hidden="true"></i>Team parent</div>
+    <div class="ai-out">Schedule + RSVP → BAND posts, parent emails, game day</div>
+  </div>
+  <div class="ai-card">
+    <div class="ai-mode"><i class="ti ti-trending-up" style="font-size:14px;color:#1D9E75" aria-hidden="true"></i>Player dev</div>
+    <div class="ai-out">Individual stats + notes → development summaries, parent reports</div>
+  </div>
+  <div class="ai-card">
+    <div class="ai-mode"><i class="ti ti-currency-dollar" style="font-size:14px;color:#BA7517" aria-hidden="true"></i>Fundraising</div>
+    <div class="ai-out">Campaign data → flyers, donor outreach, social content</div>
+  </div>
+  <div class="ai-card">
+    <div class="ai-mode"><i class="ti ti-map" style="font-size:14px;color:#7F77DD" aria-hidden="true"></i>Tournament</div>
+    <div class="ai-out">Bracket + hotel → itinerary PDF, weather, field schedule</div>
+  </div>
+</div>
+
+<div class="div"></div>
+<div class="lbl">Integrations</div>
+<div class="int-row">
+  <div class="int-item">
+    <div class="int-icon" style="background:#E1F5EE"><i class="ti ti-chart-bar" style="font-size:16px;color:#0F6E56" aria-hidden="true"></i></div>
+    <div><div class="int-name">GameChanger</div><div class="int-desc">CSV import → batting / pitching / fielding stats → AI practice recommendations</div></div>
+    <span class="int-status" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5">Phase 1 live</span>
+  </div>
+  <div class="int-item">
+    <div class="int-icon" style="background:#E6F1FB"><i class="ti ti-message-2" style="font-size:16px;color:#185FA5" aria-hidden="true"></i></div>
+    <div><div class="int-name">BAND app</div><div class="int-desc">Post generator → BAND-ready text with scheduling queue</div></div>
+    <span class="int-status" style="background:#E6F1FB;color:#0C447C;border-color:#85B7EB">In build</span>
+  </div>
+  <div class="int-item">
+    <div class="int-icon" style="background:#FAEEDA"><i class="ti ti-trophy" style="font-size:16px;color:#854F0B" aria-hidden="true"></i></div>
+    <div><div class="int-name">USSSA / NCS / NSA</div><div class="int-desc">Tournament entry workflow + roster export in portal-compatible CSV format</div></div>
+    <span class="int-status" style="background:#FAEEDA;color:#633806;border-color:#EF9F27">In build</span>
+  </div>
+  <div class="int-item">
+    <div class="int-icon" style="background:#F1EFE8"><i class="ti ti-calendar" style="font-size:16px;color:#5F5E5A" aria-hidden="true"></i></div>
+    <div><div class="int-name">Google / Apple / Outlook calendar</div><div class="int-desc">.ics feed per team — families subscribe once, all events appear automatically</div></div>
+    <span class="int-status" style="background:#F1EFE8;color:#2C2C2A;border-color:#B4B2A9">Planned</span>
+  </div>
+  <div class="int-item">
+    <div class="int-icon" style="background:#EEEDFE"><i class="ti ti-robot" style="font-size:16px;color:#534AB7" aria-hidden="true"></i></div>
+    <div><div class="int-name">Claude (Anthropic)</div><div class="int-desc">All 6 AI modes — Claude Sonnet streaming via Anthropic API, context-aware per request</div></div>
+    <span class="int-status" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">Live</span>
+  </div>
+</div>
+
+<div class="div"></div>
+<div class="lbl">Build phases</div>
+<div class="phase-row">
+  <div class="phase-cell">
+    <div class="phase-n" style="color:#1D9E75">Now</div>
+    <div class="phase-title">Stabilize</div>
+    <ul class="phase-ul">
+      <li>Bug fixes + auth</li>
+      <li>Supabase schema</li>
+      <li>GameChanger CSV</li>
+      <li>API behind Express</li>
+    </ul>
+  </div>
+  <div class="phase-cell">
+    <div class="phase-n" style="color:#378ADD">Season 1</div>
+    <div class="phase-title">Core features</div>
+    <ul class="phase-ul">
+      <li>Full roster CRUD</li>
+      <li>Tournament dash</li>
+      <li>BAND scheduler</li>
+      <li>PDF itinerary</li>
+    </ul>
+  </div>
+  <div class="phase-cell">
+    <div class="phase-n" style="color:#BA7517">Year 2</div>
+    <div class="phase-title">Automation</div>
+    <ul class="phase-ul">
+      <li>Background sync</li>
+      <li>USSSA / NCS export</li>
+      <li>RBAC + roles</li>
+      <li>License to orgs</li>
+    </ul>
+  </div>
+  <div class="phase-cell">
+    <div class="phase-n" style="color:#7F77DD">Year 2–3</div>
+    <div class="phase-title">AI optimization</div>
+    <ul class="phase-ul">
+      <li>Lineup builder</li>
+      <li>Auto dev notes</li>
+      <li>Matchup analysis</li>
+      <li>End-of-season evals</li>
+    </ul>
+  </div>
+  <div class="phase-cell">
+    <div class="phase-n" style="color:#D85A30">Year 3</div>
+    <div class="phase-title">Org platform</div>
+    <ul class="phase-ul">
+      <li>Multi-team dash</li>
+      <li>Sponsor portal</li>
+      <li>Recruiting clips</li>
+      <li>National SaaS</li>
+    </ul>
+  </div>
+</div>
+
+<div class="div"></div>
+<div class="lbl">SaaS revenue model → NAI</div>
+<table class="rev-table">
+  <thead>
+    <tr>
+      <th>Tier</th>
+      <th>Price</th>
+      <th>Target</th>
+      <th>Year 2</th>
+      <th>Year 3 ARR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bananas 2K15 (internal)</td>
+      <td style="color:#1D9E75">$0</td>
+      <td>Proof of concept</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Single-team license</td>
+      <td>$50/mo</td>
+      <td>Central TX orgs</td>
+      <td style="color:#1D9E75">$3,600</td>
+      <td style="color:#1D9E75">$7,200</td>
+    </tr>
+    <tr>
+      <td>Multi-team org license</td>
+      <td>$120/mo</td>
+      <td>3+ age group orgs</td>
+      <td>—</td>
+      <td style="color:#1D9E75">$7,200</td>
+    </tr>
+    <tr>
+      <td>Full platform (national)</td>
+      <td>$249/mo</td>
+      <td>30 orgs nationwide</td>
+      <td>—</td>
+      <td style="color:#1D9E75">$89,640</td>
+    </tr>
+    <tr>
+      <td colspan="3">Total ARR flowing to NAI</td>
+      <td style="color:#1D9E75;font-weight:500">$3,600</td>
+      <td style="color:#1D9E75;font-weight:500">$104,040</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>

@@ -1,0 +1,229 @@
+
+<style>
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+*{box-sizing:border-box}
+.w{padding:0.75rem 0;font-family:var(--font-sans)}
+.shell{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);overflow:hidden;border:0.5px solid var(--color-border-tertiary)}
+.topbar{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:10px 16px;display:flex;align-items:center;gap:10px}
+.top-logo{font-size:13px;font-weight:500;color:var(--color-text-primary);display:flex;align-items:center;gap:6px}
+.top-org{font-size:11px;color:var(--color-text-tertiary);margin-left:auto}
+.top-avatar{width:26px;height:26px;border-radius:50%;background:var(--color-background-info);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--color-text-info)}
+.nav-tabs{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:0 16px;display:flex;gap:0;overflow-x:auto}
+.tab{font-size:12px;padding:9px 14px;color:var(--color-text-secondary);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.tab.active{color:var(--color-text-primary);border-bottom-color:#7F77DD}
+.body{padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.row2{display:grid;grid-template-columns:2fr 1fr;gap:10px}
+.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.m-lbl{font-size:11px;color:var(--color-text-tertiary);margin-bottom:4px}
+.m-val{font-size:20px;font-weight:500;color:var(--color-text-primary);line-height:1}
+.m-sub{font-size:11px;color:var(--color-text-tertiary);margin-top:3px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px}
+.card-hdr{display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.card-title{font-size:12px;font-weight:500;color:var(--color-text-primary);flex:1}
+.card-badge{font-size:10px;padding:2px 7px;border-radius:20px;border:0.5px solid}
+.drill-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.drill-item:last-child{border-bottom:none}
+.drill-num{width:20px;height:20px;border-radius:50%;background:var(--color-background-info);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--color-text-info);flex-shrink:0}
+.drill-name{font-size:12px;color:var(--color-text-primary);flex:1}
+.drill-time{font-size:11px;color:var(--color-text-tertiary);white-space:nowrap}
+.player-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.player-item:last-child{border-bottom:none}
+.p-init{width:26px;height:26px;border-radius:50%;background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--color-text-secondary);flex-shrink:0}
+.p-name{font-size:12px;color:var(--color-text-primary);flex:1}
+.p-pos{font-size:10px;color:var(--color-text-tertiary)}
+.p-bar-bg{width:64px;height:4px;background:var(--color-border-tertiary);border-radius:2px;overflow:hidden}
+.p-bar{height:100%;border-radius:2px}
+.ai-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.ai-label{font-size:10px;color:var(--color-text-tertiary);display:flex;align-items:center;gap:5px;margin-bottom:6px}
+.ai-text{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.ai-cursor{display:inline-block;width:7px;height:12px;background:var(--color-text-tertiary);margin-left:2px;animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.tourn-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.tourn-item:last-child{border-bottom:none}
+.tourn-date{font-size:10px;color:var(--color-text-tertiary);min-width:40px}
+.tourn-name{font-size:12px;color:var(--color-text-primary);flex:1}
+.tourn-tag{font-size:10px;padding:1px 7px;border-radius:20px;border:0.5px solid;white-space:nowrap}
+</style>
+
+<div class="w">
+<h2 class="sr-only">DugoutOS coach dashboard mockup showing practice plan, roster development bars, AI assistant, and upcoming tournaments</h2>
+
+<div class="shell">
+
+  <div class="topbar">
+    <div class="top-logo">
+      <i class="ti ti-baseball" style="font-size:16px;color:#7F77DD" aria-hidden="true"></i>
+      DugoutOS
+    </div>
+    <span style="font-size:11px;color:var(--color-border-secondary)">|</span>
+    <span style="font-size:12px;color:var(--color-text-secondary)">Bananas 2K15 · 12U</span>
+    <div class="top-org">Georgetown TX · Mid-season</div>
+    <div class="top-avatar">BC</div>
+  </div>
+
+  <div class="nav-tabs">
+    <div class="tab active"><i class="ti ti-clipboard-list" style="font-size:13px" aria-hidden="true"></i> Practice</div>
+    <div class="tab"><i class="ti ti-users" style="font-size:13px" aria-hidden="true"></i> Roster</div>
+    <div class="tab"><i class="ti ti-trophy" style="font-size:13px" aria-hidden="true"></i> Tournaments</div>
+    <div class="tab"><i class="ti ti-chart-bar" style="font-size:13px" aria-hidden="true"></i> Stats</div>
+    <div class="tab"><i class="ti ti-message-circle" style="font-size:13px" aria-hidden="true"></i> Comms</div>
+    <div class="tab"><i class="ti ti-robot" style="font-size:13px" aria-hidden="true"></i> Ask coach</div>
+  </div>
+
+  <div class="body">
+
+    <!-- KPI row -->
+    <div class="row">
+      <div class="metric">
+        <div class="m-lbl">Next practice</div>
+        <div class="m-val" style="font-size:15px">Tue 6 PM</div>
+        <div class="m-sub">Dove Springs Field 2</div>
+      </div>
+      <div class="metric">
+        <div class="m-lbl">Season record</div>
+        <div class="m-val">8 – 3</div>
+        <div class="m-sub">+2 this month</div>
+      </div>
+      <div class="metric">
+        <div class="m-lbl">Roster size</div>
+        <div class="m-val">12</div>
+        <div class="m-sub">2 coach waivers</div>
+      </div>
+      <div class="metric">
+        <div class="m-lbl">Funds raised</div>
+        <div class="m-val">$6.2K</div>
+        <div class="m-sub">of $10K target</div>
+      </div>
+    </div>
+
+    <!-- Main 2-col -->
+    <div class="row2">
+
+      <!-- Practice plan -->
+      <div class="card">
+        <div class="card-hdr">
+          <i class="ti ti-clipboard-list" style="font-size:15px;color:#7F77DD" aria-hidden="true"></i>
+          <span class="card-title">Tuesday practice plan · AI-generated</span>
+          <span class="card-badge" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">90 min</span>
+        </div>
+        <div class="drill-item">
+          <div class="drill-num">1</div>
+          <div class="drill-name">Dynamic warm-up + arm care</div>
+          <div class="drill-time">10 min</div>
+        </div>
+        <div class="drill-item">
+          <div class="drill-num">2</div>
+          <div class="drill-name">Infield: ground ball rapid fire</div>
+          <div class="drill-time">20 min</div>
+        </div>
+        <div class="drill-item">
+          <div class="drill-num">3</div>
+          <div class="drill-name">Batting: tee + soft toss rotation</div>
+          <div class="drill-time">25 min</div>
+        </div>
+        <div class="drill-item">
+          <div class="drill-num">4</div>
+          <div class="drill-name">Live situational — runners on base</div>
+          <div class="drill-time">25 min</div>
+        </div>
+        <div class="drill-item">
+          <div class="drill-num">5</div>
+          <div class="drill-name">Cool-down + team debrief</div>
+          <div class="drill-time">10 min</div>
+        </div>
+        <div style="margin-top:10px;padding-top:10px;border-top:0.5px solid var(--color-border-tertiary);font-size:11px;color:var(--color-text-tertiary)">
+          <i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px" aria-hidden="true"></i>
+          Focus: SS error rate up 18% last 3 games · prioritized in station 2
+        </div>
+      </div>
+
+      <!-- Right col: roster dev + AI -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+
+        <div class="card">
+          <div class="card-hdr">
+            <i class="ti ti-users" style="font-size:15px;color:#378ADD" aria-hidden="true"></i>
+            <span class="card-title">Development tracker</span>
+          </div>
+          <div class="player-item">
+            <div class="p-init">KC</div>
+            <div><div class="p-name">Kassidy C.</div><div class="p-pos">SS / C / 3B</div></div>
+            <div class="p-bar-bg"><div class="p-bar" style="width:88%;background:#7F77DD"></div></div>
+          </div>
+          <div class="player-item">
+            <div class="p-init">JR</div>
+            <div><div class="p-name">Johnny R.</div><div class="p-pos">P / CF</div></div>
+            <div class="p-bar-bg"><div class="p-bar" style="width:92%;background:#1D9E75"></div></div>
+          </div>
+          <div class="player-item">
+            <div class="p-init">SA</div>
+            <div><div class="p-name">Sofia A.</div><div class="p-pos">1B / LF</div></div>
+            <div class="p-bar-bg"><div class="p-bar" style="width:74%;background:#378ADD"></div></div>
+          </div>
+          <div class="player-item">
+            <div class="p-init">MB</div>
+            <div><div class="p-name">Maya B.</div><div class="p-pos">2B / RF</div></div>
+            <div class="p-bar-bg"><div class="p-bar" style="width:68%;background:#BA7517"></div></div>
+          </div>
+          <div style="padding-top:6px;font-size:11px;color:var(--color-text-tertiary)">
+            <a href="#" style="color:var(--color-text-info);font-size:11px">View all 12 players →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-hdr">
+            <i class="ti ti-robot" style="font-size:15px;color:#7F77DD" aria-hidden="true"></i>
+            <span class="card-title">AI coach — head coach mode</span>
+            <span class="card-badge" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5">Live</span>
+          </div>
+          <div class="ai-box">
+            <div class="ai-label">
+              <i class="ti ti-sparkles" style="font-size:12px" aria-hidden="true"></i>
+              Generating practice focus...
+            </div>
+            <div class="ai-text">Based on last week's stats, Maya's ground ball rate at 2B has dropped. I've added rapid-fire reps in station 2 and paired her with Kassidy for SS coverage drills<span class="ai-cursor"></span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Upcoming tournaments -->
+    <div class="card">
+      <div class="card-hdr">
+        <i class="ti ti-calendar" style="font-size:15px;color:#BA7517" aria-hidden="true"></i>
+        <span class="card-title">Upcoming tournaments</span>
+        <a href="#" style="font-size:11px;color:var(--color-text-info);margin-left:auto">View all →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+        <div>
+          <div class="tourn-item">
+            <div class="tourn-date">Jun 14</div>
+            <div class="tourn-name">Georgetown Summer Classic</div>
+            <span class="tourn-tag" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5">Local</span>
+          </div>
+          <div class="tourn-item">
+            <div class="tourn-date">Jul 5</div>
+            <div class="tourn-name">Central TX USSSA Regional</div>
+            <span class="tourn-tag" style="background:#E6F1FB;color:#0C447C;border-color:#85B7EB">Regional</span>
+          </div>
+        </div>
+        <div>
+          <div class="tourn-item">
+            <div class="tourn-date">Jul 19</div>
+            <div class="tourn-name">NCS 12U State Championship</div>
+            <span class="tourn-tag" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">State</span>
+          </div>
+          <div class="tourn-item">
+            <div class="tourn-date">Aug 9</div>
+            <div class="tourn-name">USSSA World Series</div>
+            <span class="tourn-tag" style="background:#FAECE7;color:#712B13;border-color:#F0997B">National</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
