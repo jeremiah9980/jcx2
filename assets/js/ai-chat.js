@@ -17,11 +17,57 @@ Guidelines:
 - If asked about a specific timeline date or event, note that the full data is in the timeline and CSV exports`;
 
   const STORAGE_KEY = 'jcx2_anthropic_key';
+  const SESSION_KEY = 'jcx2_chat_session';
   const MODEL = 'claude-sonnet-4-6';
 
   let apiKey = localStorage.getItem(STORAGE_KEY) || '';
   let messages = [];
   let isStreaming = false;
+  let activeController = null;
+
+  // ---- Minimal safe markdown rendering ----
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function renderMarkdown(text) {
+    const escaped = escapeHtml(text);
+    const lines = escaped.split('\n');
+    const htmlLines = [];
+    let inList = false;
+
+    for (const line of lines) {
+      const listMatch = line.match(/^- (.*)$/);
+      if (listMatch) {
+        if (!inList) {
+          htmlLines.push('<ul>');
+          inList = true;
+        }
+        htmlLines.push(`<li>${inlineMarkdown(listMatch[1])}</li>`);
+      } else {
+        if (inList) {
+          htmlLines.push('</ul>');
+          inList = false;
+        }
+        htmlLines.push(inlineMarkdown(line));
+      }
+    }
+    if (inList) htmlLines.push('</ul>');
+
+    return htmlLines.join('<br>').replace(/<br><ul>/g, '<ul>').replace(/<\/ul><br>/g, '</ul>');
+  }
+
+  function inlineMarkdown(line) {
+    return line
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/`(.+?)`/g, '<code>$1</code>');
+  }
 
   function buildWidget() {
     const style = document.createElement('style');
@@ -98,6 +144,7 @@ Guidelines:
         align-self: flex-start; background: #1a2546; color: #eef4ff;
         border: 1px solid #30446f; border-bottom-left-radius: 4px;
       }
+      .jcx-msg.assistant ul { margin: 6px 0; padding-left: 18px; }
       .jcx-msg.system-msg {
         align-self: center; background: rgba(110,231,183,.08); color: #6ee7b7;
         border: 1px solid rgba(110,231,183,.2); font-size: .78rem;
@@ -116,13 +163,16 @@ Guidelines:
         font-family: inherit; line-height: 1.4;
       }
       #jcx-input:focus { border-color: #3b82f6; }
-      #jcx-send {
+      #jcx-send, #jcx-stop {
         background: #2563eb; border: none; border-radius: 8px;
         color: #fff; padding: 0 14px; cursor: pointer; font-size: 16px;
         transition: background .15s; flex-shrink: 0;
       }
       #jcx-send:hover { background: #1d4ed8; }
       #jcx-send:disabled { background: #1e3a6e; cursor: not-allowed; opacity: .6; }
+      #jcx-stop { background: #7f1d1d; font-size: .8rem; padding: 0 12px; }
+      #jcx-stop:hover { background: #991b1b; }
+      #jcx-stop.hidden { display: none; }
       #jcx-key-modal {
         position: fixed; inset: 0; z-index: 10000;
         background: rgba(0,0,0,.7); display: flex;
@@ -181,6 +231,7 @@ Guidelines:
       <div id="jcx-messages"></div>
       <div id="jcx-input-row">
         <textarea id="jcx-input" placeholder="Ask about the analysis, timeline, profiles…" rows="1"></textarea>
+        <button id="jcx-stop" class="hidden" title="Stop generating">■ Stop</button>
         <button id="jcx-send">➤</button>
       </div>
     `;
@@ -205,7 +256,7 @@ Guidelines:
     document.body.appendChild(modal);
 
     wireEvents();
-    showWelcome();
+    restoreSession();
   }
 
   function wireEvents() {
@@ -215,6 +266,7 @@ Guidelines:
     const keyBtn = document.getElementById('jcx-key-btn');
     const clearBtn = document.getElementById('jcx-clear-btn');
     const sendBtn = document.getElementById('jcx-send');
+    const stopBtn = document.getElementById('jcx-stop');
     const input = document.getElementById('jcx-input');
     const modal = document.getElementById('jcx-key-modal');
     const keyInput = document.getElementById('jcx-key-input');
@@ -250,10 +302,12 @@ Guidelines:
     clearBtn.addEventListener('click', () => {
       messages = [];
       document.getElementById('jcx-messages').innerHTML = '';
+      sessionStorage.removeItem(SESSION_KEY);
       showWelcome();
     });
 
     sendBtn.addEventListener('click', handleSend);
+    stopBtn.addEventListener('click', stopGenerating);
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
     });
@@ -275,16 +329,58 @@ Guidelines:
     const container = document.getElementById('jcx-messages');
     const el = document.createElement('div');
     el.className = `jcx-msg ${type}`;
-    el.textContent = text;
+    if (type === 'user') {
+      el.textContent = text;
+    } else {
+      el.innerHTML = renderMarkdown(text);
+    }
     container.appendChild(el);
     container.scrollTop = container.scrollHeight;
     return el;
   }
 
+  // ---- Session persistence (sessionStorage; clears on tab/browser close) ----
+  function persistSession() {
+    try {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(messages));
+    } catch (_) {}
+  }
+
+  function restoreSession() {
+    let saved = null;
+    try {
+      saved = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+    } catch (_) {}
+
+    if (Array.isArray(saved) && saved.length) {
+      messages = saved;
+      const container = document.getElementById('jcx-messages');
+      container.innerHTML = '';
+      for (const m of messages) {
+        addMessage(m.role === 'user' ? 'user' : 'assistant', m.content);
+      }
+    } else {
+      showWelcome();
+    }
+  }
+
+  function stopGenerating() {
+    if (activeController) {
+      activeController.abort();
+    }
+  }
+
+  function setStreamingUI(streaming) {
+    const sendBtn = document.getElementById('jcx-send');
+    const stopBtn = document.getElementById('jcx-stop');
+    sendBtn.disabled = streaming;
+    sendBtn.classList.toggle('hidden', streaming);
+    stopBtn.classList.toggle('hidden', !streaming);
+  }
+
   async function handleSend() {
     if (isStreaming) return;
     const input = document.getElementById('jcx-input');
-    const sendBtn = document.getElementById('jcx-send');
     const text = input.value.trim();
     if (!text) return;
 
@@ -299,7 +395,7 @@ Guidelines:
     messages.push({ role: 'user', content: text });
 
     isStreaming = true;
-    sendBtn.disabled = true;
+    setStreamingUI(true);
 
     const msgEl = document.createElement('div');
     msgEl.className = 'jcx-msg assistant';
@@ -310,10 +406,13 @@ Guidelines:
     document.getElementById('jcx-messages').scrollTop = 9999;
 
     let fullText = '';
+    let aborted = false;
+    activeController = new AbortController();
 
     try {
       const resp = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
+        signal: activeController.signal,
         headers: {
           'x-api-key': apiKey,
           'anthropic-version': '2023-06-01',
@@ -352,7 +451,7 @@ Guidelines:
             const parsed = JSON.parse(data);
             if (parsed.type === 'content_block_delta' && parsed.delta?.type === 'text_delta') {
               fullText += parsed.delta.text;
-              msgEl.textContent = fullText;
+              msgEl.innerHTML = renderMarkdown(fullText);
               msgEl.appendChild(cursor);
               document.getElementById('jcx-messages').scrollTop = 9999;
             }
@@ -360,16 +459,40 @@ Guidelines:
         }
       }
 
-      msgEl.textContent = fullText;
+      msgEl.innerHTML = renderMarkdown(fullText);
       messages.push({ role: 'assistant', content: fullText });
+      persistSession();
 
     } catch (err) {
-      msgEl.textContent = `Error: ${err.message}`;
-      msgEl.style.color = '#e8b7bf';
-      messages.pop();
+      if (err.name === 'AbortError') {
+        aborted = true;
+        const stoppedText = fullText ? `${fullText}\n\n*(stopped)*` : '*(stopped)*';
+        msgEl.innerHTML = renderMarkdown(stoppedText);
+        if (fullText) {
+          messages.push({ role: 'assistant', content: fullText });
+          persistSession();
+        }
+      } else if (err instanceof TypeError) {
+        // fetch-level network/timeout failure
+        const note = fullText
+          ? `${fullText}\n\n*(Network error — check your connection and try again.)*`
+          : 'Network error — check your connection and try again.';
+        msgEl.innerHTML = renderMarkdown(note);
+        msgEl.style.color = '#e8b7bf';
+      } else {
+        const note = fullText
+          ? `${fullText}\n\n*(Error: ${err.message})*`
+          : `Error: ${err.message}`;
+        msgEl.innerHTML = renderMarkdown(note);
+        msgEl.style.color = '#e8b7bf';
+      }
+      if (!aborted && !fullText) {
+        messages.pop();
+      }
     } finally {
       isStreaming = false;
-      sendBtn.disabled = false;
+      activeController = null;
+      setStreamingUI(false);
       document.getElementById('jcx-input').focus();
     }
   }
