@@ -135,6 +135,7 @@
       background: #1a2546; color: #eef4ff;
       border: 1px solid #30446f; border-bottom-left-radius: 4px;
     }
+    .ai-msg-row.assistant .ai-bubble ul { margin: 6px 0; padding-left: 18px; }
     .ai-msg-row.system-note {
       align-self: center;
     }
@@ -167,7 +168,7 @@
       height: 44px; max-height: 120px; font-family: inherit; line-height: 1.45;
     }
     #ai-input:focus { border-color: #3b82f6; }
-    #ai-send {
+    #ai-send, #ai-stop {
       background: linear-gradient(135deg,#2563eb,#1d4ed8);
       border: none; border-radius: 10px; color: #fff;
       padding: 0 18px; height: 44px; cursor: pointer; font-size: 18px;
@@ -175,6 +176,9 @@
     }
     #ai-send:hover { opacity: .88; }
     #ai-send:disabled { opacity: .4; cursor: not-allowed; }
+    #ai-stop { background: #7f1d1d; font-size: .85rem; padding: 0 16px; }
+    #ai-stop:hover { background: #991b1b; opacity: 1; }
+    #ai-stop.hidden { display: none; }
     .ai-input-hint {
       text-align: center; color: #4a5f8a; font-size: .72rem; margin-top: 6px;
     }
@@ -270,6 +274,7 @@
       <div class="ai-input-area">
         <div class="ai-input-row">
           <textarea id="ai-input" placeholder="Ask about the analysis, timeline, behavior patterns, profiles…" rows="1"></textarea>
+          <button id="ai-stop" class="hidden" onclick="stopGenerating()" title="Stop generating">■ Stop</button>
           <button id="ai-send" onclick="handleSend()">➤</button>
         </div>
         <p class="ai-input-hint">Press Enter to send · Shift+Enter for newline</p>
@@ -294,6 +299,7 @@
 
 <script>
 const STORAGE_KEY = 'jcx2_anthropic_key';
+const SESSION_KEY = 'jcx2_chat_session';
 const MODEL = 'claude-sonnet-4-6';
 const SYSTEM_PROMPT = `You are an AI analysis assistant embedded in a Communication Timeline & Analysis Package — a structured legal and co-parenting review tool.
 
@@ -323,6 +329,51 @@ Help users understand the analysis, navigate the package, and interpret behavior
 let apiKey = localStorage.getItem(STORAGE_KEY) || '';
 let messages = [];
 let isStreaming = false;
+let activeController = null;
+
+// ---- Minimal safe markdown rendering ----
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function renderMarkdown(text) {
+  const escaped = escapeHtml(text);
+  const lines = escaped.split('\n');
+  const htmlLines = [];
+  let inList = false;
+
+  for (const line of lines) {
+    const listMatch = line.match(/^- (.*)$/);
+    if (listMatch) {
+      if (!inList) {
+        htmlLines.push('<ul>');
+        inList = true;
+      }
+      htmlLines.push(`<li>${inlineMarkdown(listMatch[1])}</li>`);
+    } else {
+      if (inList) {
+        htmlLines.push('</ul>');
+        inList = false;
+      }
+      htmlLines.push(inlineMarkdown(line));
+    }
+  }
+  if (inList) htmlLines.push('</ul>');
+
+  return htmlLines.join('<br>').replace(/<br><ul>/g, '<ul>').replace(/<\/ul><br>/g, '</ul>');
+}
+
+function inlineMarkdown(line) {
+  return line
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>');
+}
 
 function updateKeyStatus() {
   const el = document.getElementById('ai-key-status');
@@ -374,7 +425,11 @@ function appendMsg(role, text) {
 
     const bubble = document.createElement('div');
     bubble.className = 'ai-bubble';
-    bubble.textContent = text;
+    if (role === 'user') {
+      bubble.textContent = text;
+    } else {
+      bubble.innerHTML = renderMarkdown(text);
+    }
 
     row.appendChild(avatar);
     row.appendChild(bubble);
@@ -392,6 +447,7 @@ function appendNote(text) {
 function clearChat() {
   messages = [];
   document.getElementById('ai-messages').innerHTML = '';
+  sessionStorage.removeItem(SESSION_KEY);
   showWelcome();
 }
 
@@ -410,6 +466,30 @@ function showWelcome() {
   appendMsg('assistant', welcomeText);
 }
 
+// ---- Session persistence (sessionStorage; clears on tab/browser close) ----
+function persistSession() {
+  try {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(messages));
+  } catch (_) {}
+}
+
+function restoreSession() {
+  let saved = null;
+  try {
+    saved = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+  } catch (_) {}
+
+  if (Array.isArray(saved) && saved.length) {
+    messages = saved;
+    document.getElementById('ai-messages').innerHTML = '';
+    for (const m of messages) {
+      appendMsg(m.role === 'user' ? 'user' : 'assistant', m.content);
+    }
+  } else {
+    showWelcome();
+  }
+}
+
 function usePrompt(btn) {
   const input = document.getElementById('ai-input');
   input.value = btn.textContent.trim();
@@ -418,10 +498,23 @@ function usePrompt(btn) {
   input.focus();
 }
 
+function stopGenerating() {
+  if (activeController) {
+    activeController.abort();
+  }
+}
+
+function setStreamingUI(streaming) {
+  const sendBtn = document.getElementById('ai-send');
+  const stopBtn = document.getElementById('ai-stop');
+  sendBtn.disabled = streaming;
+  sendBtn.classList.toggle('hidden', streaming);
+  stopBtn.classList.toggle('hidden', !streaming);
+}
+
 async function handleSend() {
   if (isStreaming) return;
   const input = document.getElementById('ai-input');
-  const sendBtn = document.getElementById('ai-send');
   const text = input.value.trim();
   if (!text) return;
 
@@ -433,7 +526,7 @@ async function handleSend() {
   messages.push({ role: 'user', content: text });
 
   isStreaming = true;
-  sendBtn.disabled = true;
+  setStreamingUI(true);
 
   // Build assistant bubble with cursor
   const container = document.getElementById('ai-messages');
@@ -453,10 +546,13 @@ async function handleSend() {
   container.scrollTop = container.scrollHeight;
 
   let fullText = '';
+  let aborted = false;
+  activeController = new AbortController();
 
   try {
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
+      signal: activeController.signal,
       headers: {
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
@@ -495,7 +591,7 @@ async function handleSend() {
           const parsed = JSON.parse(data);
           if (parsed.type === 'content_block_delta' && parsed.delta?.type === 'text_delta') {
             fullText += parsed.delta.text;
-            bubble.textContent = fullText;
+            bubble.innerHTML = renderMarkdown(fullText);
             bubble.appendChild(cursor);
             container.scrollTop = container.scrollHeight;
           }
@@ -503,16 +599,39 @@ async function handleSend() {
       }
     }
 
-    bubble.textContent = fullText;
+    bubble.innerHTML = renderMarkdown(fullText);
     messages.push({ role: 'assistant', content: fullText });
+    persistSession();
 
   } catch (err) {
-    bubble.textContent = `Error: ${err.message}`;
-    bubble.style.color = '#e8b7bf';
-    messages.pop();
+    if (err.name === 'AbortError') {
+      aborted = true;
+      const stoppedText = fullText ? `${fullText}\n\n*(stopped)*` : '*(stopped)*';
+      bubble.innerHTML = renderMarkdown(stoppedText);
+      if (fullText) {
+        messages.push({ role: 'assistant', content: fullText });
+        persistSession();
+      }
+    } else if (err instanceof TypeError) {
+      const note = fullText
+        ? `${fullText}\n\n*(Network error — check your connection and try again.)*`
+        : 'Network error — check your connection and try again.';
+      bubble.innerHTML = renderMarkdown(note);
+      bubble.style.color = '#e8b7bf';
+    } else {
+      const note = fullText
+        ? `${fullText}\n\n*(Error: ${err.message})*`
+        : `Error: ${err.message}`;
+      bubble.innerHTML = renderMarkdown(note);
+      bubble.style.color = '#e8b7bf';
+    }
+    if (!aborted && !fullText) {
+      messages.pop();
+    }
   } finally {
     isStreaming = false;
-    sendBtn.disabled = false;
+    activeController = null;
+    setStreamingUI(false);
     document.getElementById('ai-input').focus();
   }
 }
@@ -527,7 +646,7 @@ document.getElementById('ai-input').addEventListener('input', function() {
 
 // Init
 updateKeyStatus();
-showWelcome();
+restoreSession();
 </script>
 </body>
 </html>

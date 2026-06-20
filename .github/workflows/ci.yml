@@ -36,3 +36,12 @@ jobs:
             '**/*.html'
             '**/*.md'
           fail: true
+
+  html-validate:
+    name: HTML validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run html-validate
+        run: npx --yes html-validate --config .htmlvalidate.json "**/*.html"
