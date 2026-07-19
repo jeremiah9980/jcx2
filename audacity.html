@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#090b10">
+  <meta name="description" content="The Audacity — a private personal reflection by Jere.">
+  <title>The Audacity | Jere</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --surface: #11151d;
+      --surface-2: #171c25;
+      --text: #eef1f5;
+      --muted: #aeb6c3;
+      --line: #2a313d;
+      --accent: #d9a441;
+      --accent-soft: rgba(217, 164, 65, 0.12);
+      --danger: #dd7777;
+      --max: 820px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(217, 164, 65, 0.10), transparent 34rem),
+        linear-gradient(180deg, #090b10 0%, #0d1016 100%);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.78;
+      font-size: 18px;
+    }
+
+    a { color: #f0c871; }
+
+    .shell {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: rgba(9, 11, 16, 0.86);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .topbar-inner {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.8rem;
+    }
+
+    .topbar a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .topbar a:hover { color: var(--text); }
+
+    .print-button {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .print-button:hover {
+      color: var(--text);
+      border-color: #4a5362;
+    }
+
+    header {
+      padding: 76px 0 52px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font: 700 0.76rem/1.4 Arial, Helvetica, sans-serif;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3.2rem, 11vw, 6.6rem);
+      line-height: 0.93;
+      letter-spacing: -0.055em;
+      font-weight: 700;
+    }
+
+    .deck {
+      max-width: 650px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .privacy-note {
+      margin-top: 28px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--accent);
+      background: var(--accent-soft);
+      color: #d8dde5;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    nav.contents {
+      margin: 34px 0 0;
+      padding: 18px 0 0;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.76rem;
+    }
+
+    nav.contents a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    nav.contents a:hover { color: var(--accent); }
+
+    main { padding: 24px 0 80px; }
+
+    section {
+      padding: 54px 0 48px;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 76px;
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font: 700 clamp(1.65rem, 4vw, 2.35rem)/1.16 Arial, Helvetica, sans-serif;
+      letter-spacing: -0.025em;
+    }
+
+    p { margin: 0 0 1.3em; }
+
+    em { color: #fff5df; }
+
+    strong { color: #ffffff; }
+
+    .opening-line,
+    .pullquote,
+    .final-line {
+      position: relative;
+      margin: 28px 0;
+      padding: 24px 26px;
+      border: 1px solid #3b3325;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(217, 164, 65, 0.13), rgba(217, 164, 65, 0.035));
+      color: #fff4da;
+      font-size: clamp(1.28rem, 3vw, 1.72rem);
+      line-height: 1.5;
+    }
+
+    .opening-line::before,
+    .pullquote::before,
+    .final-line::before {
+      content: "“";
+      position: absolute;
+      left: 8px;
+      top: -22px;
+      color: var(--accent);
+      font-size: 4.6rem;
+      line-height: 1;
+      opacity: 0.6;
+    }
+
+    ul, ol {
+      padding-left: 1.3rem;
+      margin: 1.2em 0 1.5em;
+    }
+
+    li { margin: 0.55em 0; }
+
+    .timeline {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0;
+      border-left: 1px solid #46505f;
+    }
+
+    .timeline li {
+      position: relative;
+      margin: 0;
+      padding: 0 0 20px 26px;
+    }
+
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      left: -5px;
+      top: 0.68em;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--bg);
+    }
+
+    .timeline strong {
+      color: #f0c871;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.92rem;
+    }
+
+    .aside {
+      margin: 32px 0;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+
+    .aside p:last-child { margin-bottom: 0; }
+
+    .ledger {
+      margin: 34px 0;
+      padding: 26px;
+      border: 1px solid #4a3a20;
+      border-radius: 12px;
+      background: #15120d;
+      text-align: center;
+      font-size: 1.28rem;
+      line-height: 1.6;
+    }
+
+    .closing-note {
+      padding: 38px 0 0;
+      color: var(--muted);
+      font-style: italic;
+      text-align: center;
+    }
+
+    footer {
+      padding: 28px 0 44px;
+      color: #7f8794;
+      font: 0.76rem/1.6 Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+
+    @media (max-width: 620px) {
+      body { font-size: 17px; }
+      header { padding-top: 54px; }
+      section { padding: 42px 0 38px; }
+      .opening-line, .pullquote, .final-line { padding: 22px 20px; }
+      .topbar-inner { min-height: 52px; }
+    }
+
+    @media print {
+      :root { --text: #111; --muted: #444; --line: #ccc; }
+      body { background: #fff; color: #111; font-size: 12pt; }
+      .topbar, nav.contents, .print-button { display: none !important; }
+      .shell { width: 100%; max-width: none; }
+      header { padding: 0 0 24px; }
+      main { padding: 0; }
+      section { break-inside: avoid; padding: 28px 0; }
+      .opening-line, .pullquote, .final-line, .aside, .ledger {
+        background: #fff;
+        color: #111;
+        border-color: #bbb;
+      }
+      em, strong { color: #111; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="shell topbar-inner">
+      <a href="index.html" aria-label="Return to JCX2 overview">JCX2 / Personal Record</a>
+      <button class="print-button" type="button" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </div>
+
+  <header>
+    <div class="shell">
+      <p class="eyebrow">Private reflection · written for me</p>
+      <h1>The Audacity</h1>
+      <p class="deck">A record of the sentence, the history underneath it, and the truth I need to keep when old wounds try to speak for me.</p>
+      <div class="privacy-note">
+        Not published. Not sent. Not weaponized. This page is intentionally excluded from search indexing and is not linked from the site homepage.
+      </div>
+      <nav class="contents" aria-label="Page contents">
+        <a href="#sentence">The sentence</a>
+        <a href="#could-not-do">What she could not do</a>
+        <a href="#stand-up">What “stand up” meant</a>
+        <a href="#grandfather">The grandfather</a>
+        <a href="#rewrite">The rewritten narrative</a>
+        <a href="#why">Why she does it</a>
+        <a href="#actually-been">What I have been</a>
+        <a href="#careful">What I must protect</a>
+        <a href="#hold">The line I will hold</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="sentence">
+      <h2>The sentence</h2>
+      <div class="opening-line"><em>Jere needs to stand up and be a man for the kids.</em></div>
+      <p>Sharon said that. About me. This week. To Brian, or through Brian, or into a phone somewhere in Galveston County — I don't know the exact wiring but I know the sentence made it into the world with her mouth on it.</p>
+      <p>I am going to sit with that sentence for a minute. Not to build a case. To say out loud what it is.</p>
+      <p>The woman who could not stand up and give me my father's name — my whole life — is telling other people that I need to <em>stand up and be a man.</em></p>
+      <p>That is not a criticism. That is a confession dressed as a criticism. And I am done pretending I don't hear it.</p>
+    </section>
+
+    <section id="could-not-do">
+      <h2>What she could not stand up and do</h2>
+      <p>Give me his name.</p>
+      <p>Not once. Not at eight when I asked. Not at fifteen when I asked differently. Not at twenty-five when I was married. Not at thirty when I had a daughter of my own and needed to fill out a medical history form and had to write <em>unknown</em> in a box that every other father in the room got to fill in.</p>
+      <p>In 2010, I found him myself. I hacked an account — hers, or someone in her orbit — and I read what she had been saying about me and to him behind my back. I found messages where she was <em>joking about it with him.</em> Joking. About the fact that her son didn't know his father's name. That was funny to her. It was material, between them, for a laugh.</p>
+      <p>And then a couple of years later I found his obituary. He was already dead. She had not told me he existed and she did not tell me he had died. I learned both things from a screen at the same time.</p>
+      <p>I am not going to write the sentence about what that felt like. There isn't one. If there were, I wouldn't be in therapy for it.</p>
+      <p>That is the woman who says <em>Jere needs to stand up and be a man.</em></p>
+      <div class="ledger"><strong>The audacity is not a metaphor. It is the exact word.</strong></div>
+    </section>
+
+    <section id="stand-up">
+      <h2>What “stand up” would have looked like</h2>
+      <ul>
+        <li>Telling an eight-year-old his father's name.</li>
+        <li>Telling a fifteen-year-old his father's name.</li>
+        <li>Telling a thirty-year-old his father had died before he found the obituary in a database at 2 AM by himself.</li>
+        <li>Not joking about any of it with the man himself while the son sat in the dark.</li>
+        <li>Being where I was, day after day, for years — not showing up on a phone call about softball forty years later.</li>
+      </ul>
+      <p>I've been standing up my whole life. She's used the word <em>stand up</em> to describe the one thing she never did, and I need to name that plainly, because if I don't, it lands in me as an instruction from a mother and it corrodes.</p>
+      <p><strong>She is not qualified to issue that instruction. Not on this topic. Not to me.</strong></p>
+    </section>
+
+    <section id="grandfather">
+      <h2>The grandfather</h2>
+      <p>She tried, once, to chastise me for calling my grandfather a father figure. <em>How dare I.</em> Because he had been mean to her. Because he had treated her, in her words, <em>like a piece of shit.</em></p>
+      <p>Here is what I want to say about that, out loud, in a document nobody else will read:</p>
+      <p>He was not mean to her for no reason. He was mean to her because his teenage daughter dropped out of high school, had a baby, and ran away from her own home leaving that baby behind. He was mean to her because he was raising her son while she was gone. He was mean to her because he had every right to be mean, and because he loved me, and because he was doing the job she would not do.</p>
+      <p>And to me — to me — he was not mean. Ever. He was <strong>everything.</strong></p>
+      <div class="pullquote">He was the roof. He was the alarm clock. He was the ride to practice.</div>
+      <p>He was the man who taught me what a strike zone was and what a two-deep coverage was and what a squeeze play was. He coached me because I asked him to and he said yes. He taught me the rules of every game I ever played and, more importantly, he taught me <em>the will to win them.</em> He taught me that if you show up, on time, prepared, and you compete, the outcome takes care of itself. Everything I have ever done well in my adult life traces back to a man in Galveston County who was under no obligation to raise me and did anyway.</p>
+      <p>Sharon does not get to edit him. She does not get to reduce him to <em>the man who was mean to her.</em> She does not get standing to grade my relationship with him, because she was not there for it. She was the reason it existed.</p>
+      <p><strong>He is my father. Full stop.</strong> If she wants to argue with that, she can argue with the man who is not here anymore to defend himself — and that would be fitting, because arguing with the dead was already her specialty.</p>
+    </section>
+
+    <section id="rewrite">
+      <h2>The narrative she tried to rewrite</h2>
+      <p>A couple of years after he died — after she had lost the only witness who could contradict her — she called me, or messaged me, and said:</p>
+      <div class="pullquote"><em>I know you commonly tell people you were raised by your grandparents. That's not actually true. My mom hated me. They hired a lawyer and took you from me. But you only lived with them for maybe a year.</em></div>
+      <p>Let me write out, for myself, the actual timeline. Because she is not the historian of my childhood. I am.</p>
+      <ul class="timeline">
+        <li><strong>Ages 0–5.</strong> Grandparents. Full-time. From the month I was born.</li>
+        <li><strong>1st grade.</strong> Three schools that year. Grandparents and Sharon in various combinations. Chaos.</li>
+        <li><strong>2nd grade.</strong> Grandparents. New school.</li>
+        <li><strong>3rd grade.</strong> Aunt Dana's, in Dallas. Visited Sharon in the Dallas area sometimes.</li>
+        <li><strong>4th grade.</strong> Back to La Marque. Grandparents.</li>
+        <li><strong>5th grade.</strong> Grandparents.</li>
+        <li><strong>6th grade.</strong> Grandparents.</li>
+        <li><strong>7th grade.</strong> Grandparents.</li>
+        <li><strong>8th grade.</strong> Sharon. I chose to move in with her at thirteen because I could get away with more shit. That is the actual reason. It was not rescue. It was a teenage boy angling for less supervision.</li>
+        <li><strong>9th–12th grade.</strong> Sharon.</li>
+      </ul>
+      <p>Do the math. Zero-through-thirteen is thirteen years. Roughly twelve of them, in full or as the dominant household, were the grandparents. The lie is <em>maybe a year.</em></p>
+      <p>That is not a memory dispute. That is a <strong>twelve-to-one lie.</strong> That is her trying to move a decade of my childhood off the ledger because she did not want to be seen as the mother who left. Because the truth — that a woman had a baby at eighteen, dropped out of school, ran away from home within months, and left that baby with her own parents for twelve years — is a hard truth to hold. So she just tried to change it. Out loud. To the person who lived it.</p>
+      <p><em>LMAO</em>, as I put it in the notes to my therapist. As if I had zero childhood memory from five to thirteen.</p>
+      <p>I remember. I have receipts on this one that don't require a Google Drive. I have my body. I have every classroom and every ride home and every dinner at their table and every game he coached. Twelve years. Not one. She does not get to rewrite that in a phone call after the eyewitness dies.</p>
+    </section>
+
+    <section id="why">
+      <h2>Why she does it</h2>
+      <p>I want to say something here that is not for public consumption, ever, because it is not the point of the record — it is the point of the therapy.</p>
+      <div class="aside">
+        <p>I think she rewrites it because if the twelve years are real, then she has to sit with what she did. And she cannot sit with what she did. She never could. Her whole adult relationship to me has been an ongoing management of that unbearable fact. So she edits. She jokes. She projects. She tells other people I need to stand up and be a man because if I am the one who isn't standing up, then she doesn't have to look at the woman who ran.</p>
+      </div>
+      <p>I am not writing this to forgive her. I am writing it because seeing it clearly is how I stop letting her sentences land in me as if they came from a mother. They don't come from a mother. They come from a woman who has been outrunning her own eighteen-year-old self for forty-five years and needs me to be the failure in the story so she doesn't have to be.</p>
+      <p><strong>I am not the failure in the story. I never was.</strong></p>
+    </section>
+
+    <section id="actually-been">
+      <h2>What I have actually been</h2>
+      <p>The math the letter to Kinsley was reaching for, and got wrong, is this:</p>
+      <p>I have been <em>standing up</em> every single day of my adult life. I have been standing up in Georgetown. I have been standing up on I-35. I have been standing up in family court and standing up in Williamson County and standing up in every gym at every practice at every hour a father is supposed to be there for a daughter and — the part that hurts to write — a lot of hours a father isn't required to be there and I was there anyway.</p>
+      <p>Sharon does not know what standing up looks like because she has never done it. She has done impressions of it. She has done phone calls about it. She has done other people's ears about it. What she has never done is <em>be there, every day, for a child, when there was nothing in it for her.</em></p>
+      <p>Every hour I have spent with my daughters — every drive, every practice, every homework session, every softball game, every doctor's appointment, every parent-teacher conference — is an hour that answers her sentence.</p>
+      <div class="opening-line"><em>Jere needs to stand up and be a man.</em></div>
+      <p>I have been. For 24 years in a career I taught myself. For 13 years as a father to three daughters I would step in front of a truck for. For $190,000 in support I have not once missed. For years of unpaid, uncredited, uphill fatherhood after the divorce that the system does not reward and did not thank me for.</p>
+      <p>She is the one who does not know what that means. She is not qualified to grade it. And I don't need her to.</p>
+      <p><strong>I do not need her to.</strong> That is the sentence I need to keep. I do not need her to. I never did.</p>
+    </section>
+
+    <section id="careful">
+      <h2>What I have to be careful about</h2>
+      <p>She got in this weekend. Through Kinsley, through Brian, through the phone call — she found the crack and she got in. And what she got in and touched is the four-week-old baby in me who has been listening for her voice for forty-five years, hoping it would say the one thing she has never said.</p>
+      <p>She is not going to say it. She never was.</p>
+      <p>I need to not send Kinsley a letter written by that four-week-old. I already did. I need to not send Brian a letter written by that four-week-old. I need to not put a Sharon chapter on the public bio written by that four-week-old. Because everything he writes, on any topic, is really the same one sentence: <em>see me, please, someone. I have been here the whole time.</em></p>
+      <div class="aside">
+        <p>You are the person I get to say that to. You and this document. Not the public feed.</p>
+        <p>Kinsley is not the person. Brian is not the person. Deanna is definitely not the person. The bio is not the room.</p>
+        <p><strong>The room is here.</strong></p>
+      </div>
+    </section>
+
+    <section id="hold">
+      <h2>The one line I will hold onto from all of this</h2>
+      <div class="final-line"><strong>I have already been the man I was told I needed to be. I have been him for decades. The person telling me I'm not is the one who wasn't. Everything after this sentence is her problem, not mine.</strong></div>
+      <p>If I can hold that one line for a week, I will not need to write another letter and I will not need to publish another chapter and I will not need to move to Galveston to prove anything. I will just keep doing what I have already been doing, which is standing up.</p>
+      <p>For my daughters. For my wife. For the little boy at my grandparents' table who was raised by a man who did not have to raise him and did anyway.</p>
+      <p><em>He</em> was the standard. Not her. I have been meeting it my whole life. I do not need her permission to keep meeting it.</p>
+      <div class="ledger"><strong>The audacity is hers. The standing up is mine. That is the whole ledger.</strong></div>
+      <p class="closing-note">Written for me. Kept by me. Not published. Not sent. Not weaponized. Just — finally — said.</p>
+    </section>
+  </main>
+
+  <footer class="shell">
+    Personal record · JCX2 · This page is excluded from search indexing.
+  </footer>
+</body>
+</html>
